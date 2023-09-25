@@ -1,0 +1,16 @@
+# ninja log v5
+0	246	7173631004614711	CMakeFiles/SpaceGameHostedOnGitHub.dir/main.cpp.obj	35ae9e31c82bdf2a
+247	315	7173631005266323	SpaceGameHostedOnGitHub.exe	711307b32ab809e1
+0	264	7173631101131946	CMakeFiles/NorthRoom.dir/NorthRoom.cpp.obj	23202efed0898544
+252	326	7173631737618510	SouthRoom.exe	2905eddc7005e206
+265	336	7173631101814162	NorthRoom.exe	c89cd45e985dae45
+245	329	7173631382433168	EastRoom.exe	73cc4d71fd5dc36c
+1	245	7173631381607323	CMakeFiles/EastRoom.dir/EastRoom.cpp.obj	9f57f5e2470d167
+1	252	7173631736898540	CMakeFiles/SouthRoom.dir/SouthRoom.cpp.obj	cceca37152925084
+0	256	7173632093969901	CMakeFiles/WestRoom.dir/WestRoom.cpp.obj	7f631ebe08041dc
+256	333	7173632094676984	WestRoom.exe	4f5ec81d9407888c
+0	43	7173634646977631	CMakeFiles/NorthEastRoom.dir/NorthEastRoom.cpp.obj	89bb9c8d2314e232
+0	265	7173634834298012	CMakeFiles/SouthEastRoom.dir/SouthEastRoom.cpp.obj	7cfcb282455f852f
+266	342	7173634835027889	SouthEastRoom.exe	53aada4a2ab0b0b
+0	255	7173635333363886	CMakeFiles/SouthWestRoom.dir/SouthWestRoom.cpp.obj	bf3345ca47609294
+256	330	7173635334077168	SouthWestRoom.exe	fda2eba4353c9220

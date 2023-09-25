@@ -1,0 +1,10 @@
+C:/Users/thepe/CLionProjects/SpaceGameHostedOnGitHub/cmake-build-debug/CMakeFiles/SpaceGameHostedOnGitHub.dir
+C:/Users/thepe/CLionProjects/SpaceGameHostedOnGitHub/cmake-build-debug/CMakeFiles/NorthRoom.dir
+C:/Users/thepe/CLionProjects/SpaceGameHostedOnGitHub/cmake-build-debug/CMakeFiles/EastRoom.dir
+C:/Users/thepe/CLionProjects/SpaceGameHostedOnGitHub/cmake-build-debug/CMakeFiles/SouthRoom.dir
+C:/Users/thepe/CLionProjects/SpaceGameHostedOnGitHub/cmake-build-debug/CMakeFiles/WestRoom.dir
+C:/Users/thepe/CLionProjects/SpaceGameHostedOnGitHub/cmake-build-debug/CMakeFiles/NorthEastRoom.dir
+C:/Users/thepe/CLionProjects/SpaceGameHostedOnGitHub/cmake-build-debug/CMakeFiles/SouthEastRoom.dir
+C:/Users/thepe/CLionProjects/SpaceGameHostedOnGitHub/cmake-build-debug/CMakeFiles/SouthWestRoom.dir
+C:/Users/thepe/CLionProjects/SpaceGameHostedOnGitHub/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/thepe/CLionProjects/SpaceGameHostedOnGitHub/cmake-build-debug/CMakeFiles/rebuild_cache.dir

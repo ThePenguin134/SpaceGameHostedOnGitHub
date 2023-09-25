@@ -304,6 +304,39 @@ build SouthWestRoom.exe: CXX_EXECUTABLE_LINKER__SouthWestRoom_Debug CMakeFiles/S
   TARGET_IMPLIB = libSouthWestRoom.dll.a
   TARGET_PDB = SouthWestRoom.exe.dbg
 
+# =============================================================================
+# Object build statements for EXECUTABLE target NorthWestRoom
+
+
+#############################################
+# Order-only phony target for NorthWestRoom
+
+build cmake_object_order_depends_target_NorthWestRoom: phony || CMakeFiles/NorthWestRoom.dir
+
+build CMakeFiles/NorthWestRoom.dir/NorthWestRoom.cpp.obj: CXX_COMPILER__NorthWestRoom_unscanned_Debug C$:/Users/thepe/CLionProjects/SpaceGameHostedOnGitHub/NorthWestRoom.cpp || cmake_object_order_depends_target_NorthWestRoom
+  DEP_FILE = CMakeFiles\NorthWestRoom.dir\NorthWestRoom.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\NorthWestRoom.dir
+  OBJECT_FILE_DIR = CMakeFiles\NorthWestRoom.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target NorthWestRoom
+
+
+#############################################
+# Link the executable NorthWestRoom.exe
+
+build NorthWestRoom.exe: CXX_EXECUTABLE_LINKER__NorthWestRoom_Debug CMakeFiles/NorthWestRoom.dir/NorthWestRoom.cpp.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\NorthWestRoom.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = NorthWestRoom.exe
+  TARGET_IMPLIB = libNorthWestRoom.dll.a
+  TARGET_PDB = NorthWestRoom.exe.dbg
+
 
 #############################################
 # Utility command for edit_cache
@@ -336,6 +369,8 @@ build NorthEastRoom: phony NorthEastRoom.exe
 
 build NorthRoom: phony NorthRoom.exe
 
+build NorthWestRoom: phony NorthWestRoom.exe
+
 build SouthEastRoom: phony SouthEastRoom.exe
 
 build SouthRoom: phony SouthRoom.exe
@@ -354,7 +389,7 @@ build WestRoom: phony WestRoom.exe
 #############################################
 # Folder: C:/Users/thepe/CLionProjects/SpaceGameHostedOnGitHub/cmake-build-debug
 
-build all: phony SpaceGameHostedOnGitHub.exe NorthRoom.exe EastRoom.exe SouthRoom.exe WestRoom.exe NorthEastRoom.exe SouthEastRoom.exe SouthWestRoom.exe
+build all: phony SpaceGameHostedOnGitHub.exe NorthRoom.exe EastRoom.exe SouthRoom.exe WestRoom.exe NorthEastRoom.exe SouthEastRoom.exe SouthWestRoom.exe NorthWestRoom.exe
 
 # =============================================================================
 # Built-in targets

@@ -370,6 +370,39 @@ build CenterRoom.exe: CXX_EXECUTABLE_LINKER__CenterRoom_Debug CMakeFiles/CenterR
   TARGET_IMPLIB = libCenterRoom.dll.a
   TARGET_PDB = CenterRoom.exe.dbg
 
+# =============================================================================
+# Object build statements for EXECUTABLE target MenusDemo
+
+
+#############################################
+# Order-only phony target for MenusDemo
+
+build cmake_object_order_depends_target_MenusDemo: phony || CMakeFiles/MenusDemo.dir
+
+build CMakeFiles/MenusDemo.dir/MenusDemo.cpp.obj: CXX_COMPILER__MenusDemo_unscanned_Debug C$:/Users/thepe/CLionProjects/SpaceGameHostedOnGitHub/MenusDemo.cpp || cmake_object_order_depends_target_MenusDemo
+  DEP_FILE = CMakeFiles\MenusDemo.dir\MenusDemo.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\MenusDemo.dir
+  OBJECT_FILE_DIR = CMakeFiles\MenusDemo.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target MenusDemo
+
+
+#############################################
+# Link the executable MenusDemo.exe
+
+build MenusDemo.exe: CXX_EXECUTABLE_LINKER__MenusDemo_Debug CMakeFiles/MenusDemo.dir/MenusDemo.cpp.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\MenusDemo.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = MenusDemo.exe
+  TARGET_IMPLIB = libMenusDemo.dll.a
+  TARGET_PDB = MenusDemo.exe.dbg
+
 
 #############################################
 # Utility command for edit_cache
@@ -400,6 +433,8 @@ build CenterRoom: phony CenterRoom.exe
 
 build EastRoom: phony EastRoom.exe
 
+build MenusDemo: phony MenusDemo.exe
+
 build NorthEastRoom: phony NorthEastRoom.exe
 
 build NorthRoom: phony NorthRoom.exe
@@ -424,7 +459,7 @@ build WestRoom: phony WestRoom.exe
 #############################################
 # Folder: C:/Users/thepe/CLionProjects/SpaceGameHostedOnGitHub/cmake-build-debug
 
-build all: phony SpaceGameHostedOnGitHub.exe NorthRoom.exe EastRoom.exe SouthRoom.exe WestRoom.exe NorthEastRoom.exe SouthEastRoom.exe SouthWestRoom.exe NorthWestRoom.exe CenterRoom.exe
+build all: phony SpaceGameHostedOnGitHub.exe NorthRoom.exe EastRoom.exe SouthRoom.exe WestRoom.exe NorthEastRoom.exe SouthEastRoom.exe SouthWestRoom.exe NorthWestRoom.exe CenterRoom.exe MenusDemo.exe
 
 # =============================================================================
 # Built-in targets

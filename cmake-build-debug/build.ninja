@@ -337,6 +337,39 @@ build NorthWestRoom.exe: CXX_EXECUTABLE_LINKER__NorthWestRoom_Debug CMakeFiles/N
   TARGET_IMPLIB = libNorthWestRoom.dll.a
   TARGET_PDB = NorthWestRoom.exe.dbg
 
+# =============================================================================
+# Object build statements for EXECUTABLE target CenterRoom
+
+
+#############################################
+# Order-only phony target for CenterRoom
+
+build cmake_object_order_depends_target_CenterRoom: phony || CMakeFiles/CenterRoom.dir
+
+build CMakeFiles/CenterRoom.dir/CenterRoom.cpp.obj: CXX_COMPILER__CenterRoom_unscanned_Debug C$:/Users/thepe/CLionProjects/SpaceGameHostedOnGitHub/CenterRoom.cpp || cmake_object_order_depends_target_CenterRoom
+  DEP_FILE = CMakeFiles\CenterRoom.dir\CenterRoom.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\CenterRoom.dir
+  OBJECT_FILE_DIR = CMakeFiles\CenterRoom.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target CenterRoom
+
+
+#############################################
+# Link the executable CenterRoom.exe
+
+build CenterRoom.exe: CXX_EXECUTABLE_LINKER__CenterRoom_Debug CMakeFiles/CenterRoom.dir/CenterRoom.cpp.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\CenterRoom.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = CenterRoom.exe
+  TARGET_IMPLIB = libCenterRoom.dll.a
+  TARGET_PDB = CenterRoom.exe.dbg
+
 
 #############################################
 # Utility command for edit_cache
@@ -362,6 +395,8 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 # =============================================================================
 # Target aliases.
+
+build CenterRoom: phony CenterRoom.exe
 
 build EastRoom: phony EastRoom.exe
 
@@ -389,7 +424,7 @@ build WestRoom: phony WestRoom.exe
 #############################################
 # Folder: C:/Users/thepe/CLionProjects/SpaceGameHostedOnGitHub/cmake-build-debug
 
-build all: phony SpaceGameHostedOnGitHub.exe NorthRoom.exe EastRoom.exe SouthRoom.exe WestRoom.exe NorthEastRoom.exe SouthEastRoom.exe SouthWestRoom.exe NorthWestRoom.exe
+build all: phony SpaceGameHostedOnGitHub.exe NorthRoom.exe EastRoom.exe SouthRoom.exe WestRoom.exe NorthEastRoom.exe SouthEastRoom.exe SouthWestRoom.exe NorthWestRoom.exe CenterRoom.exe
 
 # =============================================================================
 # Built-in targets

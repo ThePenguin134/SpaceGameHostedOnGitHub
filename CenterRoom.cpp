@@ -2,7 +2,6 @@
 using namespace std;
 
 int main() {
-    //NOTE: MANY OF THESE FOR LOOPS ARE UNNECESSARY AS THEY ONLY RUN ONCE, BUT THEY MAKE IT EASIER TO ADJUST AND COUNT SPACING
 //Top Row --------------------------------------------------------------------------------------------------------------
     //prints "/" with proper spacing
     cout << "  /   ";

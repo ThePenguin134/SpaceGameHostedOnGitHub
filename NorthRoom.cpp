@@ -97,7 +97,13 @@ int main() {
 
     //Bottom Section (Same as Top) -------------------------------------------------------------------------------------
 
-
+    std::cout << "\nYou find a room with a large window directly ahead of\n"
+                 "you. The window looks out into the vast emptiness of\n"
+                 "space, along with a beautiful view of the sun, brighter\n"
+                 "than you've ever seen it before. Beneath the window is a\n"
+                 "system that is quite obviously a communications system.\n"
+                 "Various dials and levers span across the system. The rest\n"
+                 "of the room is filled with cases for various electronics."; //radio room description
 
     return 0;
 }

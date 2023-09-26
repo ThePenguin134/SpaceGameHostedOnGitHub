@@ -97,7 +97,7 @@ int main() {
 
     //Bottom Section (Same as Top) -------------------------------------------------------------------------------------
 
-    std::cout << "\nYou find a room with a large window directly ahead of\n"
+    cout << "\nYou find a room with a large window directly ahead of\n"
                  "you. The window looks out into the vast emptiness of\n"
                  "space, along with a beautiful view of the sun, brighter\n"
                  "than you've ever seen it before. Beneath the window is a\n"

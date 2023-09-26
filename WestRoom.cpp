@@ -96,7 +96,7 @@ int main() {
 
     //Bottom Section (Same as Top) -------------------------------------------------------------------------------------
 
-    std::cout << "\nUpon entering the dark room, you notice rows upon rows\n"
+    cout << "\nUpon entering the dark room, you notice rows upon rows\n"
                  "of defunct hardware for servers. In the corner of the\n"
                  "room there is what appears to be an electrical panel."; //electrical room description
 

@@ -97,7 +97,12 @@ int main() {
 
     //Bottom Section (Same as Top) -------------------------------------------------------------------------------------
 
-
+    std::cout << "\nTables with stools line the center of the room. On one\n"
+                 "side of the room, there appears to be what was once a\n"
+                 "buffet. It is now covered in dust, and some strange\n"
+                 "gooey liquid. On the other side of the room, there are\n"
+                 "three vending machines that look like they haven't been\n"
+                 "touched in many generations."; //mess hall description
 
     return 0;
 }

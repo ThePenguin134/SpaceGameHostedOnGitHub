@@ -2,16 +2,16 @@
 using namespace std;
 int main() {
     //declarations
-    int input;
-    bool incomplete = true;
+    int input; //this variable is used whenever user input is needed as a place to save that input.
+    bool incomplete = true; //while this is true, the program will loop forever until it reaches a good point to end.
     //input
     while (incomplete) {
-        cout << "What would you like to do?\n1. Start Game\n2. View Instructions\n3. Exit Game\n";
+        cout << "What would you like to do?\n1. Start Game\n2. View Instructions\n3. Exit Game\n"; //this is the start menu, that asks the user whether they want to play, read the instructions or exit.
         cin >> input;
-        switch (input) {
+        switch (input) { //switch statements are like if statements, but they let you define what each input does individually instead of having to nest if and else statements.
             case 1:
                 while (incomplete) {
-                    cout << "Which menu would you like to see?\n1. Room Menu\n2. Combat Menu\n";
+                    cout << "Which menu would you like to see?\n1. Room Menu\n2. Combat Menu\n"; //this determines whether you access the test room menu or the test battle menu.
                     cin >> input;
                     switch (input) {
                         case 1:
@@ -23,13 +23,13 @@ int main() {
                             switch (input) {
                                 case 1:
                                     incomplete = false;
-                                    cout << "You add the tea kettle to your inventory.";
-                                    break;
+                                    cout << "You add the tea kettle to your inventory."; //there is no inventory yet, so nothing happens
+                                    break; //this ends the entire block of code, which means either the program repeats if incomplete is true, or ends otherwise.
                                 case 2:
                                     incomplete = false;
                                     cout << "You leave the room.";
                                     break;
-                                default:
+                                default: //this determines what happens if an input doesn't match any of the cases
                                     cout << "That isn't a valid option!";
                                     break;
 
@@ -74,6 +74,4 @@ int main() {
 
         }
     }
-    //processing
-    //output
 }

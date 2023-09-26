@@ -166,6 +166,11 @@ int main() {
         }
     }
     //prints the corner
-    cout << "/";
+    cout << "/\n";
+    std::cout << "In the center of the room there is a command console.\n"
+                 "Near the edge of the room there is a table, on which\n"
+                 "there is a suspicious container of liquid. Under the\n"
+                 "container, there appears to be a napkin, acting as a\n"
+                 "coaster of sorts."; //control room description
     cout << endl;
 }

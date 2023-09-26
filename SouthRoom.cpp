@@ -97,7 +97,10 @@ int main() {
 
     //Bottom Section (Same as Top) -------------------------------------------------------------------------------------
 
-
+     cout << "\nAhead of you lies 8 bunk beds, with 4 on each side of the\n"
+                 "room. They are well-made, but clearly none of them have been\n"
+                 "slept in for a very long time. To the side of each bed there\n"
+                 "is a small dresser for personal belongings and clothing."; //cabins description
 
     return 0;
 }

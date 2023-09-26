@@ -139,6 +139,9 @@ int main() {
 
     //Final Row --------------------------------------------------------------------------------------------------------
 
-
+    cout << "\nThe room glows green. The air feels stale, and it smells like\n"
+                 "something died here. In the corner, a pulsing carcass sits.\n"
+                 "The source of the light. A slimy green goo is splattered all\n"
+                 "over the walls. "; //alien room description
     return 0;
 }

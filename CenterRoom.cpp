@@ -2,7 +2,6 @@
 using namespace std;
 
 int main() {
-    //NOTE: MANY OF THESE FOR LOOPS ARE UNNECESSARY AS THEY ONLY RUN ONCE, BUT THEY MAKE IT EASIER TO ADJUST AND COUNT SPACING
 //Top Row --------------------------------------------------------------------------------------------------------------
     //prints "/" with proper spacing
     cout << "  /   ";
@@ -166,6 +165,11 @@ int main() {
         }
     }
     //prints the corner
-    cout << "/";
+    cout << "/\n";
+    cout << "\nIn the center of the room there is a command console.\n"
+                 "Near the edge of the room there is a table, on which\n"
+                 "there is a suspicious container of liquid. Under the\n"
+                 "container, there appears to be a napkin, acting as a\n"
+                 "coaster of sorts."; //control room description
     cout << endl;
 }

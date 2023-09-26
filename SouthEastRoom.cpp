@@ -136,7 +136,7 @@ int main() {
 
     //Final Row --------------------------------------------------------------------------------------------------------
 
-    std::cout << "\nThe lights are broken, so the only illumination is coming from\n"
+    cout << "\nThe lights are broken, so the only illumination is coming from\n"
                  "the other side of the door. There are boxes scattered throughout\n"
                  "the room. Each box is labeled, presumably for what was contained\n"
                  "in them. However, all but one of the boxes is empty. The only one\n"

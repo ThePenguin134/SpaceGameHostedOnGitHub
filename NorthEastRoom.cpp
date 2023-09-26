@@ -60,7 +60,7 @@ int main() {
         cout << endl;
     }
 
-
+//Lower Section --------------------------------------------------------------------------------------------------------
     //creates the row that forms the bottom part of the indented corner.
     for (int i = 1; i < 6; i++) {
         cout << "*";
@@ -93,7 +93,7 @@ int main() {
         //Creates the second wall.
         cout << "*" << endl;
     }
-
+//Bottom Section -------------------------------------------------------------------------------------------------------
 //Adds spaces to move the row to the right
     for (int i = 1; i < 21; ++i) {
         cout << " ";

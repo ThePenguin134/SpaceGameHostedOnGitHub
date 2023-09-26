@@ -13,6 +13,7 @@ int main() {
     }
 
     cout << endl;
+
 //Top Section ----------------------------------------------------------------------------------------------------------
 //Makes the first half of the diagonal
     for (int i = 8; i < 13; i++) //Repeats for each row
@@ -61,6 +62,7 @@ int main() {
     }
 
 //Lower Section --------------------------------------------------------------------------------------------------------
+
     //creates the row that forms the bottom part of the indented corner.
     for (int i = 1; i < 6; i++) {
         cout << "*";
@@ -93,7 +95,9 @@ int main() {
         //Creates the second wall.
         cout << "*" << endl;
     }
+
 //Bottom Section -------------------------------------------------------------------------------------------------------
+
 //Adds spaces to move the row to the right
     for (int i = 1; i < 21; ++i) {
         cout << " ";
@@ -120,4 +124,8 @@ int main() {
 
 //Ends the row.
     cout << endl;
+
+    cout << "\nYou enter a small medical bay with 2 beds, medical equipment for each, a small desk in the corner, "
+            "\nand a coat rack on the wall across from the beds. Papers are scattered across the desk. "
+            "\nPerhaps someone was looking for something? ";
 }

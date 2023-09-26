@@ -89,8 +89,8 @@ int main() {
         cout << " ";
     }
     //Creates top row of corner with spaces between asterisks.
-    for (int i = 1; i < 6; i++) //Repeats for each asterisk on row. i is each asterisk.
-        //j is the space between each asterisk.
+    for (int i = 1; i < 6; i++) //Repeats for each asterisk on row. "i" is each asterisk.
+        //"j" is the space between each asterisk.
     {
         cout << "*";
         for (int j = 0; j < 4; ++j) {

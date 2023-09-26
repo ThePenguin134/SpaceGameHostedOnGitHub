@@ -1,0 +1,150 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.26"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "SpaceGameHostedOnGitHub",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "CenterRoom::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-CenterRoom-Debug-a430fa9754a192bc7bf5.json",
+					"name" : "CenterRoom",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "EastRoom::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-EastRoom-Debug-61520a6eabf5a3a63c59.json",
+					"name" : "EastRoom",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "MenusDemo::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-MenusDemo-Debug-03504e6419e0484f9934.json",
+					"name" : "MenusDemo",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "NorthEastRoom::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-NorthEastRoom-Debug-175c9c547df8acd75bd6.json",
+					"name" : "NorthEastRoom",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "NorthRoom::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-NorthRoom-Debug-ac3202db84276e0568f5.json",
+					"name" : "NorthRoom",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "NorthWestRoom::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-NorthWestRoom-Debug-4ba28cd269ccdc335ffd.json",
+					"name" : "NorthWestRoom",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SouthEastRoom::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SouthEastRoom-Debug-0384c2468bcfa0ddae19.json",
+					"name" : "SouthEastRoom",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SouthRoom::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SouthRoom-Debug-a5401f0942f9e4bceaeb.json",
+					"name" : "SouthRoom",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SouthWestRoom::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SouthWestRoom-Debug-c9b63b68b8d32bcc348c.json",
+					"name" : "SouthWestRoom",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SpaceGameHostedOnGitHub::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SpaceGameHostedOnGitHub-Debug-893c8c989c9a5a3cd603.json",
+					"name" : "SpaceGameHostedOnGitHub",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "WestRoom::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-WestRoom-Debug-60a3cda2305b2125d975.json",
+					"name" : "WestRoom",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/jackf/OneDrive/Documents/GitHub/SpaceGameHostedOnGitHub/cmake-build-debug",
+		"source" : "C:/Users/jackf/OneDrive/Documents/GitHub/SpaceGameHostedOnGitHub"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 5
+	}
+}

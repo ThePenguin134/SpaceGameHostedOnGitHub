@@ -82,7 +82,7 @@ int main() {
         cout << "*";
 
         //Adds fewer spaces in the beginning based on "i", the row number. Forms diagonal.
-        for (int j = 1; j < 63-i*3; j++) {
+        for (int j = 1; j < 63 - i*3; j++) {
             cout << " ";
 
         }

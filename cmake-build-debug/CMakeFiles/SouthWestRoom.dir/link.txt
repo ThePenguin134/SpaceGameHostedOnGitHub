@@ -1,3 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2023.2.1\bin\cmake\win\x64\bin\cmake.exe" -E rm -f CMakeFiles\SouthWestRoom.dir/objects.a
-C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\ar.exe qc CMakeFiles\SouthWestRoom.dir/objects.a @CMakeFiles\SouthWestRoom.dir\objects1.rsp
-C:\PROGRA~1\JETBRA~1\CLION2~1.1\bin\mingw\bin\G__~1.EXE -g -Wl,--whole-archive CMakeFiles\SouthWestRoom.dir/objects.a -Wl,--no-whole-archive -o SouthWestRoom.exe -Wl,--out-implib,libSouthWestRoom.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\SouthWestRoom.dir\linkLibs.rsp

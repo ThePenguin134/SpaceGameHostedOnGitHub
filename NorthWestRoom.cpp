@@ -127,6 +127,13 @@ int main() {
             cout << " ";
         }
     }
+    cout << "\nVarious plants are lined up across the room.\n"
+            "Beneath each plant is a label that describes the\n"
+            "plant and what its used for. Light from the sun\n"
+            "shines in through the glass that makes up most of\n"
+            "the room. Lined up on one wall are various drawers,\n"
+            "shelves, and gardening tools. A shovel can be found\n"
+            "leaning on one of the shelves."; //Greenhouse description
 
     return 0;
 }

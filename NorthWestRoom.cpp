@@ -4,8 +4,7 @@ using namespace std;
 
 int main() {
 
-    //top row-----------------------------------------------------------------------------
-
+    //Forms the top row.
     //Creates spaces before the first row of asterisks.
     for (int i = 1; i < 43; ++i) {
         cout << " ";

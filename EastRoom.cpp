@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int main() {
+void East() {
 
     //Top Row ----------------------------------------------------------------------------------------------------------
 
@@ -104,5 +104,4 @@ int main() {
                  "three vending machines that look like they haven't been\n"
                  "touched in many generations."; //mess hall description
 
-    return 0;
 }

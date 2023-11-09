@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int main() {
+void northEast() {
 //Top Row --------------------------------------------------------------------------------------------------------------
     //Places asterisks row with spaces between each one.
     for (int i = 1; i < 6; i++) {

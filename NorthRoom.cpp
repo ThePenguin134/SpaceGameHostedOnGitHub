@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int main() {
+void north() {
 
     //Top Row ----------------------------------------------------------------------------------------------------------
 
@@ -105,5 +105,4 @@ int main() {
                  "Various dials and levers span across the system. The rest\n"
                  "of the room is filled with cases for various electronics."; //radio room description
 
-    return 0;
 }

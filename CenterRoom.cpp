@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int main() {
+void center() {
 //Top Row --------------------------------------------------------------------------------------------------------------
     //prints "/" with proper spacing
     cout << "  /   ";

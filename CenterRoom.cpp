@@ -1,4 +1,6 @@
 #include <iostream>
+#include "rooms.h"
+
 using namespace std;
 
 void center() {

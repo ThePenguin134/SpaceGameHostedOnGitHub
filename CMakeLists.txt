@@ -4,7 +4,8 @@ project(SpaceGameHostedOnGitHub)
 set(CMAKE_CXX_STANDARD 17)
 
 add_executable(SpaceGameHostedOnGitHub main.cpp
-        Map.cpp)
+        Map.cpp
+        test.cpp)
 add_executable(NorthRoom NorthRoom.cpp)
 add_executable(EastRoom EastRoom.cpp)
 add_executable(SouthRoom SouthRoom.cpp)

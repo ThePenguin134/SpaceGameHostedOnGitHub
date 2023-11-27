@@ -1,8 +1,9 @@
 #include <iostream>
+#include "rooms.h"
 
 using namespace std;
 
-int main() {
+void west() {
 
     //Top Row ----------------------------------------------------------------------------------------------------------
 
@@ -100,5 +101,4 @@ int main() {
                  "of defunct hardware for servers. In the corner of the\n"
                  "room there is what appears to be an electrical panel."; //electrical room description
 
-    return 0;
 }

@@ -1,8 +1,9 @@
 #include <iostream>
+#include "rooms.h"
 
 using namespace std;
 
-int main() {
+void southEast() {
 
     //Top Row ----------------------------------------------------------------------------------------------------------
 
@@ -141,5 +142,5 @@ int main() {
                  "the room. Each box is labeled, presumably for what was contained\n"
                  "in them. However, all but one of the boxes is empty. The only one\n"
                  "that isn't empty is labeled \"Spare Parts\""; //storage room description
-    return 0;
+
 }

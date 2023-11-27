@@ -1,8 +1,9 @@
 #include <iostream>
+#include "rooms.h"
 
 using namespace std;
 
-int main() {
+void southWest() {
 
     //Top Row ----------------------------------------------------------------------------------------------------------
 
@@ -143,5 +144,4 @@ int main() {
                  "something died here. In the corner, a pulsing carcass sits.\n"
                  "The source of the light. A slimy green goo is splattered all\n"
                  "over the walls. "; //alien room description
-    return 0;
 }

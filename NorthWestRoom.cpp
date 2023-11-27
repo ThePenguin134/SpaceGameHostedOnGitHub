@@ -1,8 +1,9 @@
 #include <iostream>
+#include "rooms.h"
 
 using namespace std;
 
-int main() {
+void northWest() {
 
     //Forms the top row.
     //Creates spaces before the first row of asterisks.
@@ -134,5 +135,4 @@ int main() {
             "shelves, and gardening tools. A shovel can be found\n"
             "leaning on one of the shelves."; //Greenhouse description
 
-    return 0;
 }

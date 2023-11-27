@@ -1,8 +1,9 @@
 #include <iostream>
+#include "rooms.h"
 
 using namespace std;
 
-int main() {
+void south() {
 
     //Top Row ----------------------------------------------------------------------------------------------------------
 
@@ -102,5 +103,4 @@ int main() {
                  "slept in for a very long time. To the side of each bed there\n"
                  "is a small dresser for personal belongings and clothing."; //cabins description
 
-    return 0;
 }

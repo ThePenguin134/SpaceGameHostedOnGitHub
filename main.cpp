@@ -1,5 +1,15 @@
 #include <iostream>
 #include "rooms.h"
+#include "CenterRoom.cpp"
+#include "EastRoom.cpp"
+#include "Map.cpp"
+#include "NorthEastRoom.cpp"
+#include "NorthRoom.cpp"
+#include "NorthWestRoom.cpp"
+#include "SouthEastRoom.cpp"
+#include "SouthRoom.cpp"
+#include "SouthWestRoom.cpp"
+#include "WestRoom.cpp"
 
 using namespace std;
 
@@ -7,6 +17,16 @@ bool mainMenuActive = true;
 bool gameStart = false;
 int startInput;
 string gameInput;
+struct Item {
+    int ID;
+    string name;
+    string description;
+};
+struct Player {
+    int health;
+    Item inventory[10];
+};
+
 
 
 int main() {
@@ -41,7 +61,7 @@ int main() {
         }
     }
     while (gameStart) {
-
+        center();
         cin >> gameInput;
     }
 }

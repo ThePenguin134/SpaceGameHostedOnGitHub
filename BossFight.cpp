@@ -15,10 +15,21 @@ void BossFight() {
     };
 
     // Weapon availability struct
-    class Weapon(weaponselection) {
+    class Weapon {
+    public:
         bool isAvailable;
         int damage;
+
+        Weapon(bool WeaponIsAvailable, int weaponDamage) : isAvailable(WeaponIsAvailable),
+                                                                              damage(weaponDamage) {};
     };
+
+    Weapon Scalpel(false, 1);
+    Weapon Shovel(false, 1);
+    Weapon Dagger(false, 1);
+    Weapon Needle(false, 1);
+    Weapon Sword(false, 1);
+    Weapon RunAway(false, 1);
 
     // Scalpel Function
         // Deal a small amount of damage

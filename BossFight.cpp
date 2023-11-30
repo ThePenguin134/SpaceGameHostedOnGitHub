@@ -6,10 +6,11 @@
 using namespace std;
 
 void BossFight() {
-    // Snail Struct
-        // Health
-        // # of heads
-        // Attack damage
+    struct Snail {
+        int health;
+        int heads;
+        int snailBaseDamage;
+    };
     // Weapon Availability
 
     // Weapon Damage Struct
@@ -39,6 +40,7 @@ void BossFight() {
 
     //Actual Fight Code
         //Repeat till snail or player dies
+        for((snail.health != 0) || (playerHealth != 0))
             // Let User select choice
             // Snail attacks
 

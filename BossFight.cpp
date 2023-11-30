@@ -6,15 +6,19 @@
 using namespace std;
 
 void BossFight() {
+
+    //Snail struct with its health, # of heads, and damage before growing additional heads
     struct Snail {
         int health;
         int heads;
         int snailBaseDamage;
     };
 
-    // Weapon Availability
-
-    // Weapon Damage Struct
+    // Weapon availability struct
+    class Weapon(weaponselection) {
+        bool isAvailable;
+        int damage;
+    };
 
     // Scalpel Function
         // Deal a small amount of damage
@@ -38,7 +42,12 @@ void BossFight() {
 
     // Select Choice code - Let the user select any weapon or to run away.
     cout << "What would you like to do?" << endl;
-    cout << "1) Scalpel" << endl;
+    cout << "1) Attack with Scalpel" << endl;
+    cout << "2) Attack with Shovel" << endl;
+    cout << "3) Attack with Dagger" << endl;
+    cout << "4) Attack with Needle" << endl;
+    cout << "5) Attack with Sword" << endl;
+    cout << "6) Run Away" << endl;
     int bossChoice;
     cin >> bossChoice;
     switch(bossChoice) {

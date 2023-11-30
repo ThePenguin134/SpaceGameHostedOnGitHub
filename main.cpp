@@ -8,6 +8,7 @@ bool gameStart = false;
 int startInput;
 string input;
 
+
 int main() {
     cout << "Welcome to the space game!";
     while (gameActive) {

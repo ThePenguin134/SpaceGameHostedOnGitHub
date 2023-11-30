@@ -2,7 +2,6 @@
 #include "rooms.h"
 #include "CenterRoom.cpp"
 #include "EastRoom.cpp"
-#include "Map.cpp"
 #include "NorthEastRoom.cpp"
 #include "NorthRoom.cpp"
 #include "NorthWestRoom.cpp"
@@ -25,12 +24,7 @@ struct Item {
     string name;
     string description;
 };
-struct Player {
-    int health = 10;
-    Item inventory[10];
-    string currentRoom = "center";
-};
-Player player;
+
 
 class Room {
 public:
@@ -53,41 +47,49 @@ struct Monster {
     string name;
     int health;
 };
+struct Player {
+    int health = 10;
+    Item inventory[10];
+};
+Player player;
 
 void printRoom() {
-    if (player.currentRoom == "center") {
-        center();
-    }
-    if (player.currentRoom == "north") {
-        north();
-    }
-    if (player.currentRoom == "northEast") {
-        northEast();
-    }
-    if (player.currentRoom == "east") {
-        east();
-    }
-    if (player.currentRoom == "southEast") {
-        southEast();
-    }
-    if (player.currentRoom == "south") {
-        south();
-    }
-    if (player.currentRoom == "southWest") {
-        southWest();
-    }
-    if (player.currentRoom == "west") {
-        west();
-    }
-    if (player.currentRoom == "northWest") {
-        northWest();
-    }
+    return;
 }
-void playMenu() {
+void playMenu(Room *currentRoom) {
     cout << "What would you like to do?\n";
     cin >> gameInput;
     if (gameInput == "move") {
-        //itd be really cool to put some actual room moving code here
+        // Ask the player which room they want to go to next
+        cout << "Which room do you want to go to next? ";
+        cout << "(Available rooms: ";
+        int connectedRoomsCount = 0;
+        for (int i = 0; i < 5; ++i) {
+            if (currentRoom->connectedRooms[i] != nullptr) {
+                cout << currentRoom->connectedRooms[i]->name << ", ";
+                connectedRoomsCount++;
+            }
+        }
+        cout << ")" << endl;
+        bool isValidChoice = false;
+        string roomChoice;
+
+        while (!isValidChoice) {
+            cin >> roomChoice;
+
+
+            for (int i = 0; i < connectedRoomsCount; ++i) {
+                if (roomChoice == currentRoom->connectedRooms[i]->name) {
+                    currentRoom = currentRoom->connectedRooms[i];
+                    isValidChoice = true;
+                    break;
+                }
+
+                else {
+                    cout << "Invalid room choice. Please choose a valid room." << endl;
+                }
+            }
+        }
     }
     if (gameInput == "check map") {
         map();
@@ -211,7 +213,9 @@ int main() {
         }
     }
     while (gameStart) {
-        center();
-        cin >> gameInput;
+        // Print the current room description
+        cout << "You are in the " << currentRoom->name << endl;
+        cout << currentRoom->description << endl;
+        playMenu(currentRoom);
     }
 }

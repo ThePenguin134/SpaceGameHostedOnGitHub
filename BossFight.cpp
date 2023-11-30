@@ -11,6 +11,7 @@ void BossFight() {
         int heads;
         int snailBaseDamage;
     };
+
     // Weapon Availability
 
     // Weapon Damage Struct
@@ -35,12 +36,40 @@ void BossFight() {
     // Run away Function
         // Seal off the door
 
-    // Select Choice code
-        // Let the user select any weapon or to run away.
+    // Select Choice code - Let the user select any weapon or to run away.
+    cout << "What would you like to do?" << endl;
+    cout << "1) Scalpel" << endl;
+    int bossChoice;
+    cin >> bossChoice;
+    switch(bossChoice) {
+        case 1: {
+
+        }
+        case 2: {
+
+        }
+        case 3: {
+
+        }
+        case 4: {
+
+        }
+        case 5: {
+
+        }
+        case 6: {
+
+        }
+        default: {
+            cout << "Not a valid selection!" << endl;
+        };
+    }
 
     //Actual Fight Code
         //Repeat till snail or player dies
-        for((snail.health != 0) || (playerHealth != 0))
+        for((Snail().health != 0) && (playerHealth != 0)) {
+
+        }
             // Let User select choice
             // Snail attacks
 

@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int main() {
+int map() {
     //---------top Row
     cout << "               " ;
     cout << "*  *  *  *  *  *  *  *" << endl;

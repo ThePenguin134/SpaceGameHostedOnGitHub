@@ -3,14 +3,15 @@
 
 using namespace std;
 
-bool gameActive = true;
+bool mainMenuActive = true;
 bool gameStart = false;
 int startInput;
-string input;
+string gameInput;
+
 
 int main() {
     cout << "Welcome to the space game!";
-    while (gameActive) {
+    while (mainMenuActive) {
         cout << "\n\n"
         << "What would you like to do?\n"
         << "1. Start Game\n"
@@ -20,17 +21,27 @@ int main() {
         switch (startInput) {
             case 1: {
                 gameStart = true;
+                mainMenuActive = false;
+                break;
             }
             case 2: {
-                cout << "this would be a really great place for a description";
+                cout << "This is a game where you type in what you want to do. For example,\n"
+                << "if you want to go to another room, you would type in \"move\" and then\n"
+                << "the name of the room where you want to move. Try to find the way out!";
+                break;
             }
             case 3: {
-                gameActive = false;
+                mainMenuActive = false;
+                break;
             }
             default: {
                 cout << "Invalid option!";
+                break;
             }
         }
     }
-  center();
+    while (gameStart) {
+
+        cin >> gameInput;
+    }
 }

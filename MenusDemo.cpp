@@ -1,6 +1,6 @@
 /*#include <iostream>
 using namespace std;
-int main() {
+int test() {
     //declarations
     int input; //this variable is used whenever user input is needed as a place to save that input.
     bool incomplete = true; //while this is true, the program will loop forever until it reaches a good point to end.

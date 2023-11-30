@@ -17,17 +17,66 @@ bool mainMenuActive = true;
 bool gameStart = false;
 int startInput;
 string gameInput;
+void printRoom();
+void playMenu();
+void checkInventory();
 struct Item {
     int ID;
     string name;
     string description;
 };
 struct Player {
-    int health;
+    int health = 10;
     Item inventory[10];
+    string currentRoom = "center";
 };
+Player player;
 
-
+void printRoom() {
+    if (player.currentRoom == "center") {
+        center();
+    }
+    if (player.currentRoom == "north") {
+        north();
+    }
+    if (player.currentRoom == "northEast") {
+        northEast();
+    }
+    if (player.currentRoom == "east") {
+        east();
+    }
+    if (player.currentRoom == "southEast") {
+        southEast();
+    }
+    if (player.currentRoom == "south") {
+        south();
+    }
+    if (player.currentRoom == "southWest") {
+        southWest();
+    }
+    if (player.currentRoom == "west") {
+        west();
+    }
+    if (player.currentRoom == "northWest") {
+        northWest();
+    }
+}
+void playMenu() {
+    cout << "What would you like to do?\n";
+    cin >> gameInput;
+    if (gameInput == "move") {
+        //itd be really cool to put some actual room moving code here
+    }
+    if (gameInput == "check map") {
+        map();
+    }
+    if (gameInput == "check inventory") {
+        checkInventory(); //just iterate through the inventory, which is hopefully filled with item objects
+    }
+    if (gameInput == "get") {
+        //cool place for check what item is in a room and adding it to the inventory.
+    }
+};
 
 int main() {
     cout << "Welcome to the space game!";

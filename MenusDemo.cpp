@@ -1,4 +1,4 @@
-#include <iostream>
+/*#include <iostream>
 using namespace std;
 int test() {
     //declarations
@@ -75,3 +75,68 @@ int test() {
         }
     }
 }
+*/
+#include <iostream>
+#include <fstream>
+#include <sstream>
+
+using namespace std;
+
+int getItemIndex(string searchItem, string itemNumber[]);
+
+int getItemIndex(string searchItem, string *itemNumber) {
+    int index = 0;
+    for(int i = 1; i < 70; i++)
+    {
+        if (itemNumber[i] == searchItem) {
+            index = i;
+            break;
+        }
+    }
+    return index;
+}
+
+int main(){
+    string searchItem;
+    string itemNumber[70];
+    string itemName[70];
+    string itemDescription[70];
+    string currentitem;
+    int next = 0;
+
+    ifstream inFStrm("CS1 Group Work - Item Data.csv");
+
+
+    if (inFStrm.is_open()) {
+        string currentline;
+        while (getline(inFStrm,currentline,'\n')) {
+            istringstream lineSS(currentline);
+            getline(lineSS,currentitem,',');
+            stringstream ss;
+            ss << currentitem;
+            ss >> itemNumber[next];
+            getline(lineSS,currentitem,',');
+            itemName[next] = currentitem;
+            getline(lineSS,currentitem,',');
+            itemDescription[next] = currentitem;
+            next++;
+        }
+    }
+    else {
+        cout << "File was not found." << endl;
+        return -1;
+    }
+
+    for (int i = 0; i < 70; i++){
+        cout << itemNumber[i];
+    }
+
+    cout << "Please type an item ID to search" << endl;
+    cin >> searchItem;
+
+    int index = getItemIndex(searchItem, itemNumber);
+    cout << "This item is: " << itemName[index] << endl;
+
+    return 0;
+}
+

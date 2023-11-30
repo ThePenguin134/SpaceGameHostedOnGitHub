@@ -27,7 +27,9 @@ int main() {
             case 3: {
                 gameActive = false;
             }
-
+            default: {
+                cout << "Invalid option!";
+            }
         }
     }
   center();

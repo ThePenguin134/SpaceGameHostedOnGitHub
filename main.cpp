@@ -78,6 +78,7 @@ void playMenu() {
     }
 };
 
+
 int main() {
     cout << "Welcome to the space game!";
     while (mainMenuActive) {

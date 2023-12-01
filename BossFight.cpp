@@ -5,6 +5,7 @@
 
 using namespace std;
 
+
 //Snail struct with its snailHealth, # of heads, and damage before growing additional heads
 struct Snail {
     int Health;
@@ -12,6 +13,16 @@ struct Snail {
     int BaseDamage;
 
 };
+
+//Create Snail and initial attributes
+Snail createSnail() {
+    Snail snail{};
+    snail.Health = 10;
+    snail.Heads = 1;
+    snail.BaseDamage = 3;
+    return snail;
+}
+
 // Weapon availability/damage values struct
 class Weapon {
 public:
@@ -22,9 +33,10 @@ public:
                                                        damage(weaponDamage) {};
 };
 
-Weapon Scalpel(false, 1);
-Weapon Shovel(false, 1);
+Weapon Scalpel(false, 2);
+Weapon Shovel(false, 1); // Shovels big attack is 5x this value
 Weapon Dagger(false, 1);
+Weapon GoopDagger(false, 4);
 Weapon Needle(false, 1);
 Weapon Sword(false, 1);
 Weapon RunAway(false, 1);
@@ -64,33 +76,54 @@ void bossSlection() {
     }
 }
 
+Snail snail = createSnail();
+
 void ScalpelUsed() {
+    cout << "You attack with the scalpel, but it is not very effective and deals " << Scalpel.damage << "." << endl;
+    snail.Health -= Scalpel.damage;
+}
+
+void ShovelUsed() {
+    cout << "As you raise your shovel you wonder if you should wait for better moment to attack or go for the strike now?" << endl;
+    cout << "1) Strike Now!\n2) Wait." << endl;
+    int choice;
+    cin >> choice;
+    if (choice = 1) {
+        cout << "You seize the moment and attack, but the shovel practically glides oof of the snails shell and does minimal damage." << endl;
+        snail.Health -= Shovel.damage;
+    }
+    if (choice = 2) {
+        cout << "You bide your time and when the snail looks upwards ur able to gouge his underside with the shovel resulting in a lot of damage." << endl;
+        snail.Health -= Shovel.damage * 5;
+
+        // 1/3rd chance to lose shovel
+        if (rand() % 4) {
+            cout << "Unfortunately the snail also reacted quickly and you were unable to grab back the shovel from its body." << endl;
+            Shovel.isAvailable = false;
+        }
+    }
 
 }
+void daggerUsed() {
+
+}
+// Dagger Function
+// Bool to track if Dagger was already used
+
+// Needle Function
+// Small chance to instakill, otherwise do nothing
+
+// Sword Function
+//Bool to track if sword was already used
+
+// Run away Function
+// Seal off the door
+
 // ___________________________________________________________________________________________________________________
 
 void BossFight() {
+    srand(time(0));
 
-
-    // Scalpel Function
-        // Deal a small amount of damage
-
-    // Shovel Function
-        //Choice to attack or wait
-            // Attacking results in minimal damage
-            // Waiting results in big damage, but a chance to lose the shovel
-
-    // Dagger Function
-        // Bool to track if Dagger was already used
-
-    // Needle Function
-        // Small chance to instakill, otherwise do nothing
-
-    // Sword Function
-        //Bool to track if sword was already used
-
-    // Run away Function
-        // Seal off the door
 
     // Select Choice code - Let the user select any weapon or to run away.
 

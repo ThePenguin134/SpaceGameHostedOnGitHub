@@ -17,5 +17,3 @@ add_executable(NorthWestRoom NorthWestRoom.cpp)
 add_executable(CenterRoom CenterRoom.cpp)
 add_executable(MenusDemo MenusDemo.cpp)
 add_executable(Map Map.cpp)
-
-add_executable(BossFight BossFight.cpp)

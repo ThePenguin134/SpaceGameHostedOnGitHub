@@ -7,6 +7,7 @@ using namespace std;
 
 bool isRoomSealed = false; // Bool to control the room availability
 int playerHealth = 10; // Sets the players health
+int snailDamage; //Variable used to find snails damage each turn
 
 //Snail struct with its snailHealth, # of heads, and damage before growing additional heads
 struct Snail {
@@ -185,9 +186,10 @@ void BossFight() {
         while ((snail.Health != 0) && (playerHealth != 0) && !isRoomSealed) {
             bossSelction();// Let User select choice
             if ((snail.Health != 0) && (playerHealth != 0) && !isRoomSealed) { // Snail attacks
+                snailDamage = ((rand() % 2) * (snail.BaseDamage * snail.Heads) * .5); //Damage scales with # of heads and has a random chance to crit
+                playerHealth -= snailDamage;
                 cout << "The Snail charges at you with " << snail.Heads << " heads and deals "
-                << floor((rand() % 2) * (snail.BaseDamage * snail.Heads) * .5) //Damage scales with # of heads and has a random chance to crit
-                << " damage to you before moving back." << endl;
+                << snailDamage << " damage to you before moving back." << endl;
             }
         }
 }

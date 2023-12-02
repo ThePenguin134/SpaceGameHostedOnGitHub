@@ -338,7 +338,6 @@ void BossFight() {
 int main() {
     // Seed the random number generator with the current time
     srand(time(0));
-    BossFight();
     // Create five rooms
     Room room1("Control Room", "In the center of the room there is a command console. Near the edge of the room"
                                " there is a table, on which there is a suspicious container of liquid. Under the container, "

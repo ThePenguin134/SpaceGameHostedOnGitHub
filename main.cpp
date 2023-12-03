@@ -332,13 +332,6 @@ void BossFight() {
 }
 // ------------------------------- BOSS FIGHT CODE (END) ---------------------------------------------------------------
 
-
-
-struct Monster {
-    string name;
-    int health;
-};
-
 int main() {
     // Seed the random number generator with the current time
     srand(time(0));
@@ -396,9 +389,6 @@ int main() {
     bool keyItem3 = true;
     bool keyItem4 = true;
     bool keyItem5 = true;
-
-    // Create the monster
-    Monster monster = {"Dragon", 100};
 
     // Start the game in Room 1
     Room *currentRoom = &room1;

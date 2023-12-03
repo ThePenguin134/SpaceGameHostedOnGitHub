@@ -88,6 +88,7 @@ void playMenu(Room *currentRoom) {
 
                 else {
                     cout << "Invalid room choice. Please choose a valid room." << endl;
+                    break;
                 }
             }
         }
@@ -115,6 +116,7 @@ struct Snail {
     int BaseDamage;
 
 };
+
 //Gives snail initial attributes and creates him
 Snail createSnail() {
     Snail snail{};
@@ -153,7 +155,6 @@ void ScalpelUsed() {
         cout << "You do not currently have that weapon! The snail prepares to attack you as you fumble around." << endl;
     }
 }
-
 void ShovelUsed() {
     if (Shovel.isAvailable) {
         cout
@@ -407,9 +408,6 @@ int main() {
     bool keyItem3 = true;
     bool keyItem4 = true;
     bool keyItem5 = true;
-
-    // Create the monster
-    Monster monster = {"Dragon", 100};
 
     // Start the game in Room 1
     Room *currentRoom = &room1;

@@ -12,5 +12,6 @@ void northEast();
 void southEast();
 void southWest();
 void northWest();
+void map();
 
 #endif

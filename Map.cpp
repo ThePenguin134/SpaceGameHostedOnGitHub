@@ -1,8 +1,9 @@
 #include <iostream>
+#include "rooms.h"
 
 using namespace std;
 
-int map() {
+void map() {
     //---------top Row
     cout << "               " ;
     cout << "*  *  *  *  *  *  *  *" << endl;

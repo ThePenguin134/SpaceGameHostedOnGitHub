@@ -1590,6 +1590,9 @@ void BossFight() {
             FightSummary();
         }
     }
+    if (isRoomSealed) {
+
+    }
     if ((snail.Health <= 0)) {
         cout << "\nCongrats! You beat the snail!" << endl;
     }

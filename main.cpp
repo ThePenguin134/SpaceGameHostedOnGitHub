@@ -44,12 +44,7 @@ public:
     }
 };
 
-struct Monster {
-    string name;
-    int health;
-};
 struct Player {
-    int health = 10;
     Item inventory[10];
 };
 Player player;
@@ -57,6 +52,7 @@ Player player;
 void printRoom() {
     return;
 }
+
 void playMenu(Room *currentRoom) {
     cout << "What would you like to do?\n";
     cin >> gameInput;

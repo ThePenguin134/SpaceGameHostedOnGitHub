@@ -1333,8 +1333,14 @@ void playMenu(Room *currentRoom) {
         int connectedRoomsCount = 0;
         for (int i = 0; i < 5; ++i) {
             if (currentRoom->connectedRooms[i] != nullptr) {
-                cout << currentRoom->connectedRooms[i]->name << ", ";
-                connectedRoomsCount++;
+                if (i == 0) { // The first room name (Doesn't need a comma before it)
+                    cout  << currentRoom->connectedRooms[i]->name;
+                    connectedRoomsCount++;
+                }
+                else { // Rest of the rooms names (Need commas before each one)
+                    cout << ", " << currentRoom->connectedRooms[i]->name;
+                    connectedRoomsCount++;
+                }
             }
         }
         cout << ")" << endl;
@@ -1420,6 +1426,7 @@ Weapon GoopDagger(false, 4); // First big attack with the dagger
 Weapon Needle(false, 0); // instakills if random chance is met, 0 damage otherwise
 Weapon Sword(false, 1); // Small attack
 bool swordBeenUsed = false;
+int weaponCount;
 
 // *Weapon Functions* Start -------------------------------
 void KnifeUsed() {
@@ -1631,6 +1638,46 @@ void GoopInteraction() {
     }
 }
 
+//Stops the player when they are trying to enter the alien room and ensures they have at least one weapon, note describing the snail, key to open the door, and a healing item. Also explains this to them.
+void AlienRoomRequirements() {
+    cout << "Dangerous Snail behind these doors! Please do not enter unless you at MINIMUM have:\n1) At least two weapons\n2)Information about the dangers of the snail\n3)A proper way to heal\n"
+            "4)The key of course that we stored away for good reason" << endl;
+
+    //Count How many weapons the player has
+    if (Knife.isAvailable) {
+        weaponCount += 1; //weaponCount var is declared right below the weapon instances in Boss Fight Code
+    }
+    if (Shovel.isAvailable) {
+        weaponCount += 1; //weaponCount var is declared right below the weapon instances in Boss Fight Code
+    }
+    if (Dagger.isAvailable || GoopDagger.isAvailable) {
+        weaponCount += 1; //weaponCount var is declared right below the weapon instances in Boss Fight Code
+    }
+    if (Needle.isAvailable) {
+        weaponCount += 1; //weaponCount var is declared right below the weapon instances in Boss Fight Code
+    }
+    if (Sword.isAvailable) {
+        weaponCount += 1; //weaponCount var is declared right below the weapon instances in Boss Fight Code
+    }
+
+    if (weaponCount >= 2 && isSnailNotePickupAvailable == false && isFirstAidPickupAvailable == false && isSnailRoomKeyPickupAvailable == false) {
+        cout << "You can open the door with your key to take on the giant snail." << endl;
+        cout << "Do you wish to take him on? (y/n?)" << endl;
+        string enterSnailRoomChoice;
+        cin >> enterSnailRoomChoice;
+        if (enterSnailRoomChoice == "y") {
+            BossFight();
+        }
+        if (enterSnailRoomChoice == "n") {
+            // Leave empty so the alien Room Code ends
+        }
+    }
+    else {
+        // Leave empty so the alien Room Code ends
+    }
+}
+
+
 // ------------------------------- Room Interaction (END) --------------------------------------------------------------
 int main() {
     // Seed the random number generator with the current time
@@ -1688,7 +1735,7 @@ int main() {
         cout << "You are in the " << currentRoom->name << endl;
         cout << currentRoom->description << endl;
         if (currentRoom->name == "Alien-Room"){
-            BossFight();
+            AlienRoomRequirements();
         }
 
         // Check if the room has a treasure and if the player wants to pick it up
@@ -1720,8 +1767,14 @@ int main() {
         int connectedRoomsCount = 0;
         for (int i = 0; i < 5; ++i) {
             if (currentRoom->connectedRooms[i] != nullptr) {
-                cout << currentRoom->connectedRooms[i]->name << ", ";
-                connectedRoomsCount++;
+                if (i == 0) { // The first room name (Doesn't need a comma before it)
+                    cout  << currentRoom->connectedRooms[i]->name;
+                    connectedRoomsCount++;
+                }
+                else { // Rest of the rooms names (Need commas before each one)
+                    cout << ", " << currentRoom->connectedRooms[i]->name;
+                    connectedRoomsCount++;
+                }
             }
         }
         cout << ")" << endl;

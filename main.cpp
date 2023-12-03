@@ -1,17 +1,1287 @@
 #include <iostream>
-#include "rooms.h"
-#include "CenterRoom.cpp"
-#include "EastRoom.cpp"
-#include "NorthEastRoom.cpp"
-#include "NorthRoom.cpp"
-#include "NorthWestRoom.cpp"
-#include "SouthEastRoom.cpp"
-#include "SouthRoom.cpp"
-#include "SouthWestRoom.cpp"
-#include "WestRoom.cpp"
 #include "cmath"
 
 using namespace std;
+
+void center() {
+//Top Row --------------------------------------------------------------------------------------------------------------
+    //prints "/" with proper spacing
+    cout << "  /   ";
+    //First for loop (1-5)
+    for (int a = 1; a <= 5; a++) {
+        //Prints asterisk 5 times
+        cout << "*";
+        //Inner for loop (3 times)
+        for (int b = 1; b <= 3; b++) {
+            //Prints 3 spaces between each asterisk
+            cout << " ";
+        }
+    }
+    //prints the door
+    cout << "| |   ";
+    //Second for loop (1-5)
+    for (int d = 1; d <= 5; d++) {
+        //Prints asterisk 5 times
+        cout << "*";
+        //Inner for loop (3 times)
+        for (int y = 1; y <= 3; y++) {
+            //Prints 3 spaces between each asterisk
+            cout << " ";
+        }
+    }
+    //prints the corner of the room
+    cout << "\\";
+    //new line
+    cout << endl;
+//Row 2 ----------------------------------------------------------------------------------------------------------------
+    //prints the corner of the room
+    cout << " /";
+//Third for loop (1-51)
+    for (int n = 1; n <= 51; n++) {
+        //Prints 51 spaces
+        cout << " ";
+    }
+    //prints the corner of the room
+    cout << "\\";
+    //new line
+    cout << endl;
+//Row 3 ----------------------------------------------------------------------------------------------------------------
+    //prints the corner of the room
+    cout << "/";
+    //Third for loop (1-53)
+    for (int n = 1; n <= 53; n++) {
+        //prints 53 spaces
+        cout << " ";
+    }
+    //prints the corner of the room
+    cout << "\\";
+    //new line
+    cout << endl;
+//Rows 4-8 -------------------------------------------------------------------------------------------------------------
+    //Fourth for loop (1-5)
+    for (int k = 1; k <= 5; k++) {
+        //Inner for loop (1 time)
+        for (int m = 1; m <= 1; m++) {
+            //prints *
+            cout << "*";
+        }
+        //Inner for loop (53 times)
+        for (int n = 1; n <= 53; n++) {
+            //prints 53 spaces
+            cout << " ";
+        }
+        //Inner for loop (1 time)
+        for (int o = 1; o <= 1; o++) {
+            //prints *
+            cout << "*";
+        }
+        //new line
+        cout << endl;
+    }
+//Rows 9 & 10 ----------------------------------------------------------------------------------------------------------
+    //Fifth for loop (1-2)
+    for (int a = 1; a <= 2; a++) {
+        //Inner for loop (1 time)
+        for (int m = 1; m <= 1; m++) {
+            //prints _
+            cout << "_";
+        }
+        //Inner for loop (53 times)
+        for (int n = 1; n <= 53; n++) {
+            //Prints 53 spaces
+            cout << " ";
+        }
+        //Inner for loop (1 time)
+        for (int o = 1; o <= 1; o++) {
+            //Prints _
+            cout << "_" << endl;
+        }
+        //new line
+        cout << endl;
+    }
+//Rows 11-15 -----------------------------------------------------------------------------------------------------------//Fourth for loop (1-5)
+    //Sixth for loop (1-5)
+    for (int k = 1; k <= 5; k++) {
+        //Inner for loop (1 time)
+        for (int m = 1; m <= 1; m++) {
+            //prints *
+            cout << "*";
+        }
+        //Inner for loop (53 times)
+        for (int n = 1; n <= 53; n++) {
+            //prints 53 spaces
+            cout << " ";
+        }
+        //Inner for loop (1 time)
+        for (int o = 1; o <= 1; o++) {
+            //prints *
+            cout << "*";
+        }
+        //new line
+        cout << endl;
+    }
+//Row 16 ---------------------------------------------------------------------------------------------------------------
+    //prints the corner of the room
+    cout << "\\";
+    //Seventh for loop (1-53)
+    for (int n = 1; n <= 53; n++) {
+        //prints 53 spaces
+        cout << " ";
+    }
+    //prints the corner of the room
+    cout << "/";
+    cout << endl;
+//Row 17 ---------------------------------------------------------------------------------------------------------------
+    //prints the corner of the room
+    cout << " \\";
+    //Eighth for loop (1-51)
+    for (int n = 1; n <= 51; n++) {
+        cout << " ";
+    }
+    //prints the corner of the room
+    cout << "/";
+    cout << endl;
+//Row 18 ---------------------------------------------------------------------------------------------------------------
+    //prints "\" with proper spacing
+    cout << "  \\   ";
+    //Ninth for loop (1-5)
+    for (int a = 1; a <= 5; a++) {
+        //Prints asterisk 5 times
+        cout << "*";
+        //Inner for loop (3 times)
+        for (int b = 1; b <= 3; b++) {
+            //Prints 3 spaces between each asterisk
+            cout << " ";
+        }
+    }
+    //Prints the door
+    cout << "| |   ";
+    //Tenth for loop(1-5)
+    for (int d = 1; d <= 5; d++) {
+        //Prints 5 asterisks
+        cout << "*";
+        //Inner for loop (3 times)
+        for (int y = 1; y <= 3; y++) {
+            //prints 3 spaces between asterisk
+            cout << " ";
+        }
+    }
+    //prints the corner
+    cout << "/\n";
+    cout << "\nIn the center of the room there is a command console.\n"
+            "Near the edge of the room there is a table, on which\n"
+            "there is a suspicious container of liquid. Under the\n"
+            "container, there appears to be a napkin, acting as a\n"
+            "coaster of sorts."; //control room description
+    cout << endl;
+}
+void east() {
+
+    //Top Row ----------------------------------------------------------------------------------------------------------
+
+    // Repeats "I" number of asterisks in a line with "I" spaces in between them. (Before the Door)
+    for(int i=1; i < 6; i++) {
+        cout << "*";
+        for (int j=1; j<4; j++) {
+            cout << " ";
+        }
+    }
+
+    // Prints the doorway along with three spaces. IF SPACES IN THE ASTERISKS ARE CHANGED THIS MUST ALSO BE CHANGED.
+    cout << "| |   ";
+
+    // Repeats "I" number of asterisks in a line with "I" spaces in between them. (After the Door)
+    for(int i=1; i < 6; i++) {
+        cout << "*";
+        for (int j=1; j<4; j++) {
+            cout << " ";
+        }
+    }
+
+    //Ends the row.
+    cout << endl;
+
+    //Top Row ----------------------------------------------------------------------------------------------------------
+
+
+    //Middle Section ---------------------------------------------------------------------------------------------------
+
+    //Crates rows of empty space with walls on either side. "I" is the number of rows. "J" is the
+    // space in between left and right walls. (Before the Door)
+    for(int i=1; i < 7; i++) {
+        cout << "*";
+        for (int j = 0; j < 41; ++j) {
+            cout << " ";
+        }
+        cout << "*" << endl;
+    }
+
+    //Creates the half of the side door. Starts with the door and then prints "j" spaces before outputting
+    // the wall.
+    cout << "-";
+    for (int j = 0; j < 41; ++j) {
+        cout << " ";
+    }
+    cout << "*" << endl;
+
+    //Creates the other half of the side door. Starts with the door and then prints "j" spaces before outputting
+    // the wall.
+    cout << "-";
+    for (int j = 0; j < 41; ++j) {
+        cout << " ";
+    }
+    cout << "*" << endl;
+
+    //Crates rows of empty space with walls on either side. "I" is the number of rows. "J" is the
+    // space in between left and right walls. (After the Door)
+    for(int i=1; i < 7; i++) {
+        cout << "*";
+        for (int j = 0; j < 41; ++j) {
+            cout << " ";
+        }
+        cout << "*" << endl;
+    }
+    //Middle Section ---------------------------------------------------------------------------------------------------
+
+
+    //Bottom Section (Same as Top) -------------------------------------------------------------------------------------
+
+    // Repeats "I" number of asterisks in a line with "I" spaces in between them. (Before the Door)
+    for(int i=1; i < 6; i++) {
+        cout << "*";
+        for (int j=1; j<4; j++) {
+            cout << " ";
+        }
+    }
+
+    // Prints the doorway along with three spaces. IF SPACES IN THE ASTERISKS ARE CHANGED THIS MUST ALSO BE CHANGED.
+    cout << "| |   ";
+
+    // Repeats "I" number of asterisks in a line with "I" spaces in between them. (After the Door)
+    for(int i=1; i < 6; i++) {
+        cout << "*";
+        for (int j=1; j<4; j++) {
+            cout << " ";
+        }
+    }
+
+    //Ends the row.
+    cout << endl;
+
+    //Bottom Section (Same as Top) -------------------------------------------------------------------------------------
+
+    cout << "\nTables with stools line the center of the room. On one\n"
+            "side of the room, there appears to be what was once a\n"
+            "buffet. It is now covered in dust, and some strange\n"
+            "gooey liquid. On the other side of the room, there are\n"
+            "three vending machines that look like they haven't been\n"
+            "touched in many generations."; //mess hall description
+
+}
+void north() {
+
+    //Top Row ----------------------------------------------------------------------------------------------------------
+
+    // Repeats "I" number of asterisks in a line with "I" spaces in between them. (Before replacement asterisks)
+    for(int i=1; i < 6; i++) {
+        cout << "*";
+        for (int j=1; j<4; j++) {
+            cout << " ";
+        }
+    }
+
+    // Prints asterisks to replace a door.
+    cout << "* *   ";
+
+    // Repeats "I" number of asterisks in a line with "I" spaces in between them. (After replacement asterisks)
+    for(int i=1; i < 6; i++) {
+        cout << "*";
+        for (int j=1; j<4; j++) {
+            cout << " ";
+        }
+    }
+
+    //Ends the row.
+    cout << endl;
+
+    //Top Row ----------------------------------------------------------------------------------------------------------
+
+
+    //Middle Section ---------------------------------------------------------------------------------------------------
+
+    //Crates rows of empty space with walls on either side. "I" is the number of rows. "J" is the
+    // space in between left and right walls. (Before the Door)
+    for(int i=1; i < 7; i++) {
+        cout << "*";
+        for (int j = 0; j < 41; ++j) {
+            cout << " ";
+        }
+        cout << "*" << endl;
+    }
+
+    // Creates side doors. Starts with the first door and then prints "j" spaces before outputting part of the 2nd door.
+    cout << "-";
+    for (int j = 0; j < 41; ++j) {
+        cout << " ";
+    }
+    cout << "-" << endl;
+
+    //Creates the other half of both side doors. Starts with the 1st door and then prints "j" spaces before outputting
+    // part of the 2nd door.
+    cout << "-";
+    for (int j = 0; j < 41; ++j) {
+        cout << " ";
+    }
+    cout << "-" << endl;
+
+    //Crates rows of empty space with walls on either side. "I" is the number of rows. "J" is the
+    // space in between left and right walls. (After the Door)
+    for(int i=1; i < 7; i++) {
+        cout << "*";
+        for (int j = 0; j < 41; ++j) {
+            cout << " ";
+        }
+        cout << "*" << endl;
+    }
+
+    //Middle Section ---------------------------------------------------------------------------------------------------
+
+
+    //Bottom Section (Same as Top) -------------------------------------------------------------------------------------
+
+    // Repeats "I" number of asterisks in a line with "I" spaces in between them. (Before the Door)
+    for(int i=1; i < 6; i++) {
+        cout << "*";
+        for (int j=1; j<4; j++) {
+            cout << " ";
+        }
+    }
+
+    // Prints the doorway along with three spaces. IF SPACES IN THE ASTERISKS ARE CHANGED THIS MUST ALSO BE CHANGED.
+    cout << "| |   ";
+
+    // Repeats "I" number of asterisks in a line with "I" spaces in between them. (After the Door)
+    for(int i=1; i < 6; i++) {
+        cout << "*";
+        for (int j=1; j<4; j++) {
+            cout << " ";
+        }
+    }
+
+    //Ends the row.
+    cout << endl;
+
+    //Bottom Section (Same as Top) -------------------------------------------------------------------------------------
+
+    cout << "\nYou find a room with a large window directly ahead of\n"
+            "you. The window looks out into the vast emptiness of\n"
+            "space, along with a beautiful view of the sun, brighter\n"
+            "than you've ever seen it before. Beneath the window is a\n"
+            "system that is quite obviously a communications system.\n"
+            "Various dials and levers span across the system. The rest\n"
+            "of the room is filled with cases for various electronics."; //radio room description
+
+}
+void northEast() {
+//Top Row --------------------------------------------------------------------------------------------------------------
+    //Places asterisks row with spaces between each one.
+    for (int i = 1; i < 6; i++) {
+        cout << "*";
+        for (int j = 0; j < 4; ++j) {
+            cout << " ";
+        }
+    }
+
+    cout << endl;
+
+//Top Section ----------------------------------------------------------------------------------------------------------
+//Makes the first half of the diagonal
+    for (int i = 8; i < 13; i++) //Repeats for each row
+    {
+//Forms Left Wall
+        cout << "*";
+
+//Adds fewer spaces in the beginning based on "i", the row number. Forms diagonal.
+        for (int j = 1; j < i * 3; j++) {
+            cout << " ";
+
+        }
+        cout << "*";
+
+        cout << endl;
+    }
+
+//Makes the middle couple rows of the diagonal, but more importantly makes the right door as well.
+    for (int i = 6; i < 8; ++i) {
+
+//Forms part of the door (Once looped, creates the other part.)
+        cout << "-";
+
+//Adds more spaces in between the door and wall based on "i", the row number. Forms diagonal.
+        for (int j = 1; j < 21 + i * 3; j++) {
+            cout << " ";
+
+        }
+        cout << "*" << endl;
+    }
+
+    //Makes the second half of the diagonal
+    for (int i = 1; i < 6; i++) //Repeats for each row
+    {
+        //Forms Left Wall
+        cout << "*";
+
+        //Adds fewer spaces in the beginning based on "i", the row number. Forms diagonal.
+        for (int j = 1; j < 41 + i * 3; j++) {
+            cout << " ";
+
+        }
+        cout << "*";
+
+        cout << endl;
+    }
+
+//Lower Section --------------------------------------------------------------------------------------------------------
+
+    //creates the row that forms the bottom part of the indented corner.
+    for (int i = 1; i < 6; i++) {
+        cout << "*";
+        for (int j = 0; j < 4; j++) {
+            cout << " ";
+        }
+    }
+    for (int j = 1; j < 35; j++) {
+        cout << " ";
+    }
+    cout << "*";
+    cout << endl;
+    //Crates rows of empty space with walls on either side. "I" is the number of rows. "J" is the
+    // space in between left and right walls.
+    for (int i = 1; i < 5; i++) {
+
+        //Shifts Rows over by "j" spaces.
+        for (int j = 1; j < 21; j++) {
+            cout << " ";
+        }
+
+        //Makes first wall
+        cout << "*";
+
+        //Creates space between walls.
+        for (int j = 1; j < 42; j++) {
+            cout << " ";
+        }
+
+        //Creates the second wall.
+        cout << "*" << endl;
+    }
+
+//Bottom Section -------------------------------------------------------------------------------------------------------
+
+//Adds spaces to move the row to the right
+    for (int i = 1; i < 21; ++i) {
+        cout << " ";
+    }
+
+// Repeats "I" number of asterisks in a line with "I" spaces in between them. (Before the Door)
+    for (int i = 1; i < 6; i++) {
+        cout << "*";
+        for (int j = 1; j < 4; j++) {
+            cout << " ";
+        }
+    }
+
+// Prints the doorway along with three spaces. IF SPACES IN THE ASTERISKS ARE CHANGED THIS MUST ALSO BE CHANGED.
+    cout << "| |   ";
+
+// Repeats "I" number of asterisks in a line with "I" spaces in between them. (After the Door)
+    for (int i = 1; i < 6; i++) {
+        cout << "*";
+        for (int j = 1; j < 4; j++) {
+            cout << " ";
+        }
+    }
+
+//Ends the row.
+    cout << endl;
+
+    cout << "\nYou enter a small medical bay with 2 beds, medical equipment for each, a small desk in the corner, "
+            "\nand a coat rack on the wall across from the beds. Papers are scattered across the desk. "
+            "\nPerhaps someone was looking for something? ";
+}
+void northWest() {
+
+    //Forms the top row.
+    //Creates spaces before the first row of asterisks.
+    for (int i = 1; i < 43; ++i) {
+        cout << " ";
+    }
+
+    //Creates asterisks row with spaces between each of them.
+    for (int i = 1; i < 6; i++) {
+        cout << "*";
+        for (int j = 0; j < 4; ++j) {
+            cout << " ";
+        }
+    }
+
+    cout << endl;//Ends the top row.
+
+
+    //Creates the first diagonal segment
+    for (int i = 1; i < 6; i++) //Repeats for each row
+    {
+        //Reduces spaces in the beginning based on "i", the row number; forms diagonal.
+        for (int j = 1; j < 40 - i * 3; j++) {
+            cout << " ";
+
+        }
+        cout << "*";
+
+        //Adds more spaces after the diagonal based on "i"; Forms the wall to the right.
+        for (int j = 1; j < i*3 + 23; j++) {
+            cout << " ";
+
+        }
+        cout << "*";
+        cout << endl;
+    }
+
+
+    //Creates the middle couple rows of the diagonal; forms the right door shown by two dashes.
+    for (int i = 6; i < 8; ++i) //Repeats for each row.
+    {
+        //Reduces spaces in the beginning based on "i", the row number; Forms diagonal.
+        for (int j = 1; j < 40 - i*3; j++) {
+            cout << " ";
+
+        }
+        cout << "*";
+
+        //Adds more spaces after the diagonal based on "i"; Forms the door on the right with two dashes.
+        for (int j = 1; j < i*3 + 23; ++j) {
+            cout << " ";
+
+        }
+        cout << "-";
+        cout << endl;
+    }
+
+
+    //Makes the second half of the diagonal.
+    for (int i=8; i<13;i++) //Repeats for each row.
+    {
+        //Reduces spaces in the beginning based on "i", the row number; Forms last diagonal segment.
+        for (int j = 1; j < 40 - i*3; j++) {
+            cout << " ";
+
+        }
+        cout << "*";
+
+        //Adds more spaces after the diagonal based on "i"; Forms the wall to the right.
+        for (int j = 1; j < i*3 + 23; ++j) {
+            cout << " ";
+
+        }
+        cout << "*";
+        cout << endl; //Ends diagonal and right wall.
+    }
+
+
+    //Creates top row of indented corner; starts left outside wall.
+    cout << "*";
+    for (int i = 1; i < 42; ++i) //Adds spaces between left wall and right row.
+    {
+        cout << " ";
+    }
+    //Creates top row of corner with spaces between asterisks.
+    for (int i = 1; i < 6; i++) //Repeats for each asterisk on row. "i" is each asterisk.
+        //"j" is the space between each asterisk.
+    {
+        cout << "*";
+        for (int j = 0; j < 4; ++j) {
+            cout << " ";
+        }
+    }
+    cout << endl;
+
+
+    //Creates rows of empty space with walls on either side. "I" is the number of rows. "J" is the
+    //space in between left and right walls.
+    for (int i=1; i < 5; i++) {
+        cout << "*";
+        for (int j = 0; j < 41; j++) {
+            cout << " ";
+        }
+        cout << "*" << endl;
+    }
+    // Repeats "I" number of asterisks in a line with "I" spaces in between them. (Before the Door)
+    for(int i=1; i < 6; i++) {
+        cout << "*";
+        for (int j=1; j<4; j++) {
+            cout << " ";
+        }
+    }
+
+
+    // Prints the doorway along with three spaces. IF SPACES IN THE ASTERISKS ARE CHANGED THIS MUST ALSO BE CHANGED.
+    cout << "| |   ";
+    // Repeats "I" number of asterisks in a line with "I" spaces in between them. (After the Door)
+    for(int i=1; i < 6; i++) {
+        cout << "*";
+        for (int j=1; j<4; j++) {
+            cout << " ";
+        }
+    }
+    cout << "\nVarious plants are lined up across the room.\n"
+            "Beneath each plant is a label that describes the\n"
+            "plant and what its used for. Light from the sun\n"
+            "shines in through the glass that makes up most of\n"
+            "the room. Lined up on one wall are various drawers,\n"
+            "shelves, and gardening tools. A shovel can be found\n"
+            "leaning on one of the shelves."; //Greenhouse description
+
+}
+void southEast() {
+
+    //Top Row ----------------------------------------------------------------------------------------------------------
+
+    //Adds spaces to move the row to the right
+    for (int i = 1; i < 21; ++i) {
+        cout << " ";
+    }
+
+    // Repeats "I" number of asterisks in a line with "I" spaces in between them. (Before the Door)
+    for(int i=1; i < 6; i++) {
+        cout << "*";
+        for (int j=1; j<4; j++) {
+            cout << " ";
+        }
+    }
+
+    // Prints the doorway along with three spaces. IF SPACES IN THE ASTERISKS ARE CHANGED THIS MUST ALSO BE CHANGED.
+    cout << "| |   ";
+
+    // Repeats "I" number of asterisks in a line with "I" spaces in between them. (After the Door)
+    for(int i=1; i < 6; i++) {
+        cout << "*";
+        for (int j=1; j<4; j++) {
+            cout << " ";
+        }
+    }
+
+    //Ends the row.
+    cout << endl;
+
+    //Top Row ----------------------------------------------------------------------------------------------------------
+
+
+    //Top Section ------------------------------------------------------------------------------------------------------
+
+
+    //Crates rows of empty space with walls on either side. "I" is the number of rows. "J" is the
+    // space in between left and right walls.
+    for (int i=1; i < 5; i++) {
+
+        //Shifts Rows over by "j" spaces.
+        for (int j = 1; j < 21; j++) {
+            cout << " ";
+        }
+
+        //Makes first wall
+        cout << "*";
+
+        //Creates space between walls.
+        for (int j = 1; j < 42; j++) {
+            cout << " ";
+        }
+
+        //Creates the second wall.
+        cout << "*" << endl;
+    }
+
+    //creates the row that forms the bottom part of the indented corner.
+    for (int i = 1; i < 6; i++) {
+        cout << "*";
+        for (int j = 0; j < 4; j++) {
+            cout << " ";
+        }
+    }
+    cout << endl;
+
+    //Top Section ------------------------------------------------------------------------------------------------------
+
+
+
+    //Right/diagonal section -------------------------------------------------------------------------------------------
+
+    //Makes the first half of the diagonal
+    for (int i=1; i<6;i++) //Repeats for each row
+    {
+        //Forms Left Wall
+        cout << "*";
+
+        //Adds fewer spaces in the beginning based on "i", the row number. Forms diagonal.
+        for (int j = 1; j < 63 - i*3; j++) {
+            cout << " ";
+
+        }
+        cout << "*";
+
+        cout << endl;
+    }
+
+    //Makes the middle couple rows of the diagonal, but more importantly makes the right door as well.
+    for (int i = 6; i < 8; ++i) {
+
+        //Forms part of the door (Once looped, creates the other part.)
+        cout << "-";
+
+        //Adds more spaces in between the door and wall based on "i", the row number. Forms diagonal.
+        for (int j = 1; j < 63-i*3; j++) {
+            cout << " ";
+
+        }
+        cout << "*" << endl;
+    }
+
+    //Makes the second half of the diagonal
+    for (int i=8; i<13;i++) //Repeats for each row
+    {
+        //Forms Left Wall
+        cout << "*";
+
+        //Adds fewer spaces in the beginning based on "i", the row number. Forms diagonal.
+        for (int j = 1; j < 63-i*3; j++) {
+            cout << " ";
+
+        }
+        cout << "*";
+
+        cout << endl;
+    }
+
+    //Right/diagonal section -------------------------------------------------------------------------------------------
+
+
+    //Final Row --------------------------------------------------------------------------------------------------------
+
+    //Places asterisks row with spaces between each one.
+    for (int i = 1; i < 6; i++) {
+        cout << "*";
+        for (int j = 0; j < 4; ++j) {
+            cout << " ";
+        }
+    }
+
+    //Final Row --------------------------------------------------------------------------------------------------------
+
+    cout << "\nThe lights are broken, so the only illumination is coming from\n"
+            "the other side of the door. There are boxes scattered throughout\n"
+            "the room. Each box is labeled, presumably for what was contained\n"
+            "in them. However, all but one of the boxes is empty. The only one\n"
+            "that isn't empty is labeled \"Spare Parts\""; //storage room description
+
+}
+void south() {
+
+    //Top Row ----------------------------------------------------------------------------------------------------------
+
+    // Repeats "I" number of asterisks in a line with "I" spaces in between them. (Before the Door)
+    for(int i=1; i < 6; i++) {
+        cout << "*";
+        for (int j=1; j<4; j++) {
+            cout << " ";
+        }
+    }
+
+    // Prints the doorway along with three spaces. IF SPACES IN THE ASTERISKS ARE CHANGED THIS MUST ALSO BE CHANGED.
+    cout << "| |   ";
+
+    // Repeats "I" number of asterisks in a line with "I" spaces in between them. (After the Door)
+    for(int i=1; i < 6; i++) {
+        cout << "*";
+        for (int j=1; j<4; j++) {
+            cout << " ";
+        }
+    }
+
+    //Ends the row.
+    cout << endl;
+
+    //Top Row ----------------------------------------------------------------------------------------------------------
+
+
+    //Middle Section ---------------------------------------------------------------------------------------------------
+
+    //Crates rows of empty space with walls on either side. "I" is the number of rows. "J" is the
+    // space in between left and right walls. (Before the Door)
+    for(int i=1; i < 7; i++) {
+        cout << "*";
+        for (int j = 0; j < 41; ++j) {
+            cout << " ";
+        }
+        cout << "*" << endl;
+    }
+
+    // Creates side doors. Starts with the first door and then prints "j" spaces before outputting part of the 2nd door.
+    cout << "-";
+    for (int j = 0; j < 41; ++j) {
+        cout << " ";
+    }
+    cout << "-" << endl;
+
+    //Creates the other half of both side doors. Starts with the 1st door and then prints "j" spaces before outputting
+    // part of the 2nd door.
+    cout << "-";
+    for (int j = 0; j < 41; ++j) {
+        cout << " ";
+    }
+    cout << "-" << endl;
+
+    //Crates rows of empty space with walls on either side. "I" is the number of rows. "J" is the
+    // space in between left and right walls. (After the Door)
+    for(int i=1; i < 7; i++) {
+        cout << "*";
+        for (int j = 0; j < 41; ++j) {
+            cout << " ";
+        }
+        cout << "*" << endl;
+    }
+
+    //Middle Section ---------------------------------------------------------------------------------------------------
+
+
+    //Bottom Section (Same as Top) -------------------------------------------------------------------------------------
+
+    // Repeats "I" number of asterisks in a line with "I" spaces in between them. (Before replacement asterisks)
+    for(int i=1; i < 6; i++) {
+        cout << "*";
+        for (int j=1; j<4; j++) {
+            cout << " ";
+        }
+    }
+
+// Prints asterisks to replace a door.
+    cout << "* *   ";
+
+// Repeats "I" number of asterisks in a line with "I" spaces in between them. (After replacement asterisks)
+    for(int i=1; i < 6; i++) {
+        cout << "*";
+        for (int j=1; j<4; j++) {
+            cout << " ";
+        }
+    }
+
+//Ends the row.
+    cout << endl;
+
+    //Bottom Section (Same as Top) -------------------------------------------------------------------------------------
+
+    cout << "\nAhead of you lies 8 bunk beds, with 4 on each side of the\n"
+            "room. They are well-made, but clearly none of them have been\n"
+            "slept in for a very long time. To the side of each bed there\n"
+            "is a small dresser for personal belongings and clothing."; //cabins description
+
+}
+void southWest() {
+
+    //Top Row ----------------------------------------------------------------------------------------------------------
+
+    // Repeats "I" number of asterisks in a line with "I" spaces in between them. (Before the Door)
+    for(int i=1; i < 6; i++) {
+        cout << "*";
+        for (int j=1; j<4; j++) {
+            cout << " ";
+        }
+    }
+
+    // Prints the doorway along with three spaces. IF SPACES IN THE ASTERISKS ARE CHANGED THIS MUST ALSO BE CHANGED.
+    cout << "| |   ";
+
+    // Repeats "I" number of asterisks in a line with "I" spaces in between them. (After the Door)
+    for(int i=1; i < 6; i++) {
+        cout << "*";
+        for (int j=1; j<4; j++) {
+            cout << " ";
+        }
+    }
+
+    //Ends the row.
+    cout << endl;
+
+    //Top Row ----------------------------------------------------------------------------------------------------------
+
+
+    //Top Section ------------------------------------------------------------------------------------------------------
+
+
+    //Crates rows of empty space with walls on either side. "I" is the number of rows. "J" is the
+    // space in between left and right walls.
+    for (int i=1; i < 5; i++) {
+        cout << "*";
+        for (int j = 0; j < 41; j++) {
+            cout << " ";
+        }
+        cout << "*" << endl;
+    }
+
+    //creates the row that forms the bottom part of the indented corner.
+    cout << "*";
+    for (int i = 1; i < 42; ++i) {
+        cout << " ";
+    }
+    for (int i = 1; i < 6; i++) {
+        cout << "*";
+        for (int j = 0; j < 4; ++j) {
+            cout << " ";
+        }
+    }
+    cout << endl;
+
+    //Top Section ------------------------------------------------------------------------------------------------------
+
+
+
+    //Right/diagonal section -------------------------------------------------------------------------------------------
+
+    //Makes the first half of the diagonal
+    for (int i=1; i<6;i++) //Repeats for each row
+    {
+        //Adds more spaces in the beginning based on "i", the row number. Forms diagonal.
+        for (int j = 1; j < i*3; j++) {
+            cout << " ";
+
+        }
+        cout << "*";
+
+        //Adds more spaces after the diagonal based on "i". Forms the wall to the right.
+        for (int j = 1; j < 63-i*3; ++j) {
+            cout << " ";
+
+        }
+        cout << "*";
+        cout << endl;
+    }
+
+    //Makes the middle couple rows of the diagonal, but more importantly makes the right door as well.
+    for (int i = 6; i < 8; ++i) {
+        //Adds more spaces in the beginning based on "i", the row number. Forms diagonal.
+        for (int j = 1; j < i*3; j++) {
+            cout << " ";
+
+        }
+        cout << "*";
+
+        //Adds more spaces after the diagonal based on "i". Forms the door on the right.
+        for (int j = 1; j < 63-i*3; ++j) {
+            cout << " ";
+
+        }
+        cout << "-";
+        cout << endl;
+    }
+
+    //Makes the second half of the diagonal
+    for (int i=8; i<13;i++) //Repeats for each row
+    {
+        //Adds more spaces in the beginning based on "i", the row number. Forms diagonal.
+        for (int j = 1; j < i*3; j++) {
+            cout << " ";
+
+        }
+        cout << "*";
+
+        //Adds more spaces after the diagonal based on "i". Forms the wall to the right.
+        for (int j = 1; j < 63-i*3; ++j) {
+            cout << " ";
+
+        }
+        cout << "*";
+        cout << endl;
+    }
+
+    //Right/diagonal section -------------------------------------------------------------------------------------------
+
+
+    //Final Row --------------------------------------------------------------------------------------------------------
+
+    //Places spaces before final row of asterisks.
+    for (int i = 1; i < 43; ++i) {
+        cout << " ";
+    }
+
+    //Places asterisks row with spaces between each one.
+    for (int i = 1; i < 6; i++) {
+        cout << "*";
+        for (int j = 0; j < 4; ++j) {
+            cout << " ";
+        }
+    }
+
+    //Final Row --------------------------------------------------------------------------------------------------------
+
+    cout << "\nThe room glows green. The air feels stale, and it smells like\n"
+            "something died here. In the corner, a pulsing carcass sits.\n"
+            "The source of the light. A slimy green goo is splattered all\n"
+            "over the walls. "; //alien room description
+}
+void west() {
+
+    //Top Row ----------------------------------------------------------------------------------------------------------
+
+    // Repeats "I" number of asterisks in a line with "I" spaces in between them. (Before the Door)
+    for(int i=1; i < 6; i++) {
+        cout << "*";
+        for (int j=1; j<4; j++) {
+            cout << " ";
+        }
+    }
+
+    // Prints the doorway along with three spaces. IF SPACES IN THE ASTERISKS ARE CHANGED THIS MUST ALSO BE CHANGED.
+    cout << "| |   ";
+
+    // Repeats "I" number of asterisks in a line with "I" spaces in between them. (After the Door)
+    for(int i=1; i < 6; i++) {
+        cout << "*";
+        for (int j=1; j<4; j++) {
+            cout << " ";
+        }
+    }
+
+    //Ends the row.
+    cout << endl;
+
+    //Top Row ----------------------------------------------------------------------------------------------------------
+
+
+    //Middle Section ---------------------------------------------------------------------------------------------------
+
+    //Crates rows of empty space with walls on either side. "I" is the number of rows. "J" is the
+    // space in between left and right walls. (Before the Door)
+    for(int i=1; i < 7; i++) {
+        cout << "*";
+        for (int j = 0; j < 41; ++j) {
+            cout << " ";
+        }
+        cout << "*" << endl;
+    }
+
+    // Creates side doors. Starts with the wall and then prints "j" spaces before outputting part of the door.
+    cout << "*";
+    for (int j = 0; j < 41; ++j) {
+        cout << " ";
+    }
+    cout << "-" << endl;
+
+    //Creates the other half of the side door. Starts with the wall and then prints "j" spaces before outputting
+    // part of the door.
+    cout << "*";
+    for (int j = 0; j < 41; ++j) {
+        cout << " ";
+    }
+    cout << "-" << endl;
+
+    //Crates rows of empty space with walls on either side. "I" is the number of rows. "J" is the
+    // space in between left and right walls. (After the Door)
+    for(int i=1; i < 7; i++) {
+        cout << "*";
+        for (int j = 0; j < 41; ++j) {
+            cout << " ";
+        }
+        cout << "*" << endl;
+    }
+    //Middle Section ---------------------------------------------------------------------------------------------------
+
+
+    //Bottom Section (Same as Top) -------------------------------------------------------------------------------------
+
+    // Repeats "I" number of asterisks in a line with "I" spaces in between them. (Before the Door)
+    for(int i=1; i < 6; i++) {
+        cout << "*";
+        for (int j=1; j<4; j++) {
+            cout << " ";
+        }
+    }
+
+    // Prints the doorway along with three spaces. IF SPACES IN THE ASTERISKS ARE CHANGED THIS MUST ALSO BE CHANGED.
+    cout << "| |   ";
+
+    // Repeats "I" number of asterisks in a line with "I" spaces in between them. (After the Door)
+    for(int i=1; i < 6; i++) {
+        cout << "*";
+        for (int j=1; j<4; j++) {
+            cout << " ";
+        }
+    }
+
+    //Ends the row.
+    cout << endl;
+
+    //Bottom Section (Same as Top) -------------------------------------------------------------------------------------
+
+    cout << "\nUpon entering the dark room, you notice rows upon rows\n"
+            "of defunct hardware for servers. In the corner of the\n"
+            "room there is what appears to be an electrical panel."; //electrical room description
+
+}
+void map() {
+    //---------top Row
+    cout << "               " ;
+    cout << "*  *  *  *  *  *  *  *" << endl;
+
+    //row 2
+
+    cout << "            ";
+    cout << "*";
+    cout << "      ";
+    cout << "*";
+    cout << "            ";
+    cout << "*";
+    cout << "      ";
+    cout << "*" << endl;
+
+    //row 3
+
+    cout << "         ";
+    cout << "*";
+    cout << "         ";
+    cout << "-";
+    cout << "            ";
+    cout << "-";
+    cout << "         ";
+    cout << "*" << endl;
+
+    //row 4
+    cout << "      ";
+    cout << "*";
+    cout << "            ";
+    cout << "-";
+    cout << "            ";
+    cout << "-";
+    cout << "            ";
+    cout << "*" << endl;
+
+    //row 5
+
+    cout << "   ";
+    cout << "*";
+    cout << "               ";
+    cout << "*";
+    cout << "            ";
+    cout << "*";
+    cout << "               ";
+    cout << "*" << endl;
+
+    //row 6 ----- top of center room; end of diagonal sides.
+
+    cout << "*              ";
+    cout << "*  *  *  |  |  *  *  *";
+    cout << "              *" << endl;
+
+    //row 7
+
+    cout << "*              ";
+    cout << "*                    *";
+    cout << "              *" << endl;
+
+    //row 9
+
+    cout << "*  *  |  |  *  ";
+    cout << "*                    *";
+    cout << "  *  |  |  *  *" << endl;
+
+    //row 10
+
+    cout << "*              ";
+    cout << "*                    *";
+    cout << "              *" << endl;
+
+    //row 11
+
+    cout << "*              ";
+    cout << "-                    -";
+    cout << "              *" << endl;
+
+    //row 12
+
+    cout << "*              ";
+    cout << "-                    -";
+    cout << "              *" << endl;
+
+    //row 13
+
+    cout << "*              ";
+    cout << "*                    *";
+    cout << "              *" << endl;
+
+    //row 14
+
+    cout << "*  *  |  |  *  ";
+    cout << "*                    *";
+    cout << "  *  |  |  *  *" << endl;
+
+    //row 15
+
+    cout << "*              ";
+    cout << "*                    *";
+    cout << "              *" << endl;
+
+    //row 16 ------ bottom row of center room
+
+    cout << "*              ";
+    cout << "*  *  *  |  |  *  *  *";
+    cout << "              *" << endl;
+
+    //row 17
+
+    cout << "   ";
+    cout << "*";
+    cout << "               ";
+    cout << "*";
+    cout << "            ";
+    cout << "*";
+    cout << "               ";
+    cout << "*" << endl;
+
+    //row 18
+
+    cout << "      ";
+    cout << "*";
+    cout << "            ";
+    cout << "-";
+    cout << "            ";
+    cout << "-";
+    cout << "            ";
+    cout << "*" << endl;
+
+    //row 19
+
+    cout << "         ";
+    cout << "*";
+    cout << "         ";
+    cout << "-";
+    cout << "            ";
+    cout << "-";
+    cout << "         ";
+    cout << "*" << endl;
+
+    //row 20
+
+    cout << "            ";
+    cout << "*";
+    cout << "      ";
+    cout << "*";
+    cout << "            ";
+    cout << "*";
+    cout << "      ";
+    cout << "*" << endl;
+
+    //------------last row
+
+    cout << "               " ;
+    cout << "*  *  *  *  *  *  *  *" << endl;
+}
 
 bool mainMenuActive = true;
 bool gameStart = false;
@@ -419,27 +1689,6 @@ int main() {
                 } else if (currentRoom == &room5) {
                     keyItem5 = false;
                 }
-            }
-        }
-
-        // Check if the player has collected all the treasures
-        if (!keyItem1 && !keyItem2 && !keyItem3 && !keyItem4 && !keyItem5) {
-            cout << "You have collected all the treasures!" << endl;
-            // Check if the player wants to fight the monster
-            cout << "Do you want to fight the monster? (y/n)" << endl;
-            char answer;
-            cin >> answer;
-            if (answer == 'y') {
-                // Start the fight with the monster
-                while (monster.health > 0) {
-                    cout << "You attack the " << monster.name << " with your sword." << endl;
-                    int damage = rand() % 20 + 1; // Generate random damage between 1 and 20
-                    monster.health -= damage;
-                    cout << "You deal " << damage << " damage. The " << monster.name << " has " << monster.health
-                         << " health left." << endl;
-                }
-                cout << "You defeated the " << monster.name << " and won the game!" << endl;
-                break; // Exit the game loop
             }
         }
 

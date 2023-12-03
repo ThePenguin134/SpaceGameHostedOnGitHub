@@ -1413,19 +1413,19 @@ public:
 };
 
 // Sets weapons availability and damage. Edit weapon damage values below:
-Weapon Scalpel(false, 2); // Medium attack
-Weapon Shovel(true, 1); // Small attack. Shovels big attack is 5x this value
+Weapon Knife(false, 2); // Medium attack
+Weapon Shovel(false, 1); // Small attack. Shovels big attack is 5x this value
 Weapon Dagger(false, 1); // Later small attacks with the dagger
-Weapon GoopDagger(true, 4); // First big attack with the dagger
-Weapon Needle(true, 0); // instakills if random chance is met, 0 damage otherwise
-Weapon Sword(true, 1); // Small attack
+Weapon GoopDagger(false, 4); // First big attack with the dagger
+Weapon Needle(false, 0); // instakills if random chance is met, 0 damage otherwise
+Weapon Sword(false, 1); // Small attack
 bool swordBeenUsed = false;
 
 // *Weapon Functions* Start -------------------------------
-void ScalpelUsed() {
-    if (Scalpel.isAvailable) {
-        cout << "You attack with the scalpel, but it is not very effective and deals " << Scalpel.damage << " damage." << endl;
-        snail.Health -= Scalpel.damage;
+void KnifeUsed() {
+    if (Knife.isAvailable) {
+        cout << "You attack with the Knife, but it is not very effective and deals " << Knife.damage << " damage." << endl;
+        snail.Health -= Knife.damage;
     }
     else {
         cout << "You do not currently have that weapon! The snail prepares to attack you as you fumble around." << endl;
@@ -1538,7 +1538,7 @@ void RunAway() {
 
 void bossSelection() {
     cout << "What would you like to do?" << endl;
-    cout << "1) Attack with Scalpel" << endl;
+    cout << "1) Attack with Knife" << endl;
     cout << "2) Attack with Shovel" << endl;
     cout << "3) Attack with Dagger" << endl;
     cout << "4) Attack with Needle" << endl;
@@ -1548,7 +1548,7 @@ void bossSelection() {
     cin >> bossChoice;
     switch (bossChoice) {
         case 1: {
-            ScalpelUsed();
+            KnifeUsed();
             break;
         }
         case 2: {
@@ -1621,6 +1621,17 @@ void BossFight() {
 }
 // ------------------------------- BOSS FIGHT CODE (END) ---------------------------------------------------------------
 
+// ------------------------------- Room Interaction (START) ------------------------------------------------------------
+
+void GoopInteraction() {
+    if (Dagger.isAvailable) {
+        cout << "You dip the dagger in the goop and it now glows green." << endl;
+        GoopDagger.isAvailable = true;
+        Dagger.isAvailable = false;
+    }
+}
+
+// ------------------------------- Room Interaction (END) --------------------------------------------------------------
 int main() {
     // Seed the random number generator with the current time
     srand(time(0));
@@ -1662,11 +1673,11 @@ int main() {
     room9.connectedRooms[1] = &room5;
 
     // Create the three treasures
-    bool keyItem1 = true;
-    bool keyItem2 = true;
-    bool keyItem3 = true;
-    bool keyItem4 = true;
-    bool keyItem5 = true;
+    bool isKnifePickupAvailable = true;
+    bool isShovelPickupAvailable = true;
+    bool isDaggerPickupAvailable = true;
+    bool isNeedlePickupAvailable = true;
+    bool isSwordPickupAvailable = true;
 
     // Start the game in Room 1
     Room *currentRoom = &room1;
@@ -1689,16 +1700,16 @@ int main() {
                 currentRoom->hasItem = false;
                 cout << "You picked up the " << /*itemName <<*/ "!" << endl;
                 // Update the corresponding treasure flag
-                if (currentRoom == &room1) {
-                    keyItem1 = false;
-                } else if (currentRoom == &room2) {
-                    keyItem2 = false;
-                } else if (currentRoom == &room3) {
-                    keyItem3 = false;
-                } else if (currentRoom == &room4) {
-                    keyItem4 = false;
+                if (currentRoom == &room2) {
+                    isKnifePickupAvailable = false;
+                } else if (currentRoom == &room8) {
+                    isShovelPickupAvailable = false;
                 } else if (currentRoom == &room5) {
-                    keyItem5 = false;
+                    isDaggerPickupAvailable = false;
+                } else if (currentRoom == &room6) {
+                    isNeedlePickupAvailable = false;
+                } else if (currentRoom == &room9) {
+                    isSwordPickupAvailable = false;
                 }
             }
         }

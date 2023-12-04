@@ -1401,11 +1401,11 @@ Room* move(Room *moveCurrentRoom) {
 Room* playMenu(Room *currentRoom) {
     cout << "What would you like to do?\n";
     cin >> gameInput;
+    Room* newCurrentRoom = currentRoom;
     if (gameInput == "move") {
-        Room* newCurrentRoom = move(currentRoom); // Passes the current room into the move function and playMenu returns the new room for later use
-        return newCurrentRoom;
+        newCurrentRoom = move(currentRoom); // Uses move command to update the players room
     }
-    if (gameInput == "check map") {
+    if (gameInput == "map") {
         map();
     }
     if (gameInput == "check inventory") {
@@ -1413,6 +1413,22 @@ Room* playMenu(Room *currentRoom) {
     }
     if (gameInput == "get") {
         //cool place for check what item is in a room and adding it to the inventory.
+    }
+    return newCurrentRoom; // Passes the new room to main, or the old one if the player didn't move
+}
+
+Room *previousRoomMain = &room2; /* Initialize the previousRoom Global var and initialize it, so
+ the first local map will show up too */
+
+// Check if the player is in the same room after using the playMenu
+bool isPlayerInNewRoom(Room *previousRoom, Room *currentRoom) {
+    string firstRoom = previousRoom->name;
+    string secondRoom = currentRoom->name;
+    if (firstRoom != secondRoom) {
+        return true;
+    }
+    else {
+        return false;
     }
 }
 
@@ -1762,13 +1778,19 @@ int main() {
     // Game loop
     while (true) {
         // Print the current room description
-        printRoom(currentRoom);
         cout << "You are in the " << currentRoom->name << endl;
         cout << currentRoom->description << endl;
         if (currentRoom->name == "Alien-Room") {
             AlienRoomRequirements();
         }
+        if (isPlayerInNewRoom(previousRoomMain, currentRoom)) {
+            printRoom(currentRoom);
+        }
+        previousRoomMain = currentRoom;
         currentRoom = playMenu(currentRoom); // Allows the user to move and updates the current room with the result of the move command
+
+
+
 
         // Check if the room has a treasure and if the player wants to pick it up
         if (currentRoom->hasItem) {

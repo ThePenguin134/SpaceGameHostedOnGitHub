@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void center() {
+void ControlRoom() {
 //Top Row --------------------------------------------------------------------------------------------------------------
     //prints "/" with proper spacing
     cout << "  /   ";
@@ -175,7 +175,7 @@ void center() {
             "coaster of sorts."; //control room description
     cout << endl;
 }
-void east() {
+void MessHall() {
 
     //Top Row ----------------------------------------------------------------------------------------------------------
 
@@ -278,7 +278,7 @@ void east() {
             "touched in many generations."; //mess hall description
 
 }
-void north() {
+void RadioRoom() {
 
     //Top Row ----------------------------------------------------------------------------------------------------------
 
@@ -382,7 +382,7 @@ void north() {
             "of the room is filled with cases for various electronics."; //radio room description
 
 }
-void northEast() {
+void MedicalBay() {
 //Top Row --------------------------------------------------------------------------------------------------------------
     //Places asterisks row with spaces between each one.
     for (int i = 1; i < 6; i++) {
@@ -509,7 +509,7 @@ void northEast() {
             "\nand a coat rack on the wall across from the beds. Papers are scattered across the desk. "
             "\nPerhaps someone was looking for something? ";
 }
-void northWest() {
+void GreenHouse() {
 
     //Forms the top row.
     //Creates spaces before the first row of asterisks.
@@ -642,7 +642,7 @@ void northWest() {
             "leaning on one of the shelves."; //Greenhouse description
 
 }
-void southEast() {
+void StorageRoom() {
 
     //Top Row ----------------------------------------------------------------------------------------------------------
 
@@ -783,7 +783,7 @@ void southEast() {
             "that isn't empty is labeled \"Spare Parts\""; //storage room description
 
 }
-void south() {
+void Cabins() {
 
     //Top Row ----------------------------------------------------------------------------------------------------------
 
@@ -884,7 +884,7 @@ void south() {
             "is a small dresser for personal belongings and clothing."; //cabins description
 
 }
-void southWest() {
+void AlienRoom() {
 
     //Top Row ----------------------------------------------------------------------------------------------------------
 
@@ -1026,7 +1026,7 @@ void southWest() {
             "The source of the light. A slimy green goo is splattered all\n"
             "over the walls. "; //alien room description
 }
-void west() {
+void ElectricalRoom() {
 
     //Top Row ----------------------------------------------------------------------------------------------------------
 
@@ -1287,7 +1287,6 @@ bool mainMenuActive = true;
 bool gameStart = false;
 int startInput;
 string gameInput;
-void printRoom();
 void playMenu();
 void checkInventory();
 struct Item {
@@ -1319,62 +1318,35 @@ struct Player {
 };
 Player player;
 
-void printRoom() {
-    return;
+void printRoom(Room *currentRoom) {
+    if (currentRoom->name == "Control-Room") {
+        ControlRoom();
+    }
+    if (currentRoom->name == "Mess-Hall") {
+        MessHall();
+    }
+    if (currentRoom->name == "Electrical-Room") {
+        ElectricalRoom();
+    }
+    if (currentRoom->name == "Radio-Room") {
+        RadioRoom();
+    }
+    if (currentRoom->name == "Cabins") {
+        Cabins();
+    }
+    if (currentRoom->name == "Medical-Bay") {
+        MedicalBay();
+    }
+    if (currentRoom->name == "Alien-Room") {
+        AlienRoom();
+    }
+    if (currentRoom->name == "Greenhouse") {
+        GreenHouse();
+    }
+    if (currentRoom->name == "Storage-Room") {
+        StorageRoom();
+    }
 }
-
-void playMenu(Room *currentRoom) {
-    cout << "What would you like to do?\n";
-    cin >> gameInput;
-    if (gameInput == "move") {
-        // Ask the player which room they want to go to next
-        cout << "Which room do you want to go to next? ";
-        cout << "(Available rooms: ";
-        int connectedRoomsCount = 0;
-        for (int i = 0; i < 5; ++i) {
-            if (currentRoom->connectedRooms[i] != nullptr) {
-                if (i == 0) { // The first room name (Doesn't need a comma before it)
-                    cout  << currentRoom->connectedRooms[i]->name;
-                    connectedRoomsCount++;
-                }
-                else { // Rest of the rooms names (Need commas before each one)
-                    cout << ", " << currentRoom->connectedRooms[i]->name;
-                    connectedRoomsCount++;
-                }
-            }
-        }
-        cout << ")" << endl;
-        bool isValidChoice = false;
-        string roomChoice;
-
-        while (!isValidChoice) {
-            cin >> roomChoice;
-
-
-            for (int i = 0; i < connectedRoomsCount; ++i) {
-                if (roomChoice == currentRoom->connectedRooms[i]->name) {
-                    currentRoom = currentRoom->connectedRooms[i];
-                    isValidChoice = true;
-                    break;
-                }
-
-                else {
-                    cout << "Invalid room choice. Please choose a valid room." << endl;
-                    break;
-                }
-            }
-        }
-    }
-    if (gameInput == "check map") {
-        map();
-    }
-    if (gameInput == "check inventory") {
-        //checkInventory(); //just iterate through the inventory, which is hopefully filled with item objects
-    }
-    if (gameInput == "get") {
-        //cool place for check what item is in a room and adding it to the inventory.
-    }
-};
 
 Room room1("Control-Room", "In the center of the room there is a command console. Near the edge of the room there is a table, on which there is a suspicious container of liquid. Under the container, there appears to be a napkin, acting as a coaster of sorts", true);
 Room room2("Mess-Hall", "Tables with stools line the center of the room. On one side of the room, there appears to be what was once a buffet. It is now covered in dust, and some strange gooey liquid. On the other side of the room, there are three vending machines that look like they haven't been touched in many generations. ", false);
@@ -1385,6 +1357,64 @@ Room room6("Medical-Bay", "You enter a small medical bay with 2 beds, medical eq
 Room room7("Alien-Room", "The room glows green. The air feels stale, and it smells like something died here. In the corner, a pulsing carcass sits. The source of the light. A slimy green goo is splattered all over the walls.", true);
 Room room8("Greenhouse", "Various plants are lined up across the room. Beneath each plant is a label that describes the plant and what its used for. Light from the sun shines in through the glass that makes up most of the room. Lined up on one wall are various drawers, shelves, and gardening tools. A shovel can be found leaning on one of the shelves.", true);
 Room room9("Storage-Room", "The lights are broken, so the only illumination is coming from the other side of the door. There are boxes scattered throughout the room. Each box is labeled, presumably for what was contained in them. However, all but one of the boxes is empty. The only one that isn't empty is labeled \"Spare Parts\".", true);
+
+//Lets user move by letting them know their options and then taking their input.
+Room* move(Room *moveCurrentRoom) {
+    bool isValidChoice = false;
+    while (!isValidChoice) {
+        // Lets the player move to a new room
+        cout << "(Available rooms: ";
+        int connectedRoomsCount = 0;
+        for (int i = 0; i < 5; ++i) { // lists the connected rooms aka rooms that the user can move to
+            if (moveCurrentRoom->connectedRooms[i] != nullptr) {
+                if (i == 0) { // The first room name (Doesn't need a comma before it)
+                    cout << moveCurrentRoom->connectedRooms[i]->name;
+                    connectedRoomsCount++;
+                } else { // Rest of the rooms names (Need commas before each one)
+                    cout << ", " << moveCurrentRoom->connectedRooms[i]->name;
+                    connectedRoomsCount++;
+                }
+            }
+        }
+        cout << ")" << endl;
+
+        string roomChoice;
+        cin >> roomChoice; //Takes users input for the room they want to move to
+
+        //Validates that the imputed room matches one of the connected rooms and sets the new room to the one picked.
+        for (int i = 0; i < connectedRoomsCount; ++i) {
+            if (roomChoice == moveCurrentRoom->connectedRooms[i]->name) {
+                moveCurrentRoom = moveCurrentRoom->connectedRooms[i];
+                isValidChoice = true;
+                return moveCurrentRoom;
+                break;
+            }
+        }
+
+        if (!isValidChoice) {
+            cout << "Invalid room choice. Please choose a valid room." << endl;
+        }
+    }
+}
+
+// Allows the user to pick what they would like to do. Uses the current room as a parameter to pass through if they decide to move.
+Room* playMenu(Room *currentRoom) {
+    cout << "What would you like to do?\n";
+    cin >> gameInput;
+    if (gameInput == "move") {
+        Room* newCurrentRoom = move(currentRoom); // Passes the current room into the move function and playMenu returns the new room for later use
+        return newCurrentRoom;
+    }
+    if (gameInput == "check map") {
+        map();
+    }
+    if (gameInput == "check inventory") {
+        //checkInventory(); //just iterate through the inventory, which is hopefully filled with item objects
+    }
+    if (gameInput == "get") {
+        //cool place for check what item is in a room and adding it to the inventory.
+    }
+}
 
 // ------------------------------- BOSS FIGHT CODE (START) -------------------------------------------------------------
 bool isRoomSealed = false; // Bool to control the room availability
@@ -1660,7 +1690,7 @@ void AlienRoomRequirements() {
         weaponCount += 1; //weaponCount var is declared right below the weapon instances in Boss Fight Code
     }
 
-    if (weaponCount >= 2 && isSnailNotePickupAvailable == false && isFirstAidPickupAvailable == false && isSnailRoomKeyPickupAvailable == false) {
+    if (weaponCount >= 2) {
         cout << "You can open the door with your key to take on the giant snail." << endl;
         cout << "Do you wish to take him on? (y/n?)" << endl;
         string enterSnailRoomChoice;
@@ -1732,15 +1762,17 @@ int main() {
     // Game loop
     while (true) {
         // Print the current room description
+        printRoom(currentRoom);
         cout << "You are in the " << currentRoom->name << endl;
         cout << currentRoom->description << endl;
-        if (currentRoom->name == "Alien-Room"){
+        if (currentRoom->name == "Alien-Room") {
             AlienRoomRequirements();
         }
+        currentRoom = playMenu(currentRoom); // Allows the user to move and updates the current room with the result of the move command
 
         // Check if the room has a treasure and if the player wants to pick it up
         if (currentRoom->hasItem) {
-            cout << "There is a treasure in this room. Do you want to pick it up? (y/n)" << endl;
+            cout << "There is treasure in this room. Do you want to pick it up? (y/n)" << endl;
             char answer;
             cin >> answer;
             if (answer == 'y') {
@@ -1759,40 +1791,6 @@ int main() {
                     isSwordPickupAvailable = false;
                 }
             }
-        }
-
-        // Ask the player which room they want to go to next
-        cout << "Which room do you want to go to next? ";
-        cout << "(Available rooms: ";
-        int connectedRoomsCount = 0;
-        for (int i = 0; i < 5; ++i) {
-            if (currentRoom->connectedRooms[i] != nullptr) {
-                if (i == 0) { // The first room name (Doesn't need a comma before it)
-                    cout  << currentRoom->connectedRooms[i]->name;
-                    connectedRoomsCount++;
-                }
-                else { // Rest of the rooms names (Need commas before each one)
-                    cout << ", " << currentRoom->connectedRooms[i]->name;
-                    connectedRoomsCount++;
-                }
-            }
-        }
-        cout << ")" << endl;
-
-        string roomChoice;
-        cin >> roomChoice;
-
-        bool isValidChoice = false;
-        for (int i = 0; i < connectedRoomsCount; ++i) {
-            if (roomChoice == currentRoom->connectedRooms[i]->name) {
-                currentRoom = currentRoom->connectedRooms[i];
-                isValidChoice = true;
-                break;
-            }
-        }
-
-        if (!isValidChoice) {
-            cout << "Invalid room choice. Please choose a valid room." << endl;
         }
     }
     return 0;

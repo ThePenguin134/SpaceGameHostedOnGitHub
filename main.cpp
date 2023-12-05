@@ -2,8 +2,6 @@
 #include "cmath"
 #include "sstream"
 #include <fstream>
-#include <iomanip>
-#include <xcmc.h>
 
 using namespace std;
 

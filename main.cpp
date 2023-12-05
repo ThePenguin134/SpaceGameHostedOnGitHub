@@ -1982,7 +1982,8 @@ void SwordUsed() {
 
             //END GAME
             if ((snail.Health <= 0 || player.Health <= 0)) {
-            }break;
+                break;
+            }
         }
         // Calculate the elapsed time
         auto end_time = chrono::high_resolution_clock::now();

@@ -1307,6 +1307,7 @@ void getItem(Item ind[], Room *currentRoom) {
 
 
 
+
     //Describes Them
 
 
@@ -1813,7 +1814,6 @@ int main() {
         }
         previousRoomMain = currentRoom;
         currentRoom = playMenu(currentRoom, ind); // Allows the user to move and updates the current room with the result of the move command
-
-        return 0;
     }
+    return 0;
 }

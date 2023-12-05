@@ -1272,7 +1272,33 @@ public:
         return description;
     }
 };
+void getItem() {
 
+    //Explains Items available
+
+
+
+    //Describes Them
+
+
+    // Pick an Item
+    bool isValidChoice = false;
+    while (!isValidChoice) {
+        cout << "Which item would you like? (1 or 2)" << endl;
+        int itemChoice;
+        cin >> itemChoice;
+        if (itemChoice == 1) {
+
+isValidChoice = true;
+        }
+        if (itemChoice == 1) {
+
+isValidChoice = true;
+        }
+    }
+}
+
+// Disable Item for future pickup
 
 
 class Room {
@@ -1386,7 +1412,7 @@ Room* playMenu(Room *currentRoom) {
         //checkInventory(); //just iterate through the inventory, which is hopefully filled with item objects
     }
     if (gameInput == "get" || gameInput ==  "Get") {
-        //cool place for check hat item is in a room and adding it to the inventory.
+        getItem();
     }
     if (gameInput == "help" || gameInput ==  "Help"){
         cout << "Type \"move\" to move around \nType \"map\" to view the map if you possess that item \nType"

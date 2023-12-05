@@ -1272,35 +1272,6 @@ public:
         return description;
     }
 };
-void getItem(Item ind[]) {
-
-    //Explains Items available
-
-
-
-    //Describes Them
-
-
-    // Pick an Item
-    bool isValidChoice = false;
-    while (!isValidChoice) {
-        cout << "Which item would you like? (1 or 2)" << endl;
-        int itemChoice;
-        cin >> itemChoice;
-        if (itemChoice == 1) {
-
-isValidChoice = true;
-        }
-        if (itemChoice == 1) {
-
-isValidChoice = true;
-        }
-    }
-}
-
-// Disable Item for future pickup
-
-
 class Room {
 public:
     string name;
@@ -1329,6 +1300,29 @@ public:
         return Item2.readName();
     }
 };
+
+void getItem(Item ind[], Room *currentRoom) {
+
+    //Explains Items available
+
+
+
+    //Describes Them
+
+
+    // Pick an Item
+    bool isValidChoice = false;
+    while (!isValidChoice) {
+        if (currentRoom->hasItem1 || currentRoom->hasItem2) {
+            cout << "There are item(s) in this room. If you would like to pick up an item, enter it's name." << endl;
+            if (currentRoom->hasItem1){
+                cout << ind[1].readName();
+            }
+        }
+    }
+
+    // Disable Item for future pickup
+}
 
 void printRoom(Room *currentRoom) {
     if (currentRoom->name == "Control-Room") {
@@ -1414,7 +1408,7 @@ Room* playMenu(Room *currentRoom, Item ind[]) {
         //checkInventory(); //just iterate through the inventory, which is hopefully filled with item objects
     }
     if (gameInput == "get" || gameInput ==  "Get") {
-        getItem(ind);
+        getItem(ind, currentRoom);
     }
     if (gameInput == "help" || gameInput ==  "Help"){
         cout << "Type \"move\" to move around \nType \"map\" to view the map if you possess that item \nType"
@@ -1819,13 +1813,6 @@ int main() {
         }
         previousRoomMain = currentRoom;
         currentRoom = playMenu(currentRoom, ind); // Allows the user to move and updates the current room with the result of the move command
-
-        if (currentRoom->hasItem1 || currentRoom->hasItem2) {
-            cout << "There are item(s) in this room. If you would like to pick up an item, enter it's name." << endl;
-            if (currentRoom->hasItem1){
-                cout << ind[1].readName();
-            }
-        }
 
         return 0;
     }

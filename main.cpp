@@ -2,6 +2,7 @@
 #include "cmath"
 #include "sstream"
 #include <fstream>
+#include <chrono>
 
 using namespace std;
 
@@ -1246,7 +1247,6 @@ bool mainMenuActive = true;
 bool gameStart = false;
 int startInput;
 string gameInput;
-void playMenu();
 void checkInventory();
 class Item {
 private:
@@ -1414,7 +1414,7 @@ Room* move(Room *moveCurrentRoom) {
 }
 
 // Allows the user to pick what they would like to do. Uses the current room as a parameter to pass through if they decide to move.
-Room* playMenu(Room *currentRoom, Item ind[], Room &room1) {
+Room* playMenu(Room *currentRoom, Item ind[], Room &room1, chrono::high_resolution_clock::time_point start_time) {
     cout << "What would you like to do?\n";
     cin >> gameInput;
     Room* newCurrentRoom = currentRoom;
@@ -1439,6 +1439,13 @@ Room* playMenu(Room *currentRoom, Item ind[], Room &room1) {
         cout << "Type \"move\" to move around \nType \"map\" to view the map if you possess that item \nType"
                 " \"check inventory\" to view the items you have on you \nType \"get\" to look at and/or acquire the items"
                 " in your current room \nType \"help\" to view this menu :)" << endl;
+    }
+    if (gameInput == "time" || gameInput ==  "Time"){
+        auto end_time = chrono::high_resolution_clock::now();
+
+        // Calculate the elapsed time
+        auto duration = chrono::duration_cast<chrono::seconds>(end_time - start_time);
+        cout << "Game duration: " << duration.count() << " seconds" << endl;
     }
     return newCurrentRoom; // Passes the new room to main, or the old one if the player didn't move
 }
@@ -1763,6 +1770,9 @@ int main() {
     }
     in_stream.close();
 
+    // Get the current time at the start of the game
+    auto start_time = std::chrono::high_resolution_clock::now();
+
     Room room1("Control-Room", "\nIn the center of the room there is a command console.\nNear the edge of the room there is a table, on which\nthere is a suspicious container of liquid. Under the\ncontainer, there appears to be a napkin, acting as a\ncoaster of sorts.\n", ind[0], ind[1], true, true);
     Room room2("Mess-Hall", "\nTables with stools line the center of the room. On one\nside of the room, there appears to be what was once a\nbuffet. It is now covered in dust, and some strange\ngooey liquid. On the other side of the room, there are\nthree vending machines that look like they haven't been\ntouched in many generations.\n", ind[2],ind[3], true, true);
     Room room3("Electrical-Room", "\nUpon entering the dark room, you notice rows upon rows\nof defunct hardware for servers. In the corner of the\nroom there is what appears to be an electrical panel.\n", ind[4],ind[5], true, true);
@@ -1830,14 +1840,18 @@ int main() {
         // Print the current room description
         cout << "You are in the " << currentRoom->name << endl;
         cout << currentRoom->description << endl;
-        if (currentRoom->name == "Alien-Room") {
+        if (currentRoom->name == "Alien-Room") { //If player is in the Alien Room then show them the requirements to enter and let them fight if they meet them.
             AlienRoomRequirements(room3, room5);
         }
-        if (isPlayerInNewRoom(previousRoomMain, currentRoom)) {
+        if (isPlayerInNewRoom(previousRoomMain, currentRoom)) { //If player is in a new room then print that room's picture
             printRoom(currentRoom);
         }
         previousRoomMain = currentRoom;
-        currentRoom = playMenu(currentRoom, ind, room1); // Allows the user to move and updates the current room with the result of the move command
+        currentRoom = playMenu(currentRoom, ind, room1, start_time); // Allows the user to move and updates the current room with the result of the move command
     }
+    // Calculate the elapsed time
+    auto end_time = chrono::high_resolution_clock::now();
+    auto duration = chrono::duration_cast<chrono::seconds>(end_time - start_time);
+    cout << "Game duration: " << duration.count() << " seconds" << endl;
     return 0;
 }

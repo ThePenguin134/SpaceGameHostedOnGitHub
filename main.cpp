@@ -1722,12 +1722,14 @@ void SealRoom(Room &room3, Room &room5, Room *previousRoom) {
     isRoomSealed = true;
 }
 
+bool endFightBecauseOfRunAway = false; //Used to break out of the boss fight code when the player runs
 Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
     if (!isRoomSealed) {
         cout << "You run away and smash the lock in to seal the room, now you'll have to go to the other side if you want to fight again." << endl;
         SealRoom(room3, room5, previousRoom);
         isRoomSealed = true; // Global bool to track if one side of the Alien Room has been closed
         currentRoom = forcePlayerIntoPreviousRoom(previousRoom);
+        endFightBecauseOfRunAway = true;
     }
     else {
         cout << "You can't run away again without sealing off the room entirely! Then, you wouldn't be able to beat the game!" << endl;
@@ -1807,15 +1809,16 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
 
     Room *BossFight(Room &room3, Room &room5, player player, Room *currentRoom, Room *previousRoom) {
         //Repeat till snail dies, the player dies, or the player runs
-        while ((snail.Health > 0) && (player.Health > 0 && snail.Heads > 0) && !isRoomSealed) {
+        while ((snail.Health > 0) && (player.Health > 0 && snail.Heads > 0)) {
             currentRoom = bossSelection(room3, room5, player, currentRoom, previousRoom);// Let User select choice
-            if ((snail.Health > 0) && (player.Health > 0) && !isRoomSealed && snail.Heads > 0) { // Snail attacks
+            if ((snail.Health > 0) && (player.Health > 0) && snail.Heads > 0 && !endFightBecauseOfRunAway) { // Snail attacks
                 SnailAttack(player);
             }
-            if ((snail.Health > 0) && (player.Health > 0) && !isRoomSealed && snail.Heads > 0) {
+            if ((snail.Health > 0) && (player.Health > 0) && snail.Heads > 0 && !endFightBecauseOfRunAway) {
                 FightSummary(player);
             }
-            if (isRoomSealed) {
+            if (endFightBecauseOfRunAway) {
+                endFightBecauseOfRunAway = false; //Sets it back to false so that the player will be able to do the fight again instead of while loop dying
                 break;
             }
         }

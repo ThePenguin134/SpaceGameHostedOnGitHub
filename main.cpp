@@ -168,11 +168,6 @@ void ControlRoom() {
     }
     //prints the corner
     cout << "/\n";
-    cout << "\nIn the center of the room there is a command console.\n"
-            "Near the edge of the room there is a table, on which\n"
-            "there is a suspicious container of liquid. Under the\n"
-            "container, there appears to be a napkin, acting as a\n"
-            "coaster of sorts."; //control room description
     cout << endl;
 }
 void MessHall() {
@@ -270,12 +265,7 @@ void MessHall() {
 
     //Bottom Section (Same as Top) -------------------------------------------------------------------------------------
 
-    cout << "\nTables with stools line the center of the room. On one\n"
-            "side of the room, there appears to be what was once a\n"
-            "buffet. It is now covered in dust, and some strange\n"
-            "gooey liquid. On the other side of the room, there are\n"
-            "three vending machines that look like they haven't been\n"
-            "touched in many generations."; //mess hall description
+
 
 }
 void RadioRoom() {
@@ -373,13 +363,6 @@ void RadioRoom() {
 
     //Bottom Section (Same as Top) -------------------------------------------------------------------------------------
 
-    cout << "\nYou find a room with a large window directly ahead of\n"
-            "you. The window looks out into the vast emptiness of\n"
-            "space, along with a beautiful view of the sun, brighter\n"
-            "than you've ever seen it before. Beneath the window is a\n"
-            "system that is quite obviously a communications system.\n"
-            "Various dials and levers span across the system. The rest\n"
-            "of the room is filled with cases for various electronics."; //radio room description
 
 }
 void MedicalBay() {
@@ -505,9 +488,6 @@ void MedicalBay() {
 //Ends the row.
     cout << endl;
 
-    cout << "\nYou enter a small medical bay with 2 beds, medical equipment for each, a small desk in the corner, "
-            "\nand a coat rack on the wall across from the beds. Papers are scattered across the desk. "
-            "\nPerhaps someone was looking for something? ";
 }
 void GreenHouse() {
 
@@ -633,13 +613,7 @@ void GreenHouse() {
             cout << " ";
         }
     }
-    cout << "\nVarious plants are lined up across the room.\n"
-            "Beneath each plant is a label that describes the\n"
-            "plant and what its used for. Light from the sun\n"
-            "shines in through the glass that makes up most of\n"
-            "the room. Lined up on one wall are various drawers,\n"
-            "shelves, and gardening tools. A shovel can be found\n"
-            "leaning on one of the shelves."; //Greenhouse description
+
 
 }
 void StorageRoom() {
@@ -776,11 +750,6 @@ void StorageRoom() {
 
     //Final Row --------------------------------------------------------------------------------------------------------
 
-    cout << "\nThe lights are broken, so the only illumination is coming from\n"
-            "the other side of the door. There are boxes scattered throughout\n"
-            "the room. Each box is labeled, presumably for what was contained\n"
-            "in them. However, all but one of the boxes is empty. The only one\n"
-            "that isn't empty is labeled \"Spare Parts\""; //storage room description
 
 }
 void Cabins() {
@@ -877,11 +846,6 @@ void Cabins() {
     cout << endl;
 
     //Bottom Section (Same as Top) -------------------------------------------------------------------------------------
-
-    cout << "\nAhead of you lies 8 bunk beds, with 4 on each side of the\n"
-            "room. They are well-made, but clearly none of them have been\n"
-            "slept in for a very long time. To the side of each bed there\n"
-            "is a small dresser for personal belongings and clothing."; //cabins description
 
 }
 void AlienRoom() {
@@ -1021,10 +985,6 @@ void AlienRoom() {
 
     //Final Row --------------------------------------------------------------------------------------------------------
 
-    cout << "\nThe room glows green. The air feels stale, and it smells like\n"
-            "something died here. In the corner, a pulsing carcass sits.\n"
-            "The source of the light. A slimy green goo is splattered all\n"
-            "over the walls. "; //alien room description
 }
 void ElectricalRoom() {
 
@@ -1120,9 +1080,6 @@ void ElectricalRoom() {
 
     //Bottom Section (Same as Top) -------------------------------------------------------------------------------------
 
-    cout << "\nUpon entering the dark room, you notice rows upon rows\n"
-            "of defunct hardware for servers. In the corner of the\n"
-            "room there is what appears to be an electrical panel."; //electrical room description
 
 }
 void map() {
@@ -1348,15 +1305,15 @@ void printRoom(Room *currentRoom) {
     }
 }
 
-Room room1("Control-Room", "In the center of the room there is a command console. Near the edge of the room there is a table, on which there is a suspicious container of liquid. Under the container, there appears to be a napkin, acting as a coaster of sorts", true);
-Room room2("Mess-Hall", "Tables with stools line the center of the room. On one side of the room, there appears to be what was once a buffet. It is now covered in dust, and some strange gooey liquid. On the other side of the room, there are three vending machines that look like they haven't been touched in many generations. ", false);
-Room room3("Electrical-Room", "Upon entering the dark room, you notice rows upon rows of defunct hardware for servers. In the corner of the room there is what appears to be an electrical panel.", true);
-Room room4("Radio-Room", "You find a room with a large window directly ahead of you. The window looks out into the vast emptiness of space, along with a beautiful view of the sun, brighter than you've ever seen it before. Beneath the window is a system that is quite obviously a communications system. Various dials and levers span across the system. The rest of the room is filled with cases for various electronics.", false);
-Room room5("Cabins", "Ahead of you lies 8 bunk beds, with 4 on each side of the room. They are well-made, but clearly none of them have been slept in for a very long time. To the side of each bed there is a small dresser for personal belongings and clothing.", true);
-Room room6("Medical-Bay", "You enter a small medical bay with 2 beds, medical equipment for each, a small desk in the corner, and a coat rack on the wall across from the beds. Papers are scattered across the desk. Perhaps someone was looking for something?", true);
-Room room7("Alien-Room", "The room glows green. The air feels stale, and it smells like something died here. In the corner, a pulsing carcass sits. The source of the light. A slimy green goo is splattered all over the walls.", true);
-Room room8("Greenhouse", "Various plants are lined up across the room. Beneath each plant is a label that describes the plant and what its used for. Light from the sun shines in through the glass that makes up most of the room. Lined up on one wall are various drawers, shelves, and gardening tools. A shovel can be found leaning on one of the shelves.", true);
-Room room9("Storage-Room", "The lights are broken, so the only illumination is coming from the other side of the door. There are boxes scattered throughout the room. Each box is labeled, presumably for what was contained in them. However, all but one of the boxes is empty. The only one that isn't empty is labeled \"Spare Parts\".", true);
+Room room1("Control-Room", "\nIn the center of the room there is a command console.\nNear the edge of the room there is a table, on which\nthere is a suspicious container of liquid. Under the\ncontainer, there appears to be a napkin, acting as a\ncoaster of sorts.", true);
+Room room2("Mess-Hall", "\nTables with stools line the center of the room. On one\nside of the room, there appears to be what was once a\nbuffet. It is now covered in dust, and some strange\ngooey liquid. On the other side of the room, there are\nthree vending machines that look like they haven't been\ntouched in many generations.", false);
+Room room3("Electrical-Room", "\nUpon entering the dark room, you notice rows upon rows\nof defunct hardware for servers. In the corner of the\nroom there is what appears to be an electrical panel.", true);
+Room room4("Radio-Room", "\nYou find a room with a large window directly ahead of\nyou. The window looks out into the vast emptiness of\nspace, along with a beautiful view of the sun, brighter\nthan you've ever seen it before. Beneath the window is a\nsystem that is quite obviously a communications system.\nVarious dials and levers span across the system. The rest\nof the room is filled with cases for various electronics.", false);
+Room room5("Cabins", "\nAhead of you lies 8 bunk beds, with 4 on each side of the\nroom. They are well-made, but clearly none of them have been\nslept in for a very long time. To the side of each bed there\nis a small dresser for personal belongings and clothing.", true);
+Room room6("Medical-Bay", "\nYou enter a small medical bay with 2 beds, medical equipment for each, a small desk in the corner, \nand a coat rack on the wall across from the beds. Papers are scattered across the desk. \nPerhaps someone was looking for something?", true);
+Room room7("Alien-Room", "\nThe room glows green. The air feels stale, and it smells like\nsomething died here. In the corner, a pulsing carcass sits.\nThe source of the light. A slimy green goo is splattered all\nover the walls. ", true);
+Room room8("Greenhouse", "\nVarious plants are lined up across the room.\nBeneath each plant is a label that describes the\nplant and what its used for. Light from the sun\nshines in through the glass that makes up most of\nthe room. Lined up on one wall are various drawers,\nshelves, and gardening tools. A shovel can be found\nleaning on one of the shelves.", true);
+Room room9("Storage-Room", "\nThe lights are broken, so the only illumination is coming from\nthe other side of the door. There are boxes scattered throughout\nthe room. Each box is labeled, presumably for what was contained\nin them. However, all but one of the boxes is empty. The only one\nthat isn't empty is labeled \"Spare Parts\"", true);
 
 //Lets user move by letting them know their options and then taking their input.
 Room* move(Room *moveCurrentRoom) {
@@ -1402,17 +1359,22 @@ Room* playMenu(Room *currentRoom) {
     cout << "What would you like to do?\n";
     cin >> gameInput;
     Room* newCurrentRoom = currentRoom;
-    if (gameInput == "move") {
+    if (gameInput == "move" || gameInput == "Move") {
         newCurrentRoom = move(currentRoom); // Uses move command to update the players room
     }
-    if (gameInput == "map") {
+    if (gameInput == "map" || gameInput == "Map") {
         map();
     }
-    if (gameInput == "check inventory") {
+    if (gameInput == "check inventory" || gameInput ==  "Check inventory" || gameInput ==  "Check Inventory") {
         //checkInventory(); //just iterate through the inventory, which is hopefully filled with item objects
     }
-    if (gameInput == "get") {
-        //cool place for check what item is in a room and adding it to the inventory.
+    if (gameInput == "get" || gameInput ==  "Get") {
+        //cool place for check hat item is in a room and adding it to the inventory.
+    }
+    if (gameInput == "help" || gameInput ==  "Help"){
+        cout << "Type \"move\" to move around \nType \"map\" to view the map if you possess that item \nType"
+                " \"check inventory\" to view the items you have on you \nType \"get\" to look at and/or acquire the items"
+                " in your current room \nType \"help\" to view this menu :)" << endl;
     }
     return newCurrentRoom; // Passes the new room to main, or the old one if the player didn't move
 }
@@ -1465,12 +1427,12 @@ public:
 };
 
 // Sets weapons availability and damage. Edit weapon damage values below:
-Weapon Knife(false, 2); // Medium attack
-Weapon Shovel(false, 1); // Small attack. Shovels big attack is 5x this value
-Weapon Dagger(false, 1); // Later small attacks with the dagger
+Weapon Knife(true, 2); // Medium attack
+Weapon Shovel(true, 1); // Small attack. Shovels big attack is 5x this value
+Weapon Dagger(true, 1); // Later small attacks with the dagger
 Weapon GoopDagger(false, 4); // First big attack with the dagger
-Weapon Needle(false, 0); // instakills if random chance is met, 0 damage otherwise
-Weapon Sword(false, 1); // Small attack
+Weapon Needle(true, 0); // instakills if random chance is met, 0 damage otherwise
+Weapon Sword(true, 1); // Small attack
 bool swordBeenUsed = false;
 int weaponCount;
 

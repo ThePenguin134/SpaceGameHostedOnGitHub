@@ -1653,277 +1653,310 @@ void SwordUsed() {
                 cout << "You slash off one head, but the snail manages to yet again, grow two more." << endl;
                 cout << "You're slash also does " << Sword.damage << " damage.";
                 snail.Heads += 1;
-            }
-            else {
+            } else {
                 cout << "You slash off one head and the snail does not regen new ones this time!" << endl;
                 cout << "You're slash also does " << Sword.damage << " damage." << endl;
                 snail.Heads -= 1;
             }
-        }
-        else {
-            cout << "You cut off the snail's head! Too bad it has genetic modifications that let it grow back two more!\nThe snail has gained extra damage with its new head as well." << endl;
+        } else {
+            cout
+                    << "You cut off the snail's head! Too bad it has genetic modifications that let it grow back two more!\nThe snail has gained extra damage with its new head as well."
+                    << endl;
             cout << "You're slash also does " << Sword.damage << " damage." << endl;
             snail.Heads += 1;
             swordBeenUsed = true;
         }
         snail.Health -= Sword.damage;
-    }
-    else {
+    } else {
         cout << "You do not currently have that weapon! The snail prepares to attack you as you fumble around." << endl;
     }
-void MedkitUsed() {
+}
+    void MedKitUsed(player player) {
         if (Medkit.isAvailable) {
-            playerHealth
-        }
-        else {
-            cout << "You do not currently have that weapon! The snail prepares to attack you as you fumble around." << endl;
+
+        } else {
+            cout << "You do not currently have a MedKit! The snail prepares to attack you as you fumble around."
+                 << endl;
         }
     }
 // *Weapon Functions* End -------------------------------
 
-void SealRoom(Room &room3, Room &room5) {
-    room3.connectedRooms[1] = nullptr;
-    room5.connectedRooms[1] = nullptr;
-}
+    void SealRoom(Room &room3, Room &room5) {
+        room3.connectedRooms[1] = nullptr;
+        room5.connectedRooms[1] = nullptr;
+    }
 
-void RunAway(Room &room3, Room &room5) {
-    cout << "You run away and seal the room, so you never have to see that abomination again." << endl;
-    SealRoom(room3, room5);
-    isRoomSealed = true;
-}
+    void RunAway(Room &room3, Room &room5) {
+        cout << "You run away and seal the room, so you never have to see that abomination again." << endl;
+        SealRoom(room3, room5);
+        isRoomSealed = true;
+    }
 
-void bossSelection(Room &room3, Room &room5) {
-    cout << "What would you like to do?" << endl;
-    cout << "1) Attack with Knife" << endl;
-    cout << "2) Attack with Shovel" << endl;
-    cout << "3) Attack with Dagger" << endl;
-    cout << "4) Attack with Syringe" << endl;
-    cout << "5) Attack with Sword" << endl;
-    cout << "6) Run Away" << endl;
-    int bossChoice;
-    cin >> bossChoice;
-    switch (bossChoice) {
-        case 1: {
-            KnifeUsed();
-            break;
+    void bossSelection(Room &room3, Room &room5, player player) {
+        cout << "What would you like to do?" << endl;
+        cout << "1) Attack with Knife" << endl;
+        cout << "2) Attack with Shovel" << endl;
+        cout << "3) Attack with Dagger" << endl;
+        cout << "4) Attack with Syringe" << endl;
+        cout << "5) Attack with Sword" << endl;
+        cout << "6) Use MedKit to Heal" << endl;
+        cout << "7) Run Away" << endl;
+        int bossChoice;
+        cin >> bossChoice;
+        switch (bossChoice) {
+            case 1: {
+                KnifeUsed();
+                break;
+            }
+            case 2: {
+                ShovelUsed();
+                break;
+            }
+            case 3: {
+                DaggerUsed();
+                break;
+            }
+            case 4: {
+                SyringeUsed();
+                break;
+            }
+            case 5: {
+                SwordUsed();
+                break;
+            }
+            case 6: {
+                MedKitUsed(player);
+                break;
+            }
+            case 7: {
+                RunAway(room3, room5);
+                break;
+            }
+            default: {
+                cout << "Not a valid selection!" << endl;
+                break;
+            };
         }
-        case 2: {
-            ShovelUsed();
-            break;
-        }
-        case 3: {
-            DaggerUsed();
-            break;
-        }
-        case 4: {
-            SyringeUsed();
-            break;
-        }
-        case 5: {
-            SwordUsed();
-            break;
-        }
-        case 6: {
-            RunAway(room3, room5);
-            break;
-        }
-        default: {
-            cout << "Not a valid selection!" << endl;
-            break;
-        };
     }
-}
 
-void FightSummary() {
-    cout << endl << "Current Fight Progress (Scroll up if you can't see the result of your previous action):\nSnail's Health: " << snail.Health << "\nSnail's # of Heads: " << snail.Heads
-    << "\nYour Health: " << playerHealth << endl << endl;
-}
-
-void SnailAttack() {
-    snailDamage = ((rand() % 2) + 1) * floor(snail.BaseDamage * snail.Heads * .5); //Damage scales with # of heads and has a random chance to crit
-    playerHealth -= snailDamage;
-    if (snail.Heads == 1)
-    cout << "The Snail charges at you and deals "
-         << snailDamage << " damage to you before moving back." << endl;
-    else {
-        cout << "The Snail charges at you with " << snail.Heads << " heads and deals "
-             << snailDamage << " damage to you before moving back." << endl;
+    void FightSummary(player player) {
+        cout << endl
+             << "Current Fight Progress (Scroll up if you can't see the result of your previous action):\nSnail's Health: "
+             << snail.Health << "\nSnail's # of Heads: " << snail.Heads
+             << "\nYour Health: " << player.Health << endl << endl;
     }
-}
 
-void BossFight(Room &room3, Room &room5) {
-    //Repeat till snail dies, the player dies, or the player runs
-    while ((snail.Health > 0) && (playerHealth > 0 && snail.Heads > 0) && !isRoomSealed) {
-        bossSelection(room3, room5);// Let User select choice
-        if ((snail.Health > 0) && (playerHealth > 0) && !isRoomSealed && snail.Heads > 0) { // Snail attacks
-            SnailAttack();
-        }
-        if ((snail.Health > 0) && (playerHealth > 0) && !isRoomSealed && snail.Heads > 0) {
-            FightSummary();
+    void SnailAttack(player player) {
+        snailDamage = ((rand() % 2) + 1) * floor(snail.BaseDamage * snail.Heads *
+                                                 .5); //Damage scales with # of heads and has a random chance to crit
+        player.Health -= snailDamage;
+        if (snail.Heads == 1)
+            cout << "The Snail charges at you and deals "
+                 << snailDamage << " damage to you before moving back." << endl;
+        else {
+            cout << "The Snail charges at you with " << snail.Heads << " heads and deals "
+                 << snailDamage << " damage to you before moving back." << endl;
         }
     }
-    if (isRoomSealed) {
 
+    void BossFight(Room &room3, Room &room5, player player) {
+        //Repeat till snail dies, the player dies, or the player runs
+        while ((snail.Health > 0) && (playerHealth > 0 && snail.Heads > 0) && !isRoomSealed) {
+            bossSelection(room3, room5, player);// Let User select choice
+            if ((snail.Health > 0) && (playerHealth > 0) && !isRoomSealed && snail.Heads > 0) { // Snail attacks
+                SnailAttack(player);
+            }
+            if ((snail.Health > 0) && (playerHealth > 0) && !isRoomSealed && snail.Heads > 0) {
+                FightSummary(player);
+            }
+        }
+        if (isRoomSealed) {
+
+        }
+        if ((snail.Health <= 0)) {
+            cout << "\nCongrats! You beat the snail!" << endl;
+        }
+        if ((player.Health <= 0)) {
+            cout << "\nYou died to the snail." << endl;
+        }
+        if ((snail.Heads <= 0)) {
+            cout << "\nCongrats! You left the snail headless thus defeating him!" << endl;
+        }
     }
-    if ((snail.Health <= 0)) {
-        cout << "\nCongrats! You beat the snail!" << endl;
-    }
-    if ((playerHealth <= 0)) {
-        cout << "\nYou died to the snail." << endl;
-    }
-    if ((snail.Heads <= 0)) {
-        cout << "\nCongrats! You left the snail headless thus defeating him!" << endl;
-    }
-}
 // ------------------------------- BOSS FIGHT CODE (END) ---------------------------------------------------------------
 
 // ------------------------------- Room Interaction (START) ------------------------------------------------------------
 
-void GoopInteraction() {
-    if (Dagger.isAvailable) {
-        cout << "You dip the dagger in the goop and it now glows green." << endl;
-        GoopDagger.isAvailable = true;
-        Dagger.isAvailable = false;
+    void GoopInteraction() {
+        if (Dagger.isAvailable) {
+            cout << "You dip the dagger in the goop and it now glows green." << endl;
+            GoopDagger.isAvailable = true;
+            Dagger.isAvailable = false;
+        }
     }
-}
 
 //Stops the player when they are trying to enter the alien room and ensures they have at least one weapon, note describing the snail, key to open the door, and a healing item. Also explains this to them.
-void AlienRoomRequirements(Room &room1,Room &room2, Room &room3, Room &room4, Room &room5, Room &room6, Room &room8, Room &room9) {
-    cout << "Dangerous Snail behind these doors! Please do not enter unless you at MINIMUM have:\n1) At least two weapons\n2)Information about the dangers of the snail\n3)A proper way to heal\n"
-            "4)The key of course that we stored away for good reason" << endl;
+    void
+    AlienRoomRequirements(Room &room1, Room &room2, Room &room3, Room &room4, Room &room5, Room &room6, Room &room8,
+                          Room &room9, player player) {
+        cout
+                << "Dangerous Snail behind these doors! Please do not enter unless you at MINIMUM have:\n1) At least two weapons\n2)Information about the dangers of the snail\n3)A proper way to heal\n"
+                   "4)The key of course that we stored away for good reason" << endl;
 
-    Knife.isAvailable = !room2.hasItem1; //Available if not pickup-able. First item in Mess Hall
-    Dagger.isAvailable = !room5.hasItem1 && !GoopDagger.isAvailable; //Available if not pickup-able and GoopDagger isn't owned. First item in Cabins
-    Syringe.isAvailable = !room6.hasItem1; //Available if not pickup-able. First item in MedicalBay
-    Shovel.isAvailable = !room8.hasItem1; // //Available if not pickup-able. First item in GreenHouse
-    Sword.isAvailable = !room9.hasItem1; //Available if not pickup-able. First item in StorageRoom
+        Knife.isAvailable = !room2.hasItem1; //Available if not pickup-able. First item in Mess Hall
+        Dagger.isAvailable = !room5.hasItem1 &&
+                             !GoopDagger.isAvailable; //Available if not pickup-able and GoopDagger isn't owned. First item in Cabins
+        Syringe.isAvailable = !room6.hasItem1; //Available if not pickup-able. First item in MedicalBay
+        Shovel.isAvailable = !room8.hasItem1; // //Available if not pickup-able. First item in GreenHouse
+        Sword.isAvailable = !room9.hasItem1; //Available if not pickup-able. First item in StorageRoom
 
-    //Count How many weapons the player has
-    if (Knife.isAvailable) {
-        weaponCount += 1; //weaponCount var is declared right below the weapon instances in Boss Fight Code
-    }
-    if (Shovel.isAvailable) {
-        weaponCount += 1; //weaponCount var is declared right below the weapon instances in Boss Fight Code
-    }
-    if (Dagger.isAvailable || GoopDagger.isAvailable) {
-        weaponCount += 1; //weaponCount var is declared right below the weapon instances in Boss Fight Code
-    }
-    if (Syringe.isAvailable) {
-        weaponCount += 1; //weaponCount var is declared right below the weapon instances in Boss Fight Code
-    }
-    if (Sword.isAvailable) {
-        weaponCount += 1; //weaponCount var is declared right below the weapon instances in Boss Fight Code
-    }
-
-    if (weaponCount >= 2) {
-        cout << "You can open the door with your key to take on the giant snail." << endl;
-        cout << "Do you wish to take him on? (y/n?)" << endl;
-        string enterSnailRoomChoice;
-        cin >> enterSnailRoomChoice;
-        if (enterSnailRoomChoice == "y") {
-            BossFight(room3, room5);
+        //Count How many weapons the player has
+        if (Knife.isAvailable) {
+            weaponCount += 1; //weaponCount var is declared right below the weapon instances in Boss Fight Code
         }
-        if (enterSnailRoomChoice == "n") {
+        if (Shovel.isAvailable) {
+            weaponCount += 1; //weaponCount var is declared right below the weapon instances in Boss Fight Code
+        }
+        if (Dagger.isAvailable || GoopDagger.isAvailable) {
+            weaponCount += 1; //weaponCount var is declared right below the weapon instances in Boss Fight Code
+        }
+        if (Syringe.isAvailable) {
+            weaponCount += 1; //weaponCount var is declared right below the weapon instances in Boss Fight Code
+        }
+        if (Sword.isAvailable) {
+            weaponCount += 1; //weaponCount var is declared right below the weapon instances in Boss Fight Code
+        }
+
+        if (weaponCount >= 2) {
+            cout << "You can open the door with your key to take on the giant snail." << endl;
+            cout << "Do you wish to take him on? (y/n?)" << endl;
+            string enterSnailRoomChoice;
+            cin >> enterSnailRoomChoice;
+            if (enterSnailRoomChoice == "y") {
+                BossFight(room3, room5, player);
+            }
+            if (enterSnailRoomChoice == "n") {
+                // Leave empty so the alien Room Code ends
+            }
+        } else {
             // Leave empty so the alien Room Code ends
         }
     }
-    else {
-        // Leave empty so the alien Room Code ends
-    }
-}
 
 
 // ------------------------------- Room Interaction (END) --------------------------------------------------------------
-int main() {
+    int main() {
 
-    ifstream in_stream;
-    Item ind[18];
+        player player;
+        ifstream in_stream;
+        Item ind[18];
 
-    int row = 0;
-    string line;
-    in_stream.open("Updated Item List - Sheet1.csv");
-    getline(in_stream, line, '\n');
-    while (getline(in_stream, line, '\n')){
-        ind[row].input(line);
-        row++;
-    }
-    in_stream.close();
+        int row = 0;
+        string line;
+        in_stream.open("Updated Item List - Sheet1.csv");
+        getline(in_stream, line, '\n');
+        while (getline(in_stream, line, '\n')) {
+            ind[row].input(line);
+            row++;
+        }
+        in_stream.close();
 
-    // Get the current time at the start of the game
-    auto start_time = std::chrono::high_resolution_clock::now();
+        // Get the current time at the start of the game
+        auto start_time = std::chrono::high_resolution_clock::now();
 
-    Room room1("Control-Room", "\nIn the center of the room there is a command console.\nNear the edge of the room there is a table, on which\nthere is a suspicious container of liquid. Under the\ncontainer, there appears to be a napkin, acting as a\ncoaster of sorts.\n", ind[0], ind[1], true, true);
-    Room room2("Mess-Hall", "\nTables with stools line the center of the room. On one\nside of the room, there appears to be what was once a\nbuffet. It is now covered in dust, and some strange\ngooey liquid. On the other side of the room, there are\nthree vending machines that look like they haven't been\ntouched in many generations.\n", ind[2],ind[3], true, true);
-    Room room3("Electrical-Room", "\nUpon entering the dark room, you notice rows upon rows\nof defunct hardware for servers. In the corner of the\nroom there is what appears to be an electrical panel.\n", ind[4],ind[5], true, true);
-    Room room4("Radio-Room", "\nYou find a room with a large window directly ahead of\nyou. The window looks out into the vast emptiness of\nspace, along with a beautiful view of the sun, brighter\nthan you've ever seen it before. Beneath the window is a\nsystem that is quite obviously a communications system.\nVarious dials and levers span across the system. The rest\nof the room is filled with cases for various electronics.\n",  ind[4],ind[5], true, true);
-    Room room5("Cabins", "\nAhead of you lies 8 bunk beds, with 4 on each side of the\nroom. They are well-made, but clearly none of them have been\nslept in for a very long time. To the side of each bed there\nis a small dresser for personal belongings and clothing.\n", ind[6],ind[7], true, true);
-    Room room6("Medical-Bay", "\nYou enter a small medical bay with 2 beds, medical equipment for each, a small desk in the corner, \nand a coat rack on the wall across from the beds. Papers are scattered across the desk. \nPerhaps someone was looking for something?\n", ind[8],ind[9], true, true);
-    Room room7("Alien-Room", "\nThe room glows green. The air feels stale, and it smells like\nsomething died here. In the corner, a pulsing carcass sits.\nThe source of the light. A slimy green goo is splattered all\nover the walls.\n", ind[10],ind[11], true, true);
-    Room room8("Greenhouse", "\nVarious plants are lined up across the room.\nBeneath each plant is a label that describes the\nplant and what its used for. Light from the sun\nshines in through the glass that makes up most of\nthe room. Lined up on one wall are various drawers,\nshelves, and gardening tools. A shovel can be found\nleaning on one of the shelves.\n", ind[12],ind[13], true, true);
-    Room room9("Storage-Room", "\nThe lights are broken, so the only illumination is coming from\nthe other side of the door. There are boxes scattered throughout\nthe room. Each box is labeled, presumably for what was contained\nin them. However, all but one of the boxes is empty. The only one\nthat isn't empty is labeled \"Spare Parts\"\n", ind[14],ind[15], true, true);
+        Room room1("Control-Room",
+                   "\nIn the center of the room there is a command console.\nNear the edge of the room there is a table, on which\nthere is a suspicious container of liquid. Under the\ncontainer, there appears to be a napkin, acting as a\ncoaster of sorts.\n",
+                   ind[0], ind[1], true, true);
+        Room room2("Mess-Hall",
+                   "\nTables with stools line the center of the room. On one\nside of the room, there appears to be what was once a\nbuffet. It is now covered in dust, and some strange\ngooey liquid. On the other side of the room, there are\nthree vending machines that look like they haven't been\ntouched in many generations.\n",
+                   ind[2], ind[3], true, true);
+        Room room3("Electrical-Room",
+                   "\nUpon entering the dark room, you notice rows upon rows\nof defunct hardware for servers. In the corner of the\nroom there is what appears to be an electrical panel.\n",
+                   ind[4], ind[5], true, true);
+        Room room4("Radio-Room",
+                   "\nYou find a room with a large window directly ahead of\nyou. The window looks out into the vast emptiness of\nspace, along with a beautiful view of the sun, brighter\nthan you've ever seen it before. Beneath the window is a\nsystem that is quite obviously a communications system.\nVarious dials and levers span across the system. The rest\nof the room is filled with cases for various electronics.\n",
+                   ind[4], ind[5], true, true);
+        Room room5("Cabins",
+                   "\nAhead of you lies 8 bunk beds, with 4 on each side of the\nroom. They are well-made, but clearly none of them have been\nslept in for a very long time. To the side of each bed there\nis a small dresser for personal belongings and clothing.\n",
+                   ind[6], ind[7], true, true);
+        Room room6("Medical-Bay",
+                   "\nYou enter a small medical bay with 2 beds, medical equipment for each, a small desk in the corner, \nand a coat rack on the wall across from the beds. Papers are scattered across the desk. \nPerhaps someone was looking for something?\n",
+                   ind[8], ind[9], true, true);
+        Room room7("Alien-Room",
+                   "\nThe room glows green. The air feels stale, and it smells like\nsomething died here. In the corner, a pulsing carcass sits.\nThe source of the light. A slimy green goo is splattered all\nover the walls.\n",
+                   ind[10], ind[11], true, true);
+        Room room8("Greenhouse",
+                   "\nVarious plants are lined up across the room.\nBeneath each plant is a label that describes the\nplant and what its used for. Light from the sun\nshines in through the glass that makes up most of\nthe room. Lined up on one wall are various drawers,\nshelves, and gardening tools. A shovel can be found\nleaning on one of the shelves.\n",
+                   ind[12], ind[13], true, true);
+        Room room9("Storage-Room",
+                   "\nThe lights are broken, so the only illumination is coming from\nthe other side of the door. There are boxes scattered throughout\nthe room. Each box is labeled, presumably for what was contained\nin them. However, all but one of the boxes is empty. The only one\nthat isn't empty is labeled \"Spare Parts\"\n",
+                   ind[14], ind[15], true, true);
 
-    Room *previousRoomMain = &room2; /* Initialize the previousRoom Global var and initialize it, so
+        Room *previousRoomMain = &room2; /* Initialize the previousRoom Global var and initialize it, so
  the first local map will show up too */
 
-    // Seed the random number generator with the current time
-    srand(time(0));
+        // Seed the random number generator with the current time
+        srand(time(0));
 
-    // Create five rooms
+        // Create five rooms
 
-    // Connect the rooms according to the specified connections
-    room1.connectedRooms[0] = &room2;
-    room1.connectedRooms[1] = &room3;
-    room1.connectedRooms[2] = &room4;
-    room1.connectedRooms[3] = &room5;
+        // Connect the rooms according to the specified connections
+        room1.connectedRooms[0] = &room2;
+        room1.connectedRooms[1] = &room3;
+        room1.connectedRooms[2] = &room4;
+        room1.connectedRooms[3] = &room5;
 
-    room2.connectedRooms[0] = &room1;
-    room2.connectedRooms[1] = &room6;
-    room2.connectedRooms[2] = &room9;
+        room2.connectedRooms[0] = &room1;
+        room2.connectedRooms[1] = &room6;
+        room2.connectedRooms[2] = &room9;
 
-    room3.connectedRooms[0] = &room1;
-    room3.connectedRooms[1] = &room7;
-    room3.connectedRooms[2] = &room8;
+        room3.connectedRooms[0] = &room1;
+        room3.connectedRooms[1] = &room7;
+        room3.connectedRooms[2] = &room8;
 
-    room4.connectedRooms[0] = &room1;
-    room4.connectedRooms[1] = &room6;
-    room4.connectedRooms[2] = &room8;
+        room4.connectedRooms[0] = &room1;
+        room4.connectedRooms[1] = &room6;
+        room4.connectedRooms[2] = &room8;
 
-    room5.connectedRooms[0] = &room1;
-    room5.connectedRooms[1] = &room7;
-    room5.connectedRooms[2] = &room9;
+        room5.connectedRooms[0] = &room1;
+        room5.connectedRooms[1] = &room7;
+        room5.connectedRooms[2] = &room9;
 
-    room6.connectedRooms[0] = &room2;
-    room6.connectedRooms[1] = &room4;
+        room6.connectedRooms[0] = &room2;
+        room6.connectedRooms[1] = &room4;
 
-    room7.connectedRooms[0] = &room3;
-    room7.connectedRooms[1] = &room5;
+        room7.connectedRooms[0] = &room3;
+        room7.connectedRooms[1] = &room5;
 
-    room8.connectedRooms[0] = &room3;
-    room8.connectedRooms[1] = &room4;
+        room8.connectedRooms[0] = &room3;
+        room8.connectedRooms[1] = &room4;
 
-    room9.connectedRooms[0] = &room2;
-    room9.connectedRooms[1] = &room5;
+        room9.connectedRooms[0] = &room2;
+        room9.connectedRooms[1] = &room5;
 
-    // Start the game in Room 1
-    Room *currentRoom = &room1;
+        // Start the game in Room 1
+        Room *currentRoom = &room1;
 
-    // Game loop
-    while (true) {
-        // Print the current room description
-        cout << "You are in the " << currentRoom->name << endl;
-        cout << currentRoom->description << endl;
-        if (currentRoom->name == "Alien-Room") { //If player is in the Alien Room then show them the requirements to enter and let them fight if they meet them.
-            AlienRoomRequirements(room1,room2, room3, room4, room5, room6, room8, room9);
+        // Game loop
+        while (true) {
+            // Print the current room description
+            cout << "You are in the " << currentRoom->name << endl;
+            cout << currentRoom->description << endl;
+            if (currentRoom->name ==
+                "Alien-Room") { //If player is in the Alien Room then show them the requirements to enter and let them fight if they meet them.
+                AlienRoomRequirements(room1, room2, room3, room4, room5, room6, room8, room9, player);
+            }
+            if (isPlayerInNewRoom(previousRoomMain,
+                                  currentRoom)) { //If player is in a new room then print that room's picture
+                printRoom(currentRoom);
+            }
+            previousRoomMain = currentRoom;
+            currentRoom = playMenu(currentRoom, ind, room1, room2, room3, room4, room5, room6, room8, room9,
+                                   start_time); // Allows the user to move and updates the current room with the result of the move command// Allows the user to move and updates the current room with the result of the move command
         }
-        if (isPlayerInNewRoom(previousRoomMain, currentRoom)) { //If player is in a new room then print that room's picture
-            printRoom(currentRoom);
-        }
-        previousRoomMain = currentRoom;
-        currentRoom = playMenu(currentRoom, ind, room1, room2, room3, room4, room5, room6, room8, room9, start_time); // Allows the user to move and updates the current room with the result of the move command// Allows the user to move and updates the current room with the result of the move command
+        // Calculate the elapsed time
+        auto end_time = chrono::high_resolution_clock::now();
+        auto duration = chrono::duration_cast<chrono::seconds>(end_time - start_time);
+        cout << "Game duration: " << duration.count() << " seconds" << endl;
+        return 0;
     }
-    // Calculate the elapsed time
-    auto end_time = chrono::high_resolution_clock::now();
-    auto duration = chrono::duration_cast<chrono::seconds>(end_time - start_time);
-    cout << "Game duration: " << duration.count() << " seconds" << endl;
-    return 0;
-}

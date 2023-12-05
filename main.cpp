@@ -1,5 +1,6 @@
 #include <iostream>
 #include "cmath"
+#include "sstream"
 
 using namespace std;
 
@@ -1290,9 +1291,33 @@ string gameInput;
 void playMenu();
 void checkInventory();
 struct Item {
-    int ID;
     string name;
     string description;
+};
+
+class ItemConstructor {
+private:
+    string name;
+    string description;
+
+public:
+    // Read
+    void input(string line) {
+        istringstream lineStream(line);
+        string item;
+
+        getline(lineStream, item, ',');
+        name = item;
+
+        getline(lineStream, item, ',');
+        description = item;
+    }
+    string readName(){
+        return name;
+    }
+    string readDescription(){
+        return description;
+    }
 };
 
 
@@ -1300,23 +1325,21 @@ class Room {
 public:
     string name;
     string description;
-    bool hasItem;
+    Item Item1;
+    Item Item2;
     Room* connectedRooms[9]; // Array to hold connected rooms
 
-    Room(string n, string desc, bool Item) {
+    Room(string n, string desc, Item I1, Item I2) {
         name = n;
         description = desc;
-        hasItem = Item;
+        Item1 = I1;
+        Item2 = I2;
         for (int i = 0; i < 9; ++i) {
             connectedRooms[i] = nullptr;
         }
     }
 };
 
-struct Player {
-    Item inventory[10];
-};
-Player player;
 
 void printRoom(Room *currentRoom) {
     if (currentRoom->name == "Control-Room") {
@@ -1726,6 +1749,23 @@ void AlienRoomRequirements() {
 
 // ------------------------------- Room Interaction (END) --------------------------------------------------------------
 int main() {
+
+    ifstream in_stream;
+    Item ind[18];
+
+    int row = 0;
+    string line;
+
+    in_stream.open("Steam GPU Survey (Scrubbed) Final Version.csv");
+
+    getline(in_stream, line, '\n');
+
+    while (getline(in_stream, line, '\n')){
+        ind[row].input(line);
+        row++;
+    }
+
+
     // Seed the random number generator with the current time
     srand(time(0));
 
@@ -1815,5 +1855,7 @@ int main() {
             }
         }
     }
+
+    in_stream.close();
     return 0;
 }

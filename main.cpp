@@ -1248,6 +1248,7 @@ bool gameStart = false;
 int startInput;
 string gameInput;
 void checkInventory();
+void playMenu();
 class Item {
 private:
     string name;
@@ -1344,6 +1345,64 @@ void getItem(Item ind[], Room *currentRoom) {
     // Disable Item for future pickup
 }
 
+//Inventory function, lists items that the player has.
+void checkInventory(Item ind[], Room &room1, Room &room2, Room &room3, Room &room4, Room &room5, Room &room6, Room &room8, Room &room9){
+
+    if(!room1.hasItem1 || !room1.hasItem2 || !room2.hasItem1 || !room2.hasItem2 || !room3.hasItem1 || !room3.hasItem2 || !room4.hasItem1 || !room4.hasItem2 || !room5.hasItem1 || !room5.hasItem2 || !room6.hasItem1 || !room6.hasItem2 || !room8.hasItem1 || !room8.hasItem2 || !room9.hasItem1 || !room9.hasItem2) {
+        if (!room1.hasItem1) {
+            cout << room1.Item1.readName() << "," << endl;
+        }
+        if (!room1.hasItem2) {
+            cout << room1.Item2.readName() << "," << endl;
+        }
+        if (!room2.hasItem1) {
+            cout << room2.Item1.readName() << "," << endl;
+        }
+        if (!room2.hasItem2) {
+            cout << room2.Item2.readName() << "," << endl;
+        }
+        if (!room3.hasItem1) {
+            cout << room3.Item1.readName() << "," << endl;
+        }
+        if (!room3.hasItem2) {
+            cout << room3.Item2.readName() << "," << endl;
+        }
+        if (!room4.hasItem1) {
+            cout << room4.Item1.readName() << "," << endl;
+        }
+        if (!room4.hasItem2) {
+            cout << room4.Item2.readName() << "," << endl;
+        }
+        if (!room5.hasItem1) {
+            cout << room5.Item1.readName() << "," << endl;
+        }
+        if (!room5.hasItem2) {
+            cout << room5.Item2.readName() << "," << endl;
+        }
+        if (!room6.hasItem1) {
+            cout << room6.Item1.readName() << "," << endl;
+        }
+        if (!room6.hasItem2) {
+            cout << room6.Item2.readName() << "," << endl;
+        }
+        if (!room8.hasItem1) {
+            cout << room8.Item1.readName() << "," << endl;
+        }
+        if (!room8.hasItem2) {
+            cout << room8.Item2.readName() << "," << endl;
+        }
+        if (!room9.hasItem1) {
+            cout << room9.Item1.readName() << "," << endl;
+        }
+        if (!room9.hasItem2) {
+            cout << room9.Item2.readName() << "," << endl;
+        }
+    }
+    else{
+        cout << "You do not currently have any items." << endl;
+    }
+}
+
 void printRoom(Room *currentRoom) {
     if (currentRoom->name == "Control-Room") {
         ControlRoom();
@@ -1414,13 +1473,14 @@ Room* move(Room *moveCurrentRoom) {
 }
 
 // Allows the user to pick what they would like to do. Uses the current room as a parameter to pass through if they decide to move.
-Room* playMenu(Room *currentRoom, Item ind[], Room &room1, chrono::high_resolution_clock::time_point start_time) {
+Room* playMenu(Room *currentRoom, Item ind[], Room &room1, Room &room2, Room &room3, Room &room4, Room &room5, Room &room6, Room &room8, Room &room9, chrono::high_resolution_clock::time_point start_time) {
     cout << "What would you like to do?\n";
     cin >> gameInput;
     Room* newCurrentRoom = currentRoom;
     if (gameInput == "move" || gameInput == "Move") {
         newCurrentRoom = move(currentRoom); // Uses move command to update the players room
     }
+    //Allows the user to use the map if they have it, and doesn't if they don't.
     if (gameInput == "map" || gameInput == "Map") {
         if (room1.hasItem1) {
             cout << "You don't have that item, so you can't use that function!" << endl;
@@ -1429,8 +1489,9 @@ Room* playMenu(Room *currentRoom, Item ind[], Room &room1, chrono::high_resoluti
             map();
         }
     }
-    if (gameInput == "check inventory" || gameInput ==  "Check inventory" || gameInput ==  "Check Inventory") {
+    if (gameInput == "check-inventory" || gameInput ==  "Check-inventory" || gameInput ==  "Check-Inventory") {
         //checkInventory(); //just iterate through the inventory, which is hopefully filled with item objects
+        checkInventory(ind, room1,room2, room3, room4, room5, room6, room8, room9);
     }
     if (gameInput == "get" || gameInput ==  "Get") {
         getItem(ind, currentRoom);
@@ -1847,7 +1908,7 @@ int main() {
             printRoom(currentRoom);
         }
         previousRoomMain = currentRoom;
-        currentRoom = playMenu(currentRoom, ind, room1, start_time); // Allows the user to move and updates the current room with the result of the move command
+        currentRoom = playMenu(currentRoom, ind, room1, room2, room3, room4, room5, room6, room8, room9, start_time); // Allows the user to move and updates the current room with the result of the move command// Allows the user to move and updates the current room with the result of the move command
     }
     // Calculate the elapsed time
     auto end_time = chrono::high_resolution_clock::now();

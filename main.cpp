@@ -1307,9 +1307,11 @@ public:
     string description;
     Item Item1;
     Item Item2;
+    bool hasItem1;
+    bool hasItem2;
     Room* connectedRooms[9]; // Array to hold connected rooms
 
-    Room(string n, string desc, Item I1, Item I2) {
+    Room(string n, string desc, Item I1, Item I2, bool hasItem1, bool hasItem2) {
         name = n;
         description = desc;
         Item1 = I1;
@@ -1736,21 +1738,39 @@ int main() {
     string line;
     in_stream.open("Updated Item List - Sheet1.csv");
     getline(in_stream, line, '\n');
-    while (getline(in_stream, line, '\n')){
+    while (getline(in_stream, line, '\n')) {
         ind[row].input(line);
         row++;
     }
     in_stream.close();
 
-    Room room1("Control-Room", "\nIn the center of the room there is a command console.\nNear the edge of the room there is a table, on which\nthere is a suspicious container of liquid. Under the\ncontainer, there appears to be a napkin, acting as a\ncoaster of sorts.\n", ind[0], ind[1]);
-    Room room2("Mess-Hall", "\nTables with stools line the center of the room. On one\nside of the room, there appears to be what was once a\nbuffet. It is now covered in dust, and some strange\ngooey liquid. On the other side of the room, there are\nthree vending machines that look like they haven't been\ntouched in many generations.\n", ind[2],ind[3]);
-    Room room3("Electrical-Room", "\nUpon entering the dark room, you notice rows upon rows\nof defunct hardware for servers. In the corner of the\nroom there is what appears to be an electrical panel.\n", ind[4],ind[5]);
-    Room room4("Radio-Room", "\nYou find a room with a large window directly ahead of\nyou. The window looks out into the vast emptiness of\nspace, along with a beautiful view of the sun, brighter\nthan you've ever seen it before. Beneath the window is a\nsystem that is quite obviously a communications system.\nVarious dials and levers span across the system. The rest\nof the room is filled with cases for various electronics.\n",  ind[4],ind[5]);
-    Room room5("Cabins", "\nAhead of you lies 8 bunk beds, with 4 on each side of the\nroom. They are well-made, but clearly none of them have been\nslept in for a very long time. To the side of each bed there\nis a small dresser for personal belongings and clothing.\n", ind[6],ind[7]);
-    Room room6("Medical-Bay", "\nYou enter a small medical bay with 2 beds, medical equipment for each, a small desk in the corner, \nand a coat rack on the wall across from the beds. Papers are scattered across the desk. \nPerhaps someone was looking for something?\n", ind[8],ind[9]);
-    Room room7("Alien-Room", "\nThe room glows green. The air feels stale, and it smells like\nsomething died here. In the corner, a pulsing carcass sits.\nThe source of the light. A slimy green goo is splattered all\nover the walls.\n", ind[10],ind[11]);
-    Room room8("Greenhouse", "\nVarious plants are lined up across the room.\nBeneath each plant is a label that describes the\nplant and what its used for. Light from the sun\nshines in through the glass that makes up most of\nthe room. Lined up on one wall are various drawers,\nshelves, and gardening tools. A shovel can be found\nleaning on one of the shelves.\n", ind[12],ind[13]);
-    Room room9("Storage-Room", "\nThe lights are broken, so the only illumination is coming from\nthe other side of the door. There are boxes scattered throughout\nthe room. Each box is labeled, presumably for what was contained\nin them. However, all but one of the boxes is empty. The only one\nthat isn't empty is labeled \"Spare Parts\"\n", ind[14],ind[15]);
+    Room room1("Control-Room",
+               "\nIn the center of the room there is a command console.\nNear the edge of the room there is a table, on which\nthere is a suspicious container of liquid. Under the\ncontainer, there appears to be a napkin, acting as a\ncoaster of sorts.\n",
+               ind[0], ind[1], true, true);
+    Room room2("Mess-Hall",
+               "\nTables with stools line the center of the room. On one\nside of the room, there appears to be what was once a\nbuffet. It is now covered in dust, and some strange\ngooey liquid. On the other side of the room, there are\nthree vending machines that look like they haven't been\ntouched in many generations.\n",
+               ind[2], ind[3], true, true);
+    Room room3("Electrical-Room",
+               "\nUpon entering the dark room, you notice rows upon rows\nof defunct hardware for servers. In the corner of the\nroom there is what appears to be an electrical panel.\n",
+               ind[4], ind[5], true, true);
+    Room room4("Radio-Room",
+               "\nYou find a room with a large window directly ahead of\nyou. The window looks out into the vast emptiness of\nspace, along with a beautiful view of the sun, brighter\nthan you've ever seen it before. Beneath the window is a\nsystem that is quite obviously a communications system.\nVarious dials and levers span across the system. The rest\nof the room is filled with cases for various electronics.\n",
+               ind[4], ind[5], true, true);
+    Room room5("Cabins",
+               "\nAhead of you lies 8 bunk beds, with 4 on each side of the\nroom. They are well-made, but clearly none of them have been\nslept in for a very long time. To the side of each bed there\nis a small dresser for personal belongings and clothing.\n",
+               ind[6], ind[7], true, true);
+    Room room6("Medical-Bay",
+               "\nYou enter a small medical bay with 2 beds, medical equipment for each, a small desk in the corner, \nand a coat rack on the wall across from the beds. Papers are scattered across the desk. \nPerhaps someone was looking for something?\n",
+               ind[8], ind[9], true, true);
+    Room room7("Alien-Room",
+               "\nThe room glows green. The air feels stale, and it smells like\nsomething died here. In the corner, a pulsing carcass sits.\nThe source of the light. A slimy green goo is splattered all\nover the walls.\n",
+               ind[10], ind[11], true, true);
+    Room room8("Greenhouse",
+               "\nVarious plants are lined up across the room.\nBeneath each plant is a label that describes the\nplant and what its used for. Light from the sun\nshines in through the glass that makes up most of\nthe room. Lined up on one wall are various drawers,\nshelves, and gardening tools. A shovel can be found\nleaning on one of the shelves.\n",
+               ind[12], ind[13], true, true);
+    Room room9("Storage-Room",
+               "\nThe lights are broken, so the only illumination is coming from\nthe other side of the door. There are boxes scattered throughout\nthe room. Each box is labeled, presumably for what was contained\nin them. However, all but one of the boxes is empty. The only one\nthat isn't empty is labeled \"Spare Parts\"\n",
+               ind[14], ind[15], true, true);
 
     Room *previousRoomMain = &room2; /* Initialize the previousRoom Global var and initialize it, so
  the first local map will show up too */
@@ -1816,9 +1836,16 @@ int main() {
             printRoom(currentRoom);
         }
         previousRoomMain = currentRoom;
-        currentRoom = playMenu(currentRoom); // Allows the user to move and updates the current room with the result of the move command
+        currentRoom = playMenu(
+                currentRoom); // Allows the user to move and updates the current room with the result of the move command
 
+        if (currentRoom->hasItem1 || currentRoom->hasItem2) {
+            cout << "There are item(s) in this room. If you would like to pick up an item, enter it's name." << endl;
+            if (currentRoom->hasItem1){
+                cout << ind[1].readName();
+            }
+        }
+
+        return 0;
     }
-
-    return 0;
 }

@@ -1249,6 +1249,10 @@ int startInput;
 string gameInput;
 void checkInventory();
 void playMenu();
+class player {
+public:
+    int Health = 20;
+};
 class Item {
 private:
     string name;
@@ -1556,12 +1560,13 @@ public:
 };
 
 // Sets weapons availability and damage. Edit weapon damage values below:
-Weapon Knife(true, 2); // Medium attack
-Weapon Shovel(true, 1); // Small attack. Shovels big attack is 5x this value
-Weapon Dagger(true, 1); // Later small attacks with the dagger
+Weapon Knife(false, 2); // Medium attack
+Weapon Shovel(false, 1); // Small attack. Shovels big attack is 5x this value
+Weapon Dagger(false, 1); // Later small attacks with the dagger
 Weapon GoopDagger(false, 4); // First big attack with the dagger
-Weapon Syringe(true, 0); // instakills if random chance is met, 0 damage otherwise
-Weapon Sword(true, 1); // Small attack
+Weapon Syringe(false, 0); // instakills if random chance is met, 0 damage otherwise
+Weapon Sword(false, 1); // Small attack
+Weapon Medkit(false, 0); // Small attack
 bool swordBeenUsed = false;
 int weaponCount;
 
@@ -1666,7 +1671,14 @@ void SwordUsed() {
     else {
         cout << "You do not currently have that weapon! The snail prepares to attack you as you fumble around." << endl;
     }
-}
+void MedkitUsed() {
+        if (Medkit.isAvailable) {
+            playerHealth
+        }
+        else {
+            cout << "You do not currently have that weapon! The snail prepares to attack you as you fumble around." << endl;
+        }
+    }
 // *Weapon Functions* End -------------------------------
 
 void SealRoom(Room &room3, Room &room5) {
@@ -1780,12 +1792,11 @@ void AlienRoomRequirements(Room &room1,Room &room2, Room &room3, Room &room4, Ro
     cout << "Dangerous Snail behind these doors! Please do not enter unless you at MINIMUM have:\n1) At least two weapons\n2)Information about the dangers of the snail\n3)A proper way to heal\n"
             "4)The key of course that we stored away for good reason" << endl;
 
-    Knife.isAvailable = !room2.hasItem1; // First item in Mess Hall
-    Dagger.isAvailable = !room5.hasItem1; // first item in Cabins
-    Syringe.isAvailable = !room6.hasItem1; //First item in MedicalBay
-    Shovel.isAvailable = !room8.hasItem1; // First item in GreenHouse
-    Sword.isAvailable = !room9.hasItem1; //First item in StorageRoom
-
+    Knife.isAvailable = !room2.hasItem1; //Available if not pickup-able. First item in Mess Hall
+    Dagger.isAvailable = !room5.hasItem1 && !GoopDagger.isAvailable; //Available if not pickup-able and GoopDagger isn't owned. First item in Cabins
+    Syringe.isAvailable = !room6.hasItem1; //Available if not pickup-able. First item in MedicalBay
+    Shovel.isAvailable = !room8.hasItem1; // //Available if not pickup-able. First item in GreenHouse
+    Sword.isAvailable = !room9.hasItem1; //Available if not pickup-able. First item in StorageRoom
 
     //Count How many weapons the player has
     if (Knife.isAvailable) {

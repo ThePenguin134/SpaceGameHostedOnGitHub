@@ -1546,7 +1546,6 @@ bool isPlayerInNewRoom(Room *previousRoom, Room *currentRoom) {
 
 // ------------------------------- BOSS FIGHT CODE (START) -------------------------------------------------------------
 bool isRoomSealed = false; // Bool to control the room availability
-int playerHealth = 20; // Sets the players health
 int snailDamage = 1; //Variable used to find snails damage each turn
 
 //Snail struct with its snailHealth, # of heads, and damage before growing additional heads
@@ -1577,9 +1576,9 @@ public:
 };
 
 // Sets weapons availability and damage. Edit weapon damage values below:
-Weapon Knife(false, 2); // Medium attack
+Weapon Knife(true, 2); // Medium attack
 Weapon Shovel(false, 1); // Small attack. Shovels big attack is 5x this value
-Weapon Dagger(false, 1); // Later small attacks with the dagger
+Weapon Dagger(true, 1); // Later small attacks with the dagger
 Weapon GoopDagger(false, 4); // First big attack with the dagger
 Weapon Syringe(false, 0); // instakills if random chance is met, 0 damage otherwise
 Weapon Sword(false, 1); // Small attack
@@ -1688,10 +1687,18 @@ void SwordUsed() {
         cout << "You do not currently have that weapon! The snail prepares to attack you as you fumble around." << endl;
     }
 }
-    void MedKitUsed(player player) {
-        if (Medkit.isAvailable) {
-
-        } else {
+    int MedKitUsesLeftGlobal = 3;
+    void MedKitUsed(player player, int MedKitUsesLeftLocal) {
+        if (Medkit.isAvailable && MedKitUsesLeftLocal > 1) {
+            cout << "You patch yourself up and restore 7 hp! Careful, your uses are limited!" << endl;
+            player.Health += 7;
+            MedKitUsesLeftLocal -= 1;
+        } else if (Medkit.isAvailable && MedKitUsesLeftLocal == 1){
+            cout << "You patch yourself up and restore 7 hp! That was the last of the bandages!" << endl;
+            player.Health += 7;
+            MedKitUsesLeftLocal -= 1;
+        }
+        else {
             cout << "You do not currently have a MedKit! The snail prepares to attack you as you fumble around."
                  << endl;
         }
@@ -1742,7 +1749,7 @@ void SwordUsed() {
                 break;
             }
             case 6: {
-                MedKitUsed(player);
+                MedKitUsed(player, MedKitUsesLeftGlobal);
                 break;
             }
             case 7: {
@@ -1778,12 +1785,12 @@ void SwordUsed() {
 
     void BossFight(Room &room3, Room &room5, player player) {
         //Repeat till snail dies, the player dies, or the player runs
-        while ((snail.Health > 0) && (playerHealth > 0 && snail.Heads > 0) && !isRoomSealed) {
+        while ((snail.Health > 0) && (player.Health > 0 && snail.Heads > 0) && !isRoomSealed) {
             bossSelection(room3, room5, player);// Let User select choice
-            if ((snail.Health > 0) && (playerHealth > 0) && !isRoomSealed && snail.Heads > 0) { // Snail attacks
+            if ((snail.Health > 0) && (player.Health > 0) && !isRoomSealed && snail.Heads > 0) { // Snail attacks
                 SnailAttack(player);
             }
-            if ((snail.Health > 0) && (playerHealth > 0) && !isRoomSealed && snail.Heads > 0) {
+            if ((snail.Health > 0) && (player.Health > 0) && !isRoomSealed && snail.Heads > 0) {
                 FightSummary(player);
             }
         }
@@ -1974,7 +1981,7 @@ void SwordUsed() {
 
 
             //END GAME
-            if ((snail.Health <= 0 || playerHealth <= 0)) {
+            if ((snail.Health <= 0 || player.Health <= 0)) {
             }break;
         }
         // Calculate the elapsed time
@@ -1992,7 +1999,7 @@ void SwordUsed() {
     //time, remaining 379 points. 60 seconds then start losing points
     score += (379 - (duration.count() * 10));
     //player max health, each hp remaining is 15 points = 300 total
-    score += (playerHealth * 15);
+    score += (player.Health * 15);
 
     cout << "THE END!" << endl;
     cout << "YOUR FINAL SCORE IS" << score << endl;

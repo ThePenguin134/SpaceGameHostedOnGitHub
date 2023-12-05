@@ -1501,7 +1501,7 @@ void KnifeUsed() {
     else {
         cout << "You do not currently have that weapon! The snail prepares to attack you as you fumble around." << endl;
     }
-}
+} //hi
 void ShovelUsed() {
     if (Shovel.isAvailable) {
         cout

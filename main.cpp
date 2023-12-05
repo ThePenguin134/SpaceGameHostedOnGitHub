@@ -1350,61 +1350,78 @@ void getItem(Item ind[], Room *currentRoom) {
 }
 
 //Inventory function, lists items that the player has.
-void checkInventory(Item ind[], Room &room1, Room &room2, Room &room3, Room &room4, Room &room5, Room &room6, Room &room8, Room &room9){
-
+int checkInventory(Item ind[], Room &room1, Room &room2, Room &room3, Room &room4, Room &room5, Room &room6, Room &room8, Room &room9){
+    int itemCount = 0;
     if(!room1.hasItem1 || !room1.hasItem2 || !room2.hasItem1 || !room2.hasItem2 || !room3.hasItem1 || !room3.hasItem2 || !room4.hasItem1 || !room4.hasItem2 || !room5.hasItem1 || !room5.hasItem2 || !room6.hasItem1 || !room6.hasItem2 || !room8.hasItem1 || !room8.hasItem2 || !room9.hasItem1 || !room9.hasItem2) {
         if (!room1.hasItem1) {
             cout << room1.Item1.readName() << "," << endl;
+            itemCount++;
         }
         if (!room1.hasItem2) {
             cout << room1.Item2.readName() << "," << endl;
+            itemCount++;
         }
         if (!room2.hasItem1) {
             cout << room2.Item1.readName() << "," << endl;
+            itemCount++;
         }
         if (!room2.hasItem2) {
             cout << room2.Item2.readName() << "," << endl;
+            itemCount++;
         }
         if (!room3.hasItem1) {
             cout << room3.Item1.readName() << "," << endl;
+            itemCount++;
         }
         if (!room3.hasItem2) {
             cout << room3.Item2.readName() << "," << endl;
+            itemCount++;
         }
         if (!room4.hasItem1) {
             cout << room4.Item1.readName() << "," << endl;
+            itemCount++;
         }
         if (!room4.hasItem2) {
             cout << room4.Item2.readName() << "," << endl;
+            itemCount++;
         }
         if (!room5.hasItem1) {
             cout << room5.Item1.readName() << "," << endl;
+            itemCount++;
         }
         if (!room5.hasItem2) {
             cout << room5.Item2.readName() << "," << endl;
+            itemCount++;
         }
         if (!room6.hasItem1) {
             cout << room6.Item1.readName() << "," << endl;
+            itemCount++;
         }
         if (!room6.hasItem2) {
             cout << room6.Item2.readName() << "," << endl;
+            itemCount++;
         }
         if (!room8.hasItem1) {
             cout << room8.Item1.readName() << "," << endl;
+            itemCount++;
         }
         if (!room8.hasItem2) {
             cout << room8.Item2.readName() << "," << endl;
+            itemCount++;
         }
         if (!room9.hasItem1) {
             cout << room9.Item1.readName() << "," << endl;
+            itemCount++;
         }
         if (!room9.hasItem2) {
             cout << room9.Item2.readName() << "," << endl;
+            itemCount++;
         }
     }
     else{
         cout << "You do not currently have any items." << endl;
     }
+    return itemCount;
 }
 
 void printRoom(Room *currentRoom) {
@@ -1898,7 +1915,8 @@ void SwordUsed() {
         // Seed the random number generator with the current time
         srand(time(0));
 
-        // Create five rooms
+
+        // Create nine rooms
 
         // Connect the rooms according to the specified connections
         room1.connectedRooms[0] = &room2;
@@ -1944,7 +1962,7 @@ void SwordUsed() {
             cout << currentRoom->description << endl;
             if (currentRoom->name ==
                 "Alien-Room") { //If player is in the Alien Room then show them the requirements to enter and let them fight if they meet them.
-                AlienRoomRequirements(room1, room2, room3, room4, room5, room6, room8, room9, player);
+                AlienRoomRequirements(room1, room2, room3, room4, room5, room6, room8, room9, player player);
             }
             if (isPlayerInNewRoom(previousRoomMain,
                                   currentRoom)) { //If player is in a new room then print that room's picture
@@ -1953,10 +1971,31 @@ void SwordUsed() {
             previousRoomMain = currentRoom;
             currentRoom = playMenu(currentRoom, ind, room1, room2, room3, room4, room5, room6, room8, room9,
                                    start_time); // Allows the user to move and updates the current room with the result of the move command// Allows the user to move and updates the current room with the result of the move command
+
+
+            //END GAME
+            if ((snail.Health <= 0 || playerHealth <= 0)) {
+                break;
+            }
         }
         // Calculate the elapsed time
         auto end_time = chrono::high_resolution_clock::now();
         auto duration = chrono::duration_cast<chrono::seconds>(end_time - start_time);
         cout << "Game duration: " << duration.count() << " seconds" << endl;
         return 0;
+
+    //Score Code
+    int itemCount = checkInventory(ind, room1, room2, room3, room4, room5, room6, room8, room9);
+    //Max Score = 999
+    int score = 0;
+    //16 items, each item worth 20 points = 320 total
+    score += (itemCount * 20);
+    //time, remaining 379 points. 60 seconds then start losing points
+    score += (379 - (duration.count() * 10));
+    //player max health, each hp remaining is 15 points = 300 total
+    score += (playerHealth * 15);
+
+    cout << "THE END!" << endl;
+    cout << "YOUR FINAL SCORE IS" << score << endl;
+
     }

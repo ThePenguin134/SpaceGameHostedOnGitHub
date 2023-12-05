@@ -1282,11 +1282,13 @@ public:
     bool hasItem2;
     Room* connectedRooms[9]; // Array to hold connected rooms
 
-    Room(string n, string desc, Item I1, Item I2, bool hasItem1, bool hasItem2) {
+    Room(string n, string desc, Item I1, Item I2, bool haveItem1, bool haveItem2) {
         name = n;
         description = desc;
         Item1 = I1;
         Item2 = I2;
+        hasItem1 = haveItem1;
+        hasItem2 = haveItem2;
         for (int i = 0; i < 9; ++i) {
             connectedRooms[i] = nullptr;
         }
@@ -1307,13 +1309,33 @@ void getItem(Item ind[], Room *currentRoom) {
     bool isValidChoice = false;
     while (!isValidChoice) {
         if (currentRoom->hasItem1 || currentRoom->hasItem2) {
-            cout << "There are item(s) in this room. If you would like to pick up an item, enter it's name." << endl;
+            cout << "There are item(s) in this room. If you would like to pick up an item, enter it's name. If not just enter 'nothing'" << endl;
             if (currentRoom->hasItem1){
                 cout << "-" << currentRoom->Item1.readName() << endl;
             }
             if (currentRoom->hasItem2){
                 cout << "-" << currentRoom->Item2.readName() << endl;
             }
+        }
+
+        string userChoice;
+        cin >> userChoice;
+
+        if (userChoice == currentRoom->Item1.readName() && currentRoom->hasItem1) {
+            cout << "Description Of Item Selected:\n" << currentRoom->Item1.readDescription() << endl;
+            currentRoom->hasItem1 = false;
+            isValidChoice = true;
+        }
+        else if (userChoice == currentRoom->Item2.readName() && currentRoom->hasItem2) {
+            cout << "Description Of Item Selected:\n" << currentRoom->Item1.readDescription() << endl;
+            currentRoom->hasItem2 = false;
+            isValidChoice = true;
+        }
+        else if (userChoice == "nothing") {
+            break;
+        }
+        else {
+            cout << "That's an invalid selection!" << endl;
         }
     }
 

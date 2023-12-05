@@ -1309,10 +1309,10 @@ void getItem(Item ind[], Room *currentRoom) {
         if (currentRoom->hasItem1 || currentRoom->hasItem2) {
             cout << "There are item(s) in this room. If you would like to pick up an item, enter it's name." << endl;
             if (currentRoom->hasItem1){
-                cout << currentRoom->Item1.readName();
+                cout << "-" << currentRoom->Item1.readName() << endl;
             }
             if (currentRoom->hasItem2){
-                cout << currentRoom->Item2.readName();
+                cout << "-" << currentRoom->Item2.readName() << endl;
             }
         }
     }

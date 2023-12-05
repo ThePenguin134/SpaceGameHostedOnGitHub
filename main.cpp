@@ -1304,14 +1304,6 @@ public:
 void getItem(Item ind[], Room *currentRoom) {
 
     //Explains Items available
-
-
-
-
-    //Describes Them
-
-
-    // Pick an Item
     bool isValidChoice = false;
     while (!isValidChoice) {
         if (currentRoom->hasItem1 || currentRoom->hasItem2) {
@@ -1324,6 +1316,8 @@ void getItem(Item ind[], Room *currentRoom) {
             }
         }
     }
+
+
 
     // Disable Item for future pickup
 }

@@ -1,6 +1,8 @@
 #include <iostream>
 #include "cmath"
 #include "sstream"
+#include <fstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -1247,12 +1249,7 @@ int startInput;
 string gameInput;
 void playMenu();
 void checkInventory();
-struct Item {
-    string name;
-    string description;
-};
-
-class ItemConstructor {
+class Item {
 private:
     string name;
     string description;

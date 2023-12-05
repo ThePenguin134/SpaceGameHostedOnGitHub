@@ -1,5 +1,7 @@
 #include <iostream>
 #include "cmath"
+#include "sstream"
+#include <fstream>
 
 using namespace std;
 
@@ -1246,34 +1248,59 @@ int startInput;
 string gameInput;
 void playMenu();
 void checkInventory();
-struct Item {
-    int ID;
+class Item {
+private:
     string name;
     string description;
+
+public:
+    // Read
+    void input(string line) {
+        istringstream lineStream(line);
+        string item;
+
+        getline(lineStream, item, ',');
+        name = item;
+
+        getline(lineStream, item, ',');
+        description = item;
+    }
+    string readName(){
+        return name;
+    }
+    string readDescription(){
+        return description;
+    }
 };
+
 
 
 class Room {
 public:
     string name;
     string description;
-    bool hasItem;
+    Item Item1;
+    Item Item2;
     Room* connectedRooms[9]; // Array to hold connected rooms
 
-    Room(string n, string desc, bool Item) {
+    Room(string n, string desc, Item I1, Item I2) {
         name = n;
         description = desc;
-        hasItem = Item;
+        Item1 = I1;
+        Item2 = I2;
         for (int i = 0; i < 9; ++i) {
             connectedRooms[i] = nullptr;
         }
     }
-};
+    // Get the names of the Item objects in the Room
+    string getItem1Name() {
+        return Item1.readName();
+    }
 
-struct Player {
-    Item inventory[10];
+    string getItem2Name() {
+        return Item2.readName();
+    }
 };
-Player player;
 
 void printRoom(Room *currentRoom) {
     if (currentRoom->name == "Control-Room") {
@@ -1304,16 +1331,6 @@ void printRoom(Room *currentRoom) {
         StorageRoom();
     }
 }
-
-Room room1("Control-Room", "\nIn the center of the room there is a command console.\nNear the edge of the room there is a table, on which\nthere is a suspicious container of liquid. Under the\ncontainer, there appears to be a napkin, acting as a\ncoaster of sorts.", true);
-Room room2("Mess-Hall", "\nTables with stools line the center of the room. On one\nside of the room, there appears to be what was once a\nbuffet. It is now covered in dust, and some strange\ngooey liquid. On the other side of the room, there are\nthree vending machines that look like they haven't been\ntouched in many generations.", false);
-Room room3("Electrical-Room", "\nUpon entering the dark room, you notice rows upon rows\nof defunct hardware for servers. In the corner of the\nroom there is what appears to be an electrical panel.", true);
-Room room4("Radio-Room", "\nYou find a room with a large window directly ahead of\nyou. The window looks out into the vast emptiness of\nspace, along with a beautiful view of the sun, brighter\nthan you've ever seen it before. Beneath the window is a\nsystem that is quite obviously a communications system.\nVarious dials and levers span across the system. The rest\nof the room is filled with cases for various electronics.", false);
-Room room5("Cabins", "\nAhead of you lies 8 bunk beds, with 4 on each side of the\nroom. They are well-made, but clearly none of them have been\nslept in for a very long time. To the side of each bed there\nis a small dresser for personal belongings and clothing.", true);
-Room room6("Medical-Bay", "\nYou enter a small medical bay with 2 beds, medical equipment for each, a small desk in the corner, \nand a coat rack on the wall across from the beds. Papers are scattered across the desk. \nPerhaps someone was looking for something?", true);
-Room room7("Alien-Room", "\nThe room glows green. The air feels stale, and it smells like\nsomething died here. In the corner, a pulsing carcass sits.\nThe source of the light. A slimy green goo is splattered all\nover the walls. ", true);
-Room room8("Greenhouse", "\nVarious plants are lined up across the room.\nBeneath each plant is a label that describes the\nplant and what its used for. Light from the sun\nshines in through the glass that makes up most of\nthe room. Lined up on one wall are various drawers,\nshelves, and gardening tools. A shovel can be found\nleaning on one of the shelves.", true);
-Room room9("Storage-Room", "\nThe lights are broken, so the only illumination is coming from\nthe other side of the door. There are boxes scattered throughout\nthe room. Each box is labeled, presumably for what was contained\nin them. However, all but one of the boxes is empty. The only one\nthat isn't empty is labeled \"Spare Parts\"", true);
 
 //Lets user move by letting them know their options and then taking their input.
 Room* move(Room *moveCurrentRoom) {
@@ -1378,9 +1395,6 @@ Room* playMenu(Room *currentRoom) {
     }
     return newCurrentRoom; // Passes the new room to main, or the old one if the player didn't move
 }
-
-Room *previousRoomMain = &room2; /* Initialize the previousRoom Global var and initialize it, so
- the first local map will show up too */
 
 // Check if the player is in the same room after using the playMenu
 bool isPlayerInNewRoom(Room *previousRoom, Room *currentRoom) {
@@ -1540,18 +1554,18 @@ void SwordUsed() {
 }
 // *Weapon Functions* End -------------------------------
 
-void SealRoom() {
+void SealRoom(Room &room3, Room &room5) {
     room3.connectedRooms[1] = nullptr;
     room5.connectedRooms[1] = nullptr;
 }
 
-void RunAway() {
+void RunAway(Room &room3, Room &room5) {
     cout << "You run away and seal the room, so you never have to see that abomination again." << endl;
-    SealRoom();
+    SealRoom(room3, room5);
     isRoomSealed = true;
 }
 
-void bossSelection() {
+void bossSelection(Room &room3, Room &room5) {
     cout << "What would you like to do?" << endl;
     cout << "1) Attack with Knife" << endl;
     cout << "2) Attack with Shovel" << endl;
@@ -1583,7 +1597,7 @@ void bossSelection() {
             break;
         }
         case 6: {
-            RunAway();
+            RunAway(room3, room5);
             break;
         }
         default: {
@@ -1610,10 +1624,10 @@ void SnailAttack() {
     }
 }
 
-void BossFight() {
+void BossFight(Room &room3, Room &room5) {
     //Repeat till snail dies, the player dies, or the player runs
     while ((snail.Health > 0) && (playerHealth > 0 && snail.Heads > 0) && !isRoomSealed) {
-        bossSelection();// Let User select choice
+        bossSelection(room3, room5);// Let User select choice
         if ((snail.Health > 0) && (playerHealth > 0) && !isRoomSealed && snail.Heads > 0) { // Snail attacks
             SnailAttack();
         }
@@ -1647,7 +1661,7 @@ void GoopInteraction() {
 }
 
 //Stops the player when they are trying to enter the alien room and ensures they have at least one weapon, note describing the snail, key to open the door, and a healing item. Also explains this to them.
-void AlienRoomRequirements() {
+void AlienRoomRequirements(Room &room3, Room &room5) {
     cout << "Dangerous Snail behind these doors! Please do not enter unless you at MINIMUM have:\n1) At least two weapons\n2)Information about the dangers of the snail\n3)A proper way to heal\n"
             "4)The key of course that we stored away for good reason" << endl;
 
@@ -1674,7 +1688,7 @@ void AlienRoomRequirements() {
         string enterSnailRoomChoice;
         cin >> enterSnailRoomChoice;
         if (enterSnailRoomChoice == "y") {
-            BossFight();
+            BossFight(room3, room5);
         }
         if (enterSnailRoomChoice == "n") {
             // Leave empty so the alien Room Code ends
@@ -1688,6 +1702,33 @@ void AlienRoomRequirements() {
 
 // ------------------------------- Room Interaction (END) --------------------------------------------------------------
 int main() {
+
+    ifstream in_stream;
+    Item ind[18];
+
+    int row = 0;
+    string line;
+    in_stream.open("Updated Item List - Sheet1.csv");
+    getline(in_stream, line, '\n');
+    while (getline(in_stream, line, '\n')){
+        ind[row].input(line);
+        row++;
+    }
+    in_stream.close();
+
+    Room room1("Control-Room", "In the center of the room there is a command console. Near the edge of the room there is a table, on which there is a suspicious container of liquid. Under the container, there appears to be a napkin, acting as a coaster of sorts", ind[0], ind[1]);
+    Room room2("Mess-Hall", "Tables with stools line the center of the room. On one side of the room, there appears to be what was once a buffet. It is now covered in dust, and some strange gooey liquid. On the other side of the room, there are three vending machines that look like they haven't been touched in many generations.", ind[2],ind[3]);
+    Room room3("Electrical-Room", "Upon entering the dark room, you notice rows upon rows of defunct hardware for servers. In the corner of the room there is what appears to be an electrical panel.", ind[4],ind[5]);
+    Room room4("Radio-Room", "You find a room with a large window directly ahead of you. The window looks out into the vast emptiness of space, along with a beautiful view of the sun, brighter than you've ever seen it before. Beneath the window is a system that is quite obviously a communications system. Various dials and levers span across the system. The rest of the room is filled with cases for various electronics.", ind[4],ind[5]);
+    Room room5("Cabins", "Ahead of you lies 8 bunk beds, with 4 on each side of the room. They are well-made, but clearly none of them have been slept in for a very long time. To the side of each bed there is a small dresser for personal belongings and clothing.", ind[6],ind[7]);
+    Room room6("Medical-Bay", "You enter a small medical bay with 2 beds, medical equipment for each, a small desk in the corner, and a coat rack on the wall across from the beds. Papers are scattered across the desk. Perhaps someone was looking for something?", ind[8],ind[9]);
+    Room room7("Alien-Room", "The room glows green. The air feels stale, and it smells like something died here. In the corner, a pulsing carcass sits. The source of the light. A slimy green goo is splattered all over the walls.", ind[10],ind[11]);
+    Room room8("Greenhouse", "Various plants are lined up across the room. Beneath each plant is a label that describes the plant and what its used for. Light from the sun shines in through the glass that makes up most of the room. Lined up on one wall are various drawers, shelves, and gardening tools. A shovel can be found leaning on one of the shelves.", ind[12],ind[13]);
+    Room room9("Storage-Room", "The lights are broken, so the only illumination is coming from the other side of the door. There are boxes scattered throughout the room. Each box is labeled, presumably for what was contained in them. However, all but one of the boxes is empty. The only one that isn't empty is labeled \"Spare Parts\".", ind[14],ind[15]);
+
+    Room *previousRoomMain = &room2; /* Initialize the previousRoom Global var and initialize it, so
+ the first local map will show up too */
+
     // Seed the random number generator with the current time
     srand(time(0));
 
@@ -1743,7 +1784,7 @@ int main() {
         cout << "You are in the " << currentRoom->name << endl;
         cout << currentRoom->description << endl;
         if (currentRoom->name == "Alien-Room") {
-            AlienRoomRequirements();
+            AlienRoomRequirements(room3, room5);
         }
         if (isPlayerInNewRoom(previousRoomMain, currentRoom)) {
             printRoom(currentRoom);
@@ -1751,31 +1792,7 @@ int main() {
         previousRoomMain = currentRoom;
         currentRoom = playMenu(currentRoom); // Allows the user to move and updates the current room with the result of the move command
 
-
-
-
-        // Check if the room has a treasure and if the player wants to pick it up
-        if (currentRoom->hasItem) {
-            cout << "There is treasure in this room. Do you want to pick it up? (y/n)" << endl;
-            char answer;
-            cin >> answer;
-            if (answer == 'y') {
-                currentRoom->hasItem = false;
-                cout << "You picked up the " << /*itemName <<*/ "!" << endl;
-                // Update the corresponding treasure flag
-                if (currentRoom == &room2) {
-                    isKnifePickupAvailable = false;
-                } else if (currentRoom == &room8) {
-                    isShovelPickupAvailable = false;
-                } else if (currentRoom == &room5) {
-                    isDaggerPickupAvailable = false;
-                } else if (currentRoom == &room6) {
-                    isNeedlePickupAvailable = false;
-                } else if (currentRoom == &room9) {
-                    isSwordPickupAvailable = false;
-                }
-            }
-        }
     }
+
     return 0;
 }

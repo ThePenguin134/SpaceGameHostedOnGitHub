@@ -985,6 +985,7 @@ void AlienRoom() {
             cout << " ";
         }
     }
+    cout << endl;
 
     //Final Row --------------------------------------------------------------------------------------------------------
 
@@ -1544,6 +1545,12 @@ bool isPlayerInNewRoom(Room *previousRoom, Room *currentRoom) {
     }
 }
 
+Room *forcePlayerIntoPreviousRoom(Room *previousRoom) {
+    Room *currentRoom = previousRoom;
+    cout << "You have returned to the " << currentRoom->name << endl;
+    return currentRoom;
+}
+
 // ------------------------------- BOSS FIGHT CODE (START) -------------------------------------------------------------
 bool isRoomSealed = false; // Bool to control the room availability
 int snailDamage = 1; //Variable used to find snails damage each turn
@@ -1582,11 +1589,11 @@ Weapon Dagger(true, 1); // Later small attacks with the dagger
 Weapon GoopDagger(false, 4); // First big attack with the dagger
 Weapon Syringe(false, 0); // instakills if random chance is met, 0 damage otherwise
 Weapon Sword(false, 1); // Small attack
-Weapon Medkit(false, 0); // Small attack
+Weapon MedKit(false, 0); // Small attack
 bool swordBeenUsed = false;
 int weaponCount;
 
-// *Weapon Functions* Start -------------------------------
+// *Fighting Options* Start -------------------------------
 void KnifeUsed() {
     if (Knife.isAvailable) {
         cout << "You attack with the Knife, but it is not very effective and deals " << Knife.damage << " damage." << endl;
@@ -1687,13 +1694,14 @@ void SwordUsed() {
         cout << "You do not currently have that weapon! The snail prepares to attack you as you fumble around." << endl;
     }
 }
-    int MedKitUsesLeftGlobal = 3;
-    void MedKitUsed(player player, int MedKitUsesLeftLocal) {
-        if (Medkit.isAvailable && MedKitUsesLeftLocal > 1) {
+
+int MedKitUsesLeftGlobal = 3;
+void MedKitUsed(player player, int MedKitUsesLeftLocal) {
+        if (MedKit.isAvailable && MedKitUsesLeftLocal > 1) {
             cout << "You patch yourself up and restore 7 hp! Careful, your uses are limited!" << endl;
             player.Health += 7;
             MedKitUsesLeftLocal -= 1;
-        } else if (Medkit.isAvailable && MedKitUsesLeftLocal == 1){
+        } else if (MedKit.isAvailable && MedKitUsesLeftLocal == 1){
             cout << "You patch yourself up and restore 7 hp! That was the last of the bandages!" << endl;
             player.Health += 7;
             MedKitUsesLeftLocal -= 1;
@@ -1703,20 +1711,33 @@ void SwordUsed() {
                  << endl;
         }
     }
-// *Weapon Functions* End -------------------------------
 
-    void SealRoom(Room &room3, Room &room5) {
+void SealRoom(Room &room3, Room &room5, Room *previousRoom) {
+    if (previousRoom == &room3) {
         room3.connectedRooms[1] = nullptr;
+    }
+    if (previousRoom == &room5) {
         room5.connectedRooms[1] = nullptr;
     }
+    isRoomSealed = true;
+}
 
-    void RunAway(Room &room3, Room &room5) {
-        cout << "You run away and seal the room, so you never have to see that abomination again." << endl;
-        SealRoom(room3, room5);
-        isRoomSealed = true;
+Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
+    if (!isRoomSealed) {
+        cout << "You run away and smash the lock in to seal the room, now you'll have to go to the other side if you want to fight again." << endl;
+        SealRoom(room3, room5, previousRoom);
+        isRoomSealed = true; // Global bool to track if one side of the Alien Room has been closed
+        currentRoom = forcePlayerIntoPreviousRoom(previousRoom);
     }
+    else {
+        cout << "You can't run away again without sealing off the room entirely! Then, you wouldn't be able to beat the game!" << endl;
+    }
+    return currentRoom;
+}
+// *Fighting Options* End -------------------------------
 
-    void bossSelection(Room &room3, Room &room5, player player) {
+    Room *bossSelection(Room &room3, Room &room5, player player, Room *currentRoom, Room *previousRoom) {
+
         cout << "What would you like to do?" << endl;
         cout << "1) Attack with Knife" << endl;
         cout << "2) Attack with Shovel" << endl;
@@ -1753,7 +1774,7 @@ void SwordUsed() {
                 break;
             }
             case 7: {
-                RunAway(room3, room5);
+                currentRoom = RunAway(room3, room5, currentRoom, previousRoom);
                 break;
             }
             default: {
@@ -1761,6 +1782,7 @@ void SwordUsed() {
                 break;
             };
         }
+        return currentRoom;
     }
 
     void FightSummary(player player) {
@@ -1783,19 +1805,19 @@ void SwordUsed() {
         }
     }
 
-    void BossFight(Room &room3, Room &room5, player player) {
+    Room *BossFight(Room &room3, Room &room5, player player, Room *currentRoom, Room *previousRoom) {
         //Repeat till snail dies, the player dies, or the player runs
         while ((snail.Health > 0) && (player.Health > 0 && snail.Heads > 0) && !isRoomSealed) {
-            bossSelection(room3, room5, player);// Let User select choice
+            currentRoom = bossSelection(room3, room5, player, currentRoom, previousRoom);// Let User select choice
             if ((snail.Health > 0) && (player.Health > 0) && !isRoomSealed && snail.Heads > 0) { // Snail attacks
                 SnailAttack(player);
             }
             if ((snail.Health > 0) && (player.Health > 0) && !isRoomSealed && snail.Heads > 0) {
                 FightSummary(player);
             }
-        }
-        if (isRoomSealed) {
-
+            if (isRoomSealed) {
+                break;
+            }
         }
         if ((snail.Health <= 0)) {
             cout << "\nCongrats! You beat the snail!" << endl;
@@ -1806,6 +1828,7 @@ void SwordUsed() {
         if ((snail.Heads <= 0)) {
             cout << "\nCongrats! You left the snail headless thus defeating him!" << endl;
         }
+        return currentRoom;
     }
 // ------------------------------- BOSS FIGHT CODE (END) ---------------------------------------------------------------
 
@@ -1820,9 +1843,9 @@ void SwordUsed() {
     }
 
 //Stops the player when they are trying to enter the alien room and ensures they have at least one weapon, note describing the snail, key to open the door, and a healing item. Also explains this to them.
-    void
-    AlienRoomRequirements(Room &room1, Room &room2, Room &room3, Room &room4, Room &room5, Room &room6, Room &room8,
-                          Room &room9, player player) {
+    Room
+    *AlienRoomRequirements(Room &room1, Room &room2, Room &room3, Room &room4, Room &room5, Room &room6, Room &room8,
+                          Room &room9, player player, Room *previousRoom, Room *currentRoom) {
         cout
                 << "Dangerous Snail behind these doors! Please do not enter unless you at MINIMUM have:\n1) At least two weapons\n2)Information about the dangers of the snail\n3)A proper way to heal\n"
                    "4)The key of course that we stored away for good reason" << endl;
@@ -1851,20 +1874,26 @@ void SwordUsed() {
             weaponCount += 1; //weaponCount var is declared right below the weapon instances in Boss Fight Code
         }
 
+        cout << weaponCount << " weapons available.\nDev Amount:" << endl;
+        cin >> weaponCount;
+
         if (weaponCount >= 2) {
             cout << "You can open the door with your key to take on the giant snail." << endl;
             cout << "Do you wish to take him on? (y/n?)" << endl;
             string enterSnailRoomChoice;
             cin >> enterSnailRoomChoice;
             if (enterSnailRoomChoice == "y") {
-                BossFight(room3, room5, player);
+                currentRoom = BossFight(room3, room5, player, currentRoom, previousRoom);
             }
             if (enterSnailRoomChoice == "n") {
-                // Leave empty so the alien Room Code ends
+                currentRoom = forcePlayerIntoPreviousRoom(previousRoom);
             }
         } else {
-            // Leave empty so the alien Room Code ends
+            cout << endl << "You are not currently prepared to fight the snail, go explore some more to meet the requirements." << endl;
+            currentRoom = forcePlayerIntoPreviousRoom(previousRoom);
         }
+    printRoom(currentRoom);
+    return currentRoom;
     }
 
 
@@ -1907,7 +1936,7 @@ void SwordUsed() {
                    "\nYou enter a small medical bay with 2 beds, medical equipment for each, a small desk in the corner, \nand a coat rack on the wall across from the beds. Papers are scattered across the desk. \nPerhaps someone was looking for something?\n",
                    ind[10], ind[11], true, true);
         Room room7("Alien-Room",
-                   "\nThe room glows green. The air feels stale, and it smells like\nsomething died here. In the corner, a pulsing carcass sits.\nThe source of the light. A slimy green goo is splattered all\nover the walls.\n",
+                   "You look through the small windows of the doors.\nThe room glows green. The air feels stale, and it smells like\nsomething died here. In the corner, a pulsing carcass sits.\nThe source of the light. A slimy green goo is splattered all\nover the walls.\nThere is also a shriveling up note posted on the door:\n",
                    ind[12], ind[13], true, true);
         Room room8("Greenhouse",
                    "\nVarious plants are lined up across the room.\nBeneath each plant is a label that describes the\nplant and what its used for. Light from the sun\nshines in through the glass that makes up most of\nthe room. Lined up on one wall are various drawers,\nshelves, and gardening tools. A shovel can be found\nleaning on one of the shelves.\n",
@@ -1964,21 +1993,21 @@ void SwordUsed() {
 
         // Game loop
         while (true) {
-            // Print the current room description
-            cout << "You are in the " << currentRoom->name << endl;
-            cout << currentRoom->description << endl;
-            if (currentRoom->name ==
-                "Alien-Room") { //If player is in the Alien Room then show them the requirements to enter and let them fight if they meet them.
-                AlienRoomRequirements(room1, room2, room3, room4, room5, room6, room8, room9, player);
-            }
-            if (isPlayerInNewRoom(previousRoomMain,
-                                  currentRoom)) { //If player is in a new room then print that room's picture
+            if (isPlayerInNewRoom(previousRoomMain, currentRoom)) { //If player is in a new room then print that room's picture
                 printRoom(currentRoom);
             }
-            previousRoomMain = currentRoom;
-            currentRoom = playMenu(currentRoom, ind, room1, room2, room3, room4, room5, room6, room8, room9,
-                                   start_time); // Allows the user to move and updates the current room with the result of the move command// Allows the user to move and updates the current room with the result of the move command
-
+            // Print the current room description
+            if (currentRoom->name != "Alien-Room") { //Ensures that the program doesn't say that the player is in the room when they are met with the fight requirements
+                cout << "You are in the " << currentRoom->name << endl;
+                previousRoomMain = currentRoom; // Store current room as previous except for the alien room
+            }
+            cout << currentRoom->description << endl;
+            if (currentRoom->name == "Alien-Room") { //If player is in the Alien Room then show them the requirements to enter and let them fight if they meet them.
+                currentRoom = AlienRoomRequirements(room1, room2, room3, room4, room5, room6, room8, room9, player, previousRoomMain, currentRoom);
+            }
+            else {
+                currentRoom = playMenu(currentRoom, ind, room1, room2, room3, room4, room5, room6, room8, room9, start_time); // Allows the user to move and updates the current room with the result of the move command// Allows the user to move and updates the current room with the result of the move command
+            }
 
             //END GAME
             if ((snail.Health <= 0 || player.Health <= 0)) {

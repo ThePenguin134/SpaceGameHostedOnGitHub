@@ -1560,7 +1560,7 @@ Weapon Knife(true, 2); // Medium attack
 Weapon Shovel(true, 1); // Small attack. Shovels big attack is 5x this value
 Weapon Dagger(true, 1); // Later small attacks with the dagger
 Weapon GoopDagger(false, 4); // First big attack with the dagger
-Weapon Needle(true, 0); // instakills if random chance is met, 0 damage otherwise
+Weapon Syringe(true, 0); // instakills if random chance is met, 0 damage otherwise
 Weapon Sword(true, 1); // Small attack
 bool swordBeenUsed = false;
 int weaponCount;
@@ -1628,13 +1628,13 @@ void DaggerUsed() {
         cout << "You do not currently have that weapon! The snail prepares to attack you as you fumble around." << endl;
     }
 }
-void NeedleUsed() {
-    if (Needle.isAvailable) {
+void SyringeUsed() {
+    if (Syringe.isAvailable) {
         if (rand() % 30 == 1) {// Random chance to instakill
             snail.Health = 0;
         } else {
             cout
-                    << "Whatever disease you thought must've been on the needle had zero impact on the snail this attempt and resulted in " << Needle.damage << " damage being done this time." << endl;
+                    << "Whatever disease you thought must've been on the Syringe had zero impact on the snail this attempt and resulted in " << Syringe.damage << " damage being done this time." << endl;
         }
     }
     else {
@@ -1685,7 +1685,7 @@ void bossSelection(Room &room3, Room &room5) {
     cout << "1) Attack with Knife" << endl;
     cout << "2) Attack with Shovel" << endl;
     cout << "3) Attack with Dagger" << endl;
-    cout << "4) Attack with Needle" << endl;
+    cout << "4) Attack with Syringe" << endl;
     cout << "5) Attack with Sword" << endl;
     cout << "6) Run Away" << endl;
     int bossChoice;
@@ -1704,7 +1704,7 @@ void bossSelection(Room &room3, Room &room5) {
             break;
         }
         case 4: {
-            NeedleUsed();
+            SyringeUsed();
             break;
         }
         case 5: {
@@ -1776,9 +1776,16 @@ void GoopInteraction() {
 }
 
 //Stops the player when they are trying to enter the alien room and ensures they have at least one weapon, note describing the snail, key to open the door, and a healing item. Also explains this to them.
-void AlienRoomRequirements(Room &room3, Room &room5) {
+void AlienRoomRequirements(Room &room1,Room &room2, Room &room3, Room &room4, Room &room5, Room &room6, Room &room8, Room &room9) {
     cout << "Dangerous Snail behind these doors! Please do not enter unless you at MINIMUM have:\n1) At least two weapons\n2)Information about the dangers of the snail\n3)A proper way to heal\n"
             "4)The key of course that we stored away for good reason" << endl;
+
+    Knife.isAvailable = !room2.hasItem1; // First item in Mess Hall
+    Dagger.isAvailable = !room5.hasItem1; // first item in Cabins
+    Syringe.isAvailable = !room6.hasItem1; //First item in MedicalBay
+    Shovel.isAvailable = !room8.hasItem1; // First item in GreenHouse
+    Sword.isAvailable = !room9.hasItem1; //First item in StorageRoom
+
 
     //Count How many weapons the player has
     if (Knife.isAvailable) {
@@ -1790,7 +1797,7 @@ void AlienRoomRequirements(Room &room3, Room &room5) {
     if (Dagger.isAvailable || GoopDagger.isAvailable) {
         weaponCount += 1; //weaponCount var is declared right below the weapon instances in Boss Fight Code
     }
-    if (Needle.isAvailable) {
+    if (Syringe.isAvailable) {
         weaponCount += 1; //weaponCount var is declared right below the weapon instances in Boss Fight Code
     }
     if (Sword.isAvailable) {
@@ -1886,13 +1893,6 @@ int main() {
     room9.connectedRooms[0] = &room2;
     room9.connectedRooms[1] = &room5;
 
-    // Create the three treasures
-    bool isKnifePickupAvailable = true;
-    bool isShovelPickupAvailable = true;
-    bool isDaggerPickupAvailable = true;
-    bool isNeedlePickupAvailable = true;
-    bool isSwordPickupAvailable = true;
-
     // Start the game in Room 1
     Room *currentRoom = &room1;
 
@@ -1902,7 +1902,7 @@ int main() {
         cout << "You are in the " << currentRoom->name << endl;
         cout << currentRoom->description << endl;
         if (currentRoom->name == "Alien-Room") { //If player is in the Alien Room then show them the requirements to enter and let them fight if they meet them.
-            AlienRoomRequirements(room3, room5);
+            AlienRoomRequirements(room1,room2, room3, room4, room5, room6, room8, room9);
         }
         if (isPlayerInNewRoom(previousRoomMain, currentRoom)) { //If player is in a new room then print that room's picture
             printRoom(currentRoom);

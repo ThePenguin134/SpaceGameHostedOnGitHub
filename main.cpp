@@ -1414,7 +1414,7 @@ Room* move(Room *moveCurrentRoom) {
 }
 
 // Allows the user to pick what they would like to do. Uses the current room as a parameter to pass through if they decide to move.
-Room* playMenu(Room *currentRoom, Item ind[]) {
+Room* playMenu(Room *currentRoom, Item ind[], Room &room1) {
     cout << "What would you like to do?\n";
     cin >> gameInput;
     Room* newCurrentRoom = currentRoom;
@@ -1422,7 +1422,12 @@ Room* playMenu(Room *currentRoom, Item ind[]) {
         newCurrentRoom = move(currentRoom); // Uses move command to update the players room
     }
     if (gameInput == "map" || gameInput == "Map") {
-        map();
+        if (room1.hasItem1) {
+            cout << "You don't have that item, so you can't use that function!" << endl;
+        }
+        else{
+            map();
+        }
     }
     if (gameInput == "check inventory" || gameInput ==  "Check inventory" || gameInput ==  "Check Inventory") {
         //checkInventory(); //just iterate through the inventory, which is hopefully filled with item objects
@@ -1501,7 +1506,7 @@ void KnifeUsed() {
     else {
         cout << "You do not currently have that weapon! The snail prepares to attack you as you fumble around." << endl;
     }
-} //hi
+}
 void ShovelUsed() {
     if (Shovel.isAvailable) {
         cout
@@ -1832,7 +1837,7 @@ int main() {
             printRoom(currentRoom);
         }
         previousRoomMain = currentRoom;
-        currentRoom = playMenu(currentRoom, ind); // Allows the user to move and updates the current room with the result of the move command
+        currentRoom = playMenu(currentRoom, ind, room1); // Allows the user to move and updates the current room with the result of the move command
     }
     return 0;
 }

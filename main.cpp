@@ -1519,7 +1519,7 @@ Room* move(Room *moveCurrentRoom) {
                 }
             }
         }
-        cout << ")" << endl;
+        cout << "), or \"nothing\" if you don't want to move." << endl;
 
         string roomChoice;
         cin >> roomChoice; //Takes users input for the room they want to move to
@@ -1528,6 +1528,11 @@ Room* move(Room *moveCurrentRoom) {
         for (int i = 0; i < connectedRoomsCount; ++i) {
             if (roomChoice == moveCurrentRoom->connectedRooms[i]->name) {
                 moveCurrentRoom = moveCurrentRoom->connectedRooms[i];
+                isValidChoice = true;
+                return moveCurrentRoom;
+                break;
+            }
+            if (roomChoice == "nothing") {
                 isValidChoice = true;
                 return moveCurrentRoom;
                 break;

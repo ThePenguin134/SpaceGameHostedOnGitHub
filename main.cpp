@@ -1244,12 +1244,7 @@ void map() {
     cout << "*  *  *  *  *  *  *  *" << endl;
 }
 
-bool mainMenuActive = true;
-bool gameStart = false;
-int startInput;
 string gameInput;
-void checkInventory();
-void playMenu();
 class player {
 public:
     int Health = 20;
@@ -1315,7 +1310,6 @@ public:
 
     Weapon(bool WeaponIsAvailable, int weaponDamage) : isAvailable(WeaponIsAvailable), damage(weaponDamage) {};
 }; // Weapon availability/damage values struct
-
 // Sets weapons availability and damage. Edit weapon damage values below:
 Weapon Knife(true, 2); // Medium attack
 Weapon Shovel(false, 1); // Small attack. Shovels big attack is 5x this value
@@ -1327,6 +1321,11 @@ Weapon MedKit(false, 0); // Small attack
 bool swordBeenUsed = false;
 int weaponCount;
 
+void about() {
+    cout << "Welcome to SpaceGame. This is a game about speed, collection, and pure rng :D\n Please explore the"
+            "space station at your own pace. However, if you are a score setter, then collect as many items as "
+            "possible and beat the boss as quickly as possible to receive the highest score." << endl;
+}
 void GoopInteraction() {
     if (Dagger.isAvailable) {
         cout << "You can't seem to pick the goop up. However, you decide to dip your dagger in the goop and it now glows green. Maybe it'll be stronger?" << endl;
@@ -1533,7 +1532,7 @@ Room* move(Room *moveCurrentRoom) {
 
 // Allows the user to pick what they would like to do. Uses the current room as a parameter to pass through if they decide to move.
 Room* playMenu(Room *currentRoom, Item ind[], Room &room1, Room &room2, Room &room3, Room &room4, Room &room5, Room &room6, Room &room8, Room &room9, chrono::high_resolution_clock::time_point start_time) {
-    cout << "What would you like to do?\n";
+    cout << "What would you like to do? Commands:\n- move\n- map (If you have it)\n- check-inventory\n- get\n- about\n- time";
     cin >> gameInput;
     Room* newCurrentRoom = currentRoom;
     if (gameInput == "move" || gameInput == "Move") {
@@ -1555,10 +1554,8 @@ Room* playMenu(Room *currentRoom, Item ind[], Room &room1, Room &room2, Room &ro
     if (gameInput == "get" || gameInput ==  "Get") {
         getItem(ind, currentRoom);
     }
-    if (gameInput == "help" || gameInput ==  "Help"){
-        cout << "Type \"move\" to move around \nType \"map\" to view the map if you possess that item \nType"
-                " \"check inventory\" to view the items you have on you \nType \"get\" to look at and/or acquire the items"
-                " in your current room \nType \"help\" to view this menu :)" << endl;
+    if (gameInput == "about" || gameInput ==  "About"){
+        about();
     }
     if (gameInput == "time" || gameInput ==  "Time"){
         auto end_time = chrono::high_resolution_clock::now();
@@ -1926,9 +1923,10 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
 //-----------------------------------------------------------------------------------------------------------------------
 
 int main() {
+   about();
 
-        ifstream in_stream;
-        Item ind[18];
+    fstream in_stream;
+    Item ind[18];
 
         int row = 0;
         string line;

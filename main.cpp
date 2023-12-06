@@ -1329,9 +1329,11 @@ int weaponCount;
 
 void GoopInteraction() {
     if (Dagger.isAvailable) {
-        cout << "You dip the dagger in the goop and it now glows green." << endl;
+        cout << "You can't seem to pick the goop up. However, you decide to dip your dagger in the goop and it now glows green. Maybe it'll be stronger?" << endl;
         GoopDagger.isAvailable = true;
         Dagger.isAvailable = false;
+    } else {
+        cout << "You can't seem to pick the goop up. You seem to be missing a weapon that might be useful here.." << endl;
     }
 }
 
@@ -1340,6 +1342,8 @@ void getItem(Item ind[], Room *currentRoom) {
     //Explains Items available
     bool isValidChoice = false;
     while (!isValidChoice) {
+
+        //Output options for items that the player can pick up / interact with
         if (currentRoom->hasItem1 || currentRoom->hasItem2) {
             cout << "There are item(s) in this room. If you would like to pick up an item, enter it's name. If not just enter 'nothing'" << endl;
             if (currentRoom->hasItem1){
@@ -1353,6 +1357,7 @@ void getItem(Item ind[], Room *currentRoom) {
         string userChoice;
         cin >> userChoice;
 
+        // Process the users item input and gives their item by making it unavailable for pickup
         if (userChoice == currentRoom->Item1.readName() && currentRoom->hasItem1) {
             cout << "Description Of Item Selected:\n" << currentRoom->Item1.readDescription() << endl;
             currentRoom->hasItem1 = false;
@@ -1364,7 +1369,7 @@ void getItem(Item ind[], Room *currentRoom) {
                 cout << "Description Of Item Selected:\n" << currentRoom->Item1.readDescription() << endl;
                 currentRoom->hasItem2 = false;
                 isValidChoice = true;
-            } else {
+            } else { //If the item picked is the goop, then it has its own functionality aka you can't pick it up
                 GoopInteraction();
                 isValidChoice = true;
             }

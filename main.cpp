@@ -617,9 +617,12 @@ void GreenHouse() {
         }
     }
 
+    //Ends the row.
+    cout << endl;
 
 }
-void StorageRoom() {
+void StorageRoom()
+{
 
     //Top Row ----------------------------------------------------------------------------------------------------------
 
@@ -753,6 +756,8 @@ void StorageRoom() {
 
     //Final Row --------------------------------------------------------------------------------------------------------
 
+    //Ends the row.
+    cout << endl;
 
 }
 void Cabins() {
@@ -1328,7 +1333,7 @@ void about() {
 }
 void GoopInteraction() {
     if (Dagger.isAvailable) {
-        cout << "You can't seem to pick the goop up. However, you decide to dip your dagger in the goop and it now glows green. Maybe it'll be stronger?" << endl;
+        cout << "You can't seem to pick the goop up.\nHowever, you decide to dip your dagger in the goop and it now glows green. Maybe it'll be stronger?" << endl;
         GoopDagger.isAvailable = true;
         Dagger.isAvailable = false;
     } else {
@@ -1748,11 +1753,12 @@ void SealRoom(Room &room3, Room &room5, Room *previousRoom) {
 bool endFightBecauseOfRunAway = false; //Used to break out of the boss fight code when the player runs
 Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
     if (!isRoomSealed) {
-        cout << "You run away and smash the lock in to seal the room, now you'll have to go to the other side if you want to fight again." << endl;
+        cout << "You run away and smash the card reader sealing the room from this side, now you'll have to go around if you want to fight again." << endl;
         SealRoom(room3, room5, previousRoom);
         isRoomSealed = true; // Global bool to track if one side of the Alien Room has been closed
         currentRoom = forcePlayerIntoPreviousRoom(previousRoom);
         endFightBecauseOfRunAway = true;
+        printRoom(currentRoom);
     }
     else {
         cout << "You can't run away again without sealing off the room entirely! Then, you wouldn't be able to beat the game!" << endl;
@@ -1814,8 +1820,11 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
     void FightSummary() {
         cout << endl
              << "Current Fight Progress (Scroll up if you can't see the result of your previous action):\nSnail's Health: "
-             << snail.Health << "\nSnail's # of Heads: " << snail.Heads
-             << "\nYour Health: " << player.Health << endl << endl;
+             << snail.Health << endl;
+        if (snail.Heads >= 2) {
+            cout << "Snail's # of Heads: " << snail.Heads << endl;
+        }
+        cout << "Your Health: " << player.Health << endl << endl;
     }
 
     void SnailAttack() {
@@ -1870,7 +1879,7 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
     string devChoice;
     cin >> devChoice;
     if (devChoice == "y") {
-        room3.hasItem1 = false; // MedKit
+        room6.hasItem2 = false; // MedKit
         room1.hasItem2 = false; /* The ID Card */
         room2.hasItem2 = false; /* The Slime Note */
     }
@@ -1880,7 +1889,7 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
         Syringe.isAvailable = !room6.hasItem1; //Available if not pickup-able. First item in MedicalBay
         Shovel.isAvailable = !room8.hasItem1; // //Available if not pickup-able. First item in GreenHouse
         Sword.isAvailable = !room9.hasItem1; //Available if not pickup-able. First item in Storage-Room
-        MedKit.isAvailable = !room3.hasItem1; //Available if not pickup-able. First item in Electrical-Room
+        MedKit.isAvailable = !room2.hasItem2; //Available if not pickup-able. First item in Electrical-Room
 
 
         //Count How many weapons the player has
@@ -1913,12 +1922,13 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
             }
             if (enterSnailRoomChoice == "n") {
                 currentRoom = forcePlayerIntoPreviousRoom(previousRoom);
+                printRoom(currentRoom);
             }
         } else {
             cout << endl << "You are not currently prepared to fight the snail, go explore some more to meet the requirements." << endl;
             currentRoom = forcePlayerIntoPreviousRoom(previousRoom);
+            printRoom(currentRoom);
         }
-    printRoom(currentRoom);
     return currentRoom;
     }
 

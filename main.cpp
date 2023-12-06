@@ -1244,12 +1244,7 @@ void map() {
     cout << "*  *  *  *  *  *  *  *" << endl;
 }
 
-bool mainMenuActive = true;
-bool gameStart = false;
-int startInput;
 string gameInput;
-void checkInventory();
-void playMenu();
 class player {
 public:
     int Health = 20;
@@ -1315,7 +1310,6 @@ public:
 
     Weapon(bool WeaponIsAvailable, int weaponDamage) : isAvailable(WeaponIsAvailable), damage(weaponDamage) {};
 }; // Weapon availability/damage values struct
-
 // Sets weapons availability and damage. Edit weapon damage values below:
 Weapon Knife(true, 2); // Medium attack
 Weapon Shovel(false, 1); // Small attack. Shovels big attack is 5x this value
@@ -1327,11 +1321,18 @@ Weapon MedKit(false, 0); // Small attack
 bool swordBeenUsed = false;
 int weaponCount;
 
+void about() {
+    cout << "Welcome to SpaceGame. This is a game about speed, collection, and pure rng :D\n Please explore the"
+            "space station at your own pace. However, if you are a score setter, then collect as many items as "
+            "possible and beat the boss as quickly as possible to receive the highest score." << endl;
+}
 void GoopInteraction() {
     if (Dagger.isAvailable) {
-        cout << "You dip the dagger in the goop and it now glows green." << endl;
+        cout << "You can't seem to pick the goop up. However, you decide to dip your dagger in the goop and it now glows green. Maybe it'll be stronger?" << endl;
         GoopDagger.isAvailable = true;
         Dagger.isAvailable = false;
+    } else {
+        cout << "You can't seem to pick the goop up. You seem to be missing a weapon that might be useful here.." << endl;
     }
 }
 
@@ -1340,6 +1341,8 @@ void getItem(Item ind[], Room *currentRoom) {
     //Explains Items available
     bool isValidChoice = false;
     while (!isValidChoice) {
+
+        //Output options for items that the player can pick up / interact with
         if (currentRoom->hasItem1 || currentRoom->hasItem2) {
             cout << "There are item(s) in this room. If you would like to pick up an item, enter it's name. If not just enter 'nothing'" << endl;
             if (currentRoom->hasItem1){
@@ -1353,6 +1356,7 @@ void getItem(Item ind[], Room *currentRoom) {
         string userChoice;
         cin >> userChoice;
 
+        // Process the users item input and gives their item by making it unavailable for pickup
         if (userChoice == currentRoom->Item1.readName() && currentRoom->hasItem1) {
             cout << "Description Of Item Selected:\n" << currentRoom->Item1.readDescription() << endl;
             currentRoom->hasItem1 = false;
@@ -1361,10 +1365,10 @@ void getItem(Item ind[], Room *currentRoom) {
         }
         else if (userChoice == currentRoom->Item2.readName() && currentRoom->hasItem2) {
             if (currentRoom->Item2.readName() != "Green-Goop") {
-                cout << "Description Of Item Selected:\n" << currentRoom->Item1.readDescription() << endl;
+                cout << "Description Of Item Selected:\n" << currentRoom->Item2.readDescription() << endl;
                 currentRoom->hasItem2 = false;
                 isValidChoice = true;
-            } else {
+            } else { //If the item picked is the goop, then it has its own functionality aka you can't pick it up
                 GoopInteraction();
                 isValidChoice = true;
             }
@@ -1386,6 +1390,7 @@ void getItem(Item ind[], Room *currentRoom) {
 int checkInventory(Item ind[], Room &room1, Room &room2, Room &room3, Room &room4, Room &room5, Room &room6, Room &room8, Room &room9){
     int itemCount = 0;
     if(!room1.hasItem1 || !room1.hasItem2 || !room2.hasItem1 || !room2.hasItem2 || !room3.hasItem1 || !room3.hasItem2 || !room4.hasItem1 || !room4.hasItem2 || !room5.hasItem1 || !room5.hasItem2 || !room6.hasItem1 || !room6.hasItem2 || !room8.hasItem1 || !room8.hasItem2 || !room9.hasItem1 || !room9.hasItem2) {
+        cout << "You currently have:" << endl;
         if (!room1.hasItem1) {
             cout << room1.Item1.readName() << "," << endl;
             itemCount++;
@@ -1528,7 +1533,7 @@ Room* move(Room *moveCurrentRoom) {
 
 // Allows the user to pick what they would like to do. Uses the current room as a parameter to pass through if they decide to move.
 Room* playMenu(Room *currentRoom, Item ind[], Room &room1, Room &room2, Room &room3, Room &room4, Room &room5, Room &room6, Room &room8, Room &room9, chrono::high_resolution_clock::time_point start_time) {
-    cout << "What would you like to do?\n";
+    cout << "What would you like to do? Commands:\n- move\n- map (If you have it)\n- check-inventory\n- get\n- about\n- time" << endl;
     cin >> gameInput;
     Room* newCurrentRoom = currentRoom;
     if (gameInput == "move" || gameInput == "Move") {
@@ -1550,10 +1555,8 @@ Room* playMenu(Room *currentRoom, Item ind[], Room &room1, Room &room2, Room &ro
     if (gameInput == "get" || gameInput ==  "Get") {
         getItem(ind, currentRoom);
     }
-    if (gameInput == "help" || gameInput ==  "Help"){
-        cout << "Type \"move\" to move around \nType \"map\" to view the map if you possess that item \nType"
-                " \"check inventory\" to view the items you have on you \nType \"get\" to look at and/or acquire the items"
-                " in your current room \nType \"help\" to view this menu :)" << endl;
+    if (gameInput == "about" || gameInput ==  "About"){
+        about();
     }
     if (gameInput == "time" || gameInput ==  "Time"){
         auto end_time = chrono::high_resolution_clock::now();
@@ -1760,7 +1763,8 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
 
     Room *bossSelection(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
 
-        cout << "What would you like to do?" << endl;
+        cout << "What would you like to do?\nMake sure you have the item you want to use or the snail "
+                "will catch you off guard." << endl;
         cout << "1) Attack with Knife" << endl;
         cout << "2) Attack with Shovel" << endl;
         cout << "3) Attack with Dagger" << endl;
@@ -1921,9 +1925,10 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
 //-----------------------------------------------------------------------------------------------------------------------
 
 int main() {
+   about();
 
-        ifstream in_stream;
-        Item ind[18];
+    fstream in_stream;
+    Item ind[18];
 
         int row = 0;
         string line;
@@ -1945,7 +1950,7 @@ int main() {
                    "\nTables with stools line the center of the room. On one\nside of the room, there appears to be what was once a\nbuffet. It is now covered in dust, and some strange\ngooey liquid. You can see a note in the goo. On the\nother end of the buffet are various utensils, notably\na knife.",
                    ind[2], ind[3], true, true);
         Room room3("Electrical-Room",
-                   "\nUpon entering the dark room, you notice rows upon rows\nof defunct hardware for servers. In the corner of the\nroom there is what appears to be a shelf with emergency\nmedical supplies on it. You can see a lightbulb discarded\non the floor.\n",
+                   "\nUpon entering the dark room, you notice rows upon rows\nof defunct hardware for servers. In the corner of the\nroom there is what appears to be a shelf with emergency\nmedical supplies on it. You can see a light bulb discarded\non the floor.\n",
                    ind[4], ind[5], true, true);
         Room room4("Radio-Room",
                    "\nYou find a room with a large window directly ahead of\nyou. The window looks out into the vast emptiness of\nspace, along with a beautiful view of the sun, brighter\nthan you've ever seen it before. Beneath the window is a\nsystem that is quite obviously a communications system.\nThe system looks dead, but there seems to be a spare\nradio nearby. Also near the system is a skull, with\nslime nearby.",

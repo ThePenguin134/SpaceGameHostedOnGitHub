@@ -1308,6 +1308,32 @@ public:
         return Item2.readName();
     }
 };
+class Weapon {
+public:
+    bool isAvailable;
+    int damage;
+
+    Weapon(bool WeaponIsAvailable, int weaponDamage) : isAvailable(WeaponIsAvailable), damage(weaponDamage) {};
+}; // Weapon availability/damage values struct
+
+// Sets weapons availability and damage. Edit weapon damage values below:
+Weapon Knife(true, 2); // Medium attack
+Weapon Shovel(false, 1); // Small attack. Shovels big attack is 5x this value
+Weapon Dagger(true, 1); // Later small attacks with the dagger
+Weapon GoopDagger(false, 4); // First big attack with the dagger
+Weapon Syringe(false, 0); // instakills if random chance is met, 0 damage otherwise
+Weapon Sword(false, 1); // Small attack
+Weapon MedKit(false, 0); // Small attack
+bool swordBeenUsed = false;
+int weaponCount;
+
+void GoopInteraction() {
+    if (Dagger.isAvailable) {
+        cout << "You dip the dagger in the goop and it now glows green." << endl;
+        GoopDagger.isAvailable = true;
+        Dagger.isAvailable = false;
+    }
+}
 
 void getItem(Item ind[], Room *currentRoom) {
 
@@ -1331,11 +1357,17 @@ void getItem(Item ind[], Room *currentRoom) {
             cout << "Description Of Item Selected:\n" << currentRoom->Item1.readDescription() << endl;
             currentRoom->hasItem1 = false;
             isValidChoice = true;
+
         }
         else if (userChoice == currentRoom->Item2.readName() && currentRoom->hasItem2) {
-            cout << "Description Of Item Selected:\n" << currentRoom->Item1.readDescription() << endl;
-            currentRoom->hasItem2 = false;
-            isValidChoice = true;
+            if (currentRoom->Item2.readName() != "Green-Goop") {
+                cout << "Description Of Item Selected:\n" << currentRoom->Item1.readDescription() << endl;
+                currentRoom->hasItem2 = false;
+                isValidChoice = true;
+            } else {
+                GoopInteraction();
+                isValidChoice = true;
+            }
         }
         else if (userChoice == "nothing") {
             break;
@@ -1580,26 +1612,6 @@ player createPlayer() {
 }
 player player = createPlayer();
 
-// Weapon availability/damage values struct
-class Weapon {
-public:
-    bool isAvailable;
-    int damage;
-
-    Weapon(bool WeaponIsAvailable, int weaponDamage) : isAvailable(WeaponIsAvailable), damage(weaponDamage) {};
-};
-
-// Sets weapons availability and damage. Edit weapon damage values below:
-Weapon Knife(true, 2); // Medium attack
-Weapon Shovel(false, 1); // Small attack. Shovels big attack is 5x this value
-Weapon Dagger(true, 1); // Later small attacks with the dagger
-Weapon GoopDagger(false, 4); // First big attack with the dagger
-Weapon Syringe(false, 0); // instakills if random chance is met, 0 damage otherwise
-Weapon Sword(false, 1); // Small attack
-Weapon MedKit(false, 0); // Small attack
-bool swordBeenUsed = false;
-int weaponCount;
-
 // *Fighting Options* Start -------------------------------
 void KnifeUsed() {
     if (Knife.isAvailable) {
@@ -1843,19 +1855,8 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
     }
 // ------------------------------- BOSS FIGHT CODE (END) ---------------------------------------------------------------
 
-// ------------------------------- Room Interaction (START) ------------------------------------------------------------
-
-    void GoopInteraction() {
-        if (Dagger.isAvailable) {
-            cout << "You dip the dagger in the goop and it now glows green." << endl;
-            GoopDagger.isAvailable = true;
-            Dagger.isAvailable = false;
-        }
-    }
-
 //Stops the player when they are trying to enter the alien room and ensures they have at least one weapon, note describing the snail, key to open the door, and a healing item. Also explains this to them.
-    Room
-    *AlienRoomRequirements(Room &room1, Room &room2, Room &room3, Room &room4, Room &room5, Room &room6, Room &room8,
+    Room *AlienRoomRequirements(Room &room1, Room &room2, Room &room3, Room &room4, Room &room5, Room &room6, Room &room8,
                           Room &room9, Room *previousRoom, Room *currentRoom) {
         cout
                 << "Dangerous Snail behind these doors! Please do not enter unless you at MINIMUM have:\n1) At least two weapons\n2)Information about the dangers of the snail\n3)A proper way to heal\n"
@@ -1871,8 +1872,7 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
     }
 
         Knife.isAvailable = !room2.hasItem1; //Available if not pickup-able. First item in Mess Hall
-        Dagger.isAvailable = !room5.hasItem1 &&
-                             !GoopDagger.isAvailable; //Available if not pickup-able and GoopDagger isn't owned. First item in Cabins
+        Dagger.isAvailable = !room5.hasItem1 && !GoopDagger.isAvailable; //Available if not pickup-able and GoopDagger isn't owned. First item in Cabins
         Syringe.isAvailable = !room6.hasItem1; //Available if not pickup-able. First item in MedicalBay
         Shovel.isAvailable = !room8.hasItem1; // //Available if not pickup-able. First item in GreenHouse
         Sword.isAvailable = !room9.hasItem1; //Available if not pickup-able. First item in Storage-Room
@@ -1918,9 +1918,9 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
     return currentRoom;
     }
 
+//-----------------------------------------------------------------------------------------------------------------------
 
-// ------------------------------- Room Interaction (END) --------------------------------------------------------------
-    int main() {
+int main() {
 
         ifstream in_stream;
         Item ind[18];
@@ -2031,7 +2031,7 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
             }
 
             //END GAME
-            if ((snail.Health <= 0 || player.Health <= 0)) {
+            if ((snail.Health <= 0 || player.Health <= 0 || snail.Heads <= 0)) {
                 break;
             }
         }

@@ -1950,7 +1950,7 @@ int main() {
                    "\nTables with stools line the center of the room. On one\nside of the room, there appears to be what was once a\nbuffet. It is now covered in dust, and some strange\ngooey liquid. You can see a note in the goo. On the\nother end of the buffet are various utensils, notably\na knife.",
                    ind[2], ind[3], true, true);
         Room room3("Electrical-Room",
-                   "\nUpon entering the dark room, you notice rows upon rows\nof defunct hardware for servers. In the corner of the\nroom there is what appears to be a shelf with emergency\nmedical supplies on it. You can see a lightbulb discarded\non the floor.\n",
+                   "\nUpon entering the dark room, you notice rows upon rows\nof defunct hardware for servers. In the corner of the\nroom there is what appears to be a shelf with emergency\nmedical supplies on it. You can see a light bulb discarded\non the floor.\n",
                    ind[4], ind[5], true, true);
         Room room4("Radio-Room",
                    "\nYou find a room with a large window directly ahead of\nyou. The window looks out into the vast emptiness of\nspace, along with a beautiful view of the sun, brighter\nthan you've ever seen it before. Beneath the window is a\nsystem that is quite obviously a communications system.\nThe system looks dead, but there seems to be a spare\nradio nearby. Also near the system is a skull, with\nslime nearby.",

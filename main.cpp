@@ -1860,8 +1860,8 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
         cout
                 << "Dangerous Snail behind these doors! Please do not enter unless you at MINIMUM have:\n1) At least two weapons\n2)Information about the dangers of the snail\n3)A proper way to heal\n"
                    "4)The key of course that we stored away for good reason" << endl;
-    cout << "Give yourself medkit, ID Card, and Slime Note? (y/n)" <<endl;
 
+    cout << "Dev Option: Give yourself MedKit, ID Card, and Slime Note? (y/n)" <<endl;
     string devChoice;
     cin >> devChoice;
     if (devChoice == "y") {

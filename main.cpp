@@ -1868,9 +1868,9 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
                           Room &room9, Room *previousRoom, Room *currentRoom) {
         cout
                 << "Dangerous Snail behind these doors! Please do not enter unless you at MINIMUM have:\n1) At least two weapons\n2)Information about the dangers of the snail\n3)A proper way to heal\n"
-                   "4)The key of course that we stored away for good reason" << endl;
+                   "4)An ID-Card with clearance to access the room" << endl;
 
-    cout << "Dev Option: Give yourself MedKit, ID Card, and Slime Note? (y/n)" <<endl;
+    cout << "Dev Option: Give yourself MedKit, ID-Card, and Slime Note? (y/n)" <<endl;
     string devChoice;
     cin >> devChoice;
     if (devChoice == "y") {
@@ -1908,7 +1908,7 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
         cin >> weaponCount;
 
         if (weaponCount >= 2 && MedKit.isAvailable && !room1.hasItem2 /* The ID Card */ && !room2.hasItem2 /* The Slime Note */) {
-            cout << "You can open the door with your key to take on the giant snail." << endl;
+            cout << "You can open the door with your ID-Card to take on the giant snail." << endl;
             cout << "Do you wish to take him on? (y/n?)" << endl;
             string enterSnailRoomChoice;
             cin >> enterSnailRoomChoice;

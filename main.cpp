@@ -856,7 +856,7 @@ void Cabins() {
     //Bottom Section (Same as Top) -------------------------------------------------------------------------------------
 
 }
-void AlienRoom() {
+void SnailRoom() {
 
     //Top Row ----------------------------------------------------------------------------------------------------------
 
@@ -1490,8 +1490,8 @@ void printRoom(Room *currentRoom) {
     if (currentRoom->name == "Medical-Bay") {
         MedicalBay();
     }
-    if (currentRoom->name == "Alien-Room") {
-        AlienRoom();
+    if (currentRoom->name == "Snail-Room") {
+        SnailRoom();
     }
     if (currentRoom->name == "Greenhouse") {
         GreenHouse();
@@ -1765,7 +1765,7 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
     if (!isRoomSealed) {
         cout << "You run away and smash the card reader sealing the room from this side, now you'll have to go around if you want to fight again." << endl;
         SealRoom(room3, room5, previousRoom);
-        isRoomSealed = true; // Global bool to track if one side of the Alien Room has been closed
+        isRoomSealed = true; // Global bool to track if one side of the snail room has been closed
         currentRoom = forcePlayerIntoPreviousRoom(previousRoom);
         endFightBecauseOfRunAway = true;
         printRoom(currentRoom);
@@ -1878,8 +1878,8 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
     }
 // ------------------------------- BOSS FIGHT CODE (END) ---------------------------------------------------------------
 
-//Stops the player when they are trying to enter the alien room and ensures they have at least one weapon, note describing the snail, key to open the door, and a healing item. Also explains this to them.
-    Room *AlienRoomRequirements(Room &room1, Room &room2, Room &room3, Room &room4, Room &room5, Room &room6, Room &room8,
+//Stops the player when they are trying to enter the snail room and ensures they have at least one weapon, note describing the snail, key to open the door, and a healing item. Also explains this to them.
+    Room *SnailRoomRequirements(Room &room1, Room &room2, Room &room3, Room &room4, Room &room5, Room &room6, Room &room8,
                           Room &room9, Room *previousRoom, Room *currentRoom) {
         cout
                 << "Dangerous Snail behind these doors! Please do not enter unless you at MINIMUM have:\n1) At least two weapons\n2)Information about the dangers of the snail\n3)A proper way to heal\n"
@@ -1981,7 +1981,7 @@ int main() {
         Room room6("Medical-Bay",
                    "\nYou enter a small medical bay with 2 beds, medical equipment for each,\na small desk in the corner, and a coat rack on the wall across from the\nbeds. Papers are scattered across the desk, along with a used syringe\nand some hand sanitizer. Perhaps someone was looking for something?\n",
                    ind[10], ind[11], true, true);
-        Room room7("Alien-Room",
+        Room room7("Snail-Room",
                    "You look through the small windows of the doors.\nThe room glows green. The air feels stale, and it smells like\nsomething died here. In the corner, a pulsing carcass sits.\nThe source of the light. A slimy green goo is splattered all\nover the walls.\nThere is also a shriveling up note posted on the door:\n",
                    ind[12], ind[13], true, true);
         Room room8("Greenhouse",
@@ -2043,13 +2043,13 @@ int main() {
                 printRoom(currentRoom);
             }
             // Print the current room description
-            if (currentRoom->name != "Alien-Room") { //Ensures that the program doesn't say that the player is in the room when they are met with the fight requirements
+            if (currentRoom->name != "Snail-Room") { //Ensures that the program doesn't say that the player is in the room when they are met with the fight requirements
                 cout << "You are in the " << currentRoom->name << endl;
-                previousRoomMain = currentRoom; // Store current room as previous except for the alien room
+                previousRoomMain = currentRoom; // Store current room as previous except for the snail room
             }
             cout << currentRoom->description << endl;
-            if (currentRoom->name == "Alien-Room") { //If player is in the Alien Room then show them the requirements to enter and let them fight if they meet them.
-                currentRoom = AlienRoomRequirements(room1, room2, room3, room4, room5, room6, room8, room9, previousRoomMain, currentRoom);
+            if (currentRoom->name == "Snail-Room") { //If player is in the snail room then show them the requirements to enter and let them fight if they meet them.
+                currentRoom = SnailRoomRequirements(room1, room2, room3, room4, room5, room6, room8, room9, previousRoomMain, currentRoom);
             }
             else {
                 currentRoom = playMenu(currentRoom, ind, room1, room2, room3, room4, room5, room6, room8, room9, start_time); // Allows the user to move and updates the current room with the result of the move command// Allows the user to move and updates the current room with the result of the move command
@@ -2076,6 +2076,7 @@ int main() {
     score += (379 - (duration.count() * 10));
     //player max health, each hp remaining is 15 points = 300 total
     score += (player.Health * 15);
+
 
     cout << "THE END!" << endl;
     cout << "YOUR FINAL SCORE IS" << score << endl;

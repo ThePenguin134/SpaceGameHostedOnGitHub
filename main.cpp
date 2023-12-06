@@ -1118,7 +1118,7 @@ void map() {
     cout << "*";
     cout << "            ";
     cout << "-";
-    cout << "            ";
+    cout << "     RAD    ";
     cout << "-";
     cout << "            ";
     cout << "*" << endl;
@@ -1127,11 +1127,11 @@ void map() {
 
     cout << "   ";
     cout << "*";
-    cout << "               ";
+    cout << "     GH        ";
     cout << "*";
     cout << "            ";
     cout << "*";
-    cout << "               ";
+    cout << "       MED     ";
     cout << "*" << endl;
 
     //row 6 ----- top of center room; end of diagonal sides.
@@ -1160,9 +1160,9 @@ void map() {
 
     //row 11
 
-    cout << "*              ";
-    cout << "-                    -";
-    cout << "              *" << endl;
+    cout << "*      ER      ";
+    cout << "-        CR          -";
+    cout << "       MH     *" << endl;
 
     //row 12
 
@@ -1198,11 +1198,11 @@ void map() {
 
     cout << "   ";
     cout << "*";
-    cout << "               ";
+    cout << "      ALI      ";
     cout << "*";
     cout << "            ";
     cout << "*";
-    cout << "               ";
+    cout << "       STO     ";
     cout << "*" << endl;
 
     //row 18
@@ -1211,7 +1211,7 @@ void map() {
     cout << "*";
     cout << "            ";
     cout << "-";
-    cout << "            ";
+    cout << "     CAB    ";
     cout << "-";
     cout << "            ";
     cout << "*" << endl;

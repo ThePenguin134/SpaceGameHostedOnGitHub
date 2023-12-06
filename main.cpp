@@ -1365,7 +1365,7 @@ void getItem(Item ind[], Room *currentRoom) {
         }
         else if (userChoice == currentRoom->Item2.readName() && currentRoom->hasItem2) {
             if (currentRoom->Item2.readName() != "Green-Goop") {
-                cout << "Description Of Item Selected:\n" << currentRoom->Item1.readDescription() << endl;
+                cout << "Description Of Item Selected:\n" << currentRoom->Item2.readDescription() << endl;
                 currentRoom->hasItem2 = false;
                 isValidChoice = true;
             } else { //If the item picked is the goop, then it has its own functionality aka you can't pick it up
@@ -1390,6 +1390,7 @@ void getItem(Item ind[], Room *currentRoom) {
 int checkInventory(Item ind[], Room &room1, Room &room2, Room &room3, Room &room4, Room &room5, Room &room6, Room &room8, Room &room9){
     int itemCount = 0;
     if(!room1.hasItem1 || !room1.hasItem2 || !room2.hasItem1 || !room2.hasItem2 || !room3.hasItem1 || !room3.hasItem2 || !room4.hasItem1 || !room4.hasItem2 || !room5.hasItem1 || !room5.hasItem2 || !room6.hasItem1 || !room6.hasItem2 || !room8.hasItem1 || !room8.hasItem2 || !room9.hasItem1 || !room9.hasItem2) {
+        cout << "You currently have:" << endl;
         if (!room1.hasItem1) {
             cout << room1.Item1.readName() << "," << endl;
             itemCount++;
@@ -1532,7 +1533,7 @@ Room* move(Room *moveCurrentRoom) {
 
 // Allows the user to pick what they would like to do. Uses the current room as a parameter to pass through if they decide to move.
 Room* playMenu(Room *currentRoom, Item ind[], Room &room1, Room &room2, Room &room3, Room &room4, Room &room5, Room &room6, Room &room8, Room &room9, chrono::high_resolution_clock::time_point start_time) {
-    cout << "What would you like to do? Commands:\n- move\n- map (If you have it)\n- check-inventory\n- get\n- about\n- time";
+    cout << "What would you like to do? Commands:\n- move\n- map (If you have it)\n- check-inventory\n- get\n- about\n- time" << endl;
     cin >> gameInput;
     Room* newCurrentRoom = currentRoom;
     if (gameInput == "move" || gameInput == "Move") {
@@ -1762,7 +1763,8 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
 
     Room *bossSelection(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
 
-        cout << "What would you like to do?" << endl;
+        cout << "What would you like to do?\nMake sure you have the item you want to use or the snail "
+                "will catch you off guard." << endl;
         cout << "1) Attack with Knife" << endl;
         cout << "2) Attack with Shovel" << endl;
         cout << "3) Attack with Dagger" << endl;

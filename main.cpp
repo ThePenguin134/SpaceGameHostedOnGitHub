@@ -1573,6 +1573,13 @@ Snail createSnail() {
 }
 Snail snail = createSnail();
 
+player createPlayer() {
+    player player{};
+    player.Health = 20;
+    return player;
+}
+player player = createPlayer();
+
 // Weapon availability/damage values struct
 class Weapon {
 public:
@@ -1696,7 +1703,7 @@ void SwordUsed() {
 }
 
 int MedKitUsesLeftGlobal = 3;
-void MedKitUsed(player player, int MedKitUsesLeftLocal) {
+int MedKitUsed(int MedKitUsesLeftLocal) {
         if (MedKit.isAvailable && MedKitUsesLeftLocal > 1) {
             cout << "You patch yourself up and restore 7 hp! Careful, your uses are limited!" << endl;
             player.Health += 7;
@@ -1710,6 +1717,7 @@ void MedKitUsed(player player, int MedKitUsesLeftLocal) {
             cout << "You do not currently have a MedKit! The snail prepares to attack you as you fumble around."
                  << endl;
         }
+        return MedKitUsesLeftLocal;
     }
 
 void SealRoom(Room &room3, Room &room5, Room *previousRoom) {
@@ -1738,7 +1746,7 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
 }
 // *Fighting Options* End -------------------------------
 
-    Room *bossSelection(Room &room3, Room &room5, player player, Room *currentRoom, Room *previousRoom) {
+    Room *bossSelection(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
 
         cout << "What would you like to do?" << endl;
         cout << "1) Attack with Knife" << endl;
@@ -1772,7 +1780,7 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
                 break;
             }
             case 6: {
-                MedKitUsed(player, MedKitUsesLeftGlobal);
+                MedKitUsesLeftGlobal = MedKitUsed(MedKitUsesLeftGlobal);
                 break;
             }
             case 7: {
@@ -1787,14 +1795,14 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
         return currentRoom;
     }
 
-    void FightSummary(player player) {
+    void FightSummary() {
         cout << endl
              << "Current Fight Progress (Scroll up if you can't see the result of your previous action):\nSnail's Health: "
              << snail.Health << "\nSnail's # of Heads: " << snail.Heads
              << "\nYour Health: " << player.Health << endl << endl;
     }
 
-    void SnailAttack(player player) {
+    void SnailAttack() {
         snailDamage = ((rand() % 2) + 1) * floor(snail.BaseDamage * snail.Heads *
                                                  .5); //Damage scales with # of heads and has a random chance to crit
         player.Health -= snailDamage;
@@ -1807,15 +1815,15 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
         }
     }
 
-    Room *BossFight(Room &room3, Room &room5, player player, Room *currentRoom, Room *previousRoom) {
+    Room *BossFight(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
         //Repeat till snail dies, the player dies, or the player runs
         while ((snail.Health > 0) && (player.Health > 0 && snail.Heads > 0)) {
-            currentRoom = bossSelection(room3, room5, player, currentRoom, previousRoom);// Let User select choice
+            currentRoom = bossSelection(room3, room5, currentRoom, previousRoom);// Let User select choice
             if ((snail.Health > 0) && (player.Health > 0) && snail.Heads > 0 && !endFightBecauseOfRunAway) { // Snail attacks
-                SnailAttack(player);
+                SnailAttack();
             }
             if ((snail.Health > 0) && (player.Health > 0) && snail.Heads > 0 && !endFightBecauseOfRunAway) {
-                FightSummary(player);
+                FightSummary();
             }
             if (endFightBecauseOfRunAway) {
                 endFightBecauseOfRunAway = false; //Sets it back to false so that the player will be able to do the fight again instead of while loop dying
@@ -1848,17 +1856,28 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
 //Stops the player when they are trying to enter the alien room and ensures they have at least one weapon, note describing the snail, key to open the door, and a healing item. Also explains this to them.
     Room
     *AlienRoomRequirements(Room &room1, Room &room2, Room &room3, Room &room4, Room &room5, Room &room6, Room &room8,
-                          Room &room9, player player, Room *previousRoom, Room *currentRoom) {
+                          Room &room9, Room *previousRoom, Room *currentRoom) {
         cout
                 << "Dangerous Snail behind these doors! Please do not enter unless you at MINIMUM have:\n1) At least two weapons\n2)Information about the dangers of the snail\n3)A proper way to heal\n"
                    "4)The key of course that we stored away for good reason" << endl;
+    cout << "Give yourself medkit, ID Card, and Slime Note? (y/n)" <<endl;
+
+    string devChoice;
+    cin >> devChoice;
+    if (devChoice == "y") {
+        room3.hasItem1 = false; // MedKit
+        room1.hasItem2 = false; /* The ID Card */
+        room2.hasItem2 = false; /* The Slime Note */
+    }
 
         Knife.isAvailable = !room2.hasItem1; //Available if not pickup-able. First item in Mess Hall
         Dagger.isAvailable = !room5.hasItem1 &&
                              !GoopDagger.isAvailable; //Available if not pickup-able and GoopDagger isn't owned. First item in Cabins
         Syringe.isAvailable = !room6.hasItem1; //Available if not pickup-able. First item in MedicalBay
         Shovel.isAvailable = !room8.hasItem1; // //Available if not pickup-able. First item in GreenHouse
-        Sword.isAvailable = !room9.hasItem1; //Available if not pickup-able. First item in StorageRoom
+        Sword.isAvailable = !room9.hasItem1; //Available if not pickup-able. First item in Storage-Room
+        MedKit.isAvailable = !room3.hasItem1; //Available if not pickup-able. First item in Electrical-Room
+
 
         //Count How many weapons the player has
         if (Knife.isAvailable) {
@@ -1880,13 +1899,13 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
         cout << weaponCount << " weapons available.\nDev Amount:" << endl;
         cin >> weaponCount;
 
-        if (weaponCount >= 2) {
+        if (weaponCount >= 2 && MedKit.isAvailable && !room1.hasItem2 /* The ID Card */ && !room2.hasItem2 /* The Slime Note */) {
             cout << "You can open the door with your key to take on the giant snail." << endl;
             cout << "Do you wish to take him on? (y/n?)" << endl;
             string enterSnailRoomChoice;
             cin >> enterSnailRoomChoice;
             if (enterSnailRoomChoice == "y") {
-                currentRoom = BossFight(room3, room5, player, currentRoom, previousRoom);
+                currentRoom = BossFight(room3, room5, currentRoom, previousRoom);
             }
             if (enterSnailRoomChoice == "n") {
                 currentRoom = forcePlayerIntoPreviousRoom(previousRoom);
@@ -1903,7 +1922,6 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
 // ------------------------------- Room Interaction (END) --------------------------------------------------------------
     int main() {
 
-        player player;
         ifstream in_stream;
         Item ind[18];
 
@@ -2006,7 +2024,7 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
             }
             cout << currentRoom->description << endl;
             if (currentRoom->name == "Alien-Room") { //If player is in the Alien Room then show them the requirements to enter and let them fight if they meet them.
-                currentRoom = AlienRoomRequirements(room1, room2, room3, room4, room5, room6, room8, room9, player, previousRoomMain, currentRoom);
+                currentRoom = AlienRoomRequirements(room1, room2, room3, room4, room5, room6, room8, room9, previousRoomMain, currentRoom);
             }
             else {
                 currentRoom = playMenu(currentRoom, ind, room1, room2, room3, room4, room5, room6, room8, room9, start_time); // Allows the user to move and updates the current room with the result of the move command// Allows the user to move and updates the current room with the result of the move command

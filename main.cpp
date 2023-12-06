@@ -1691,9 +1691,10 @@ void SyringeUsed() {
     if (Syringe.isAvailable) {
         if (rand() % 30 == 1) {// Random chance to instakill
             snail.Health = 0;
+            cout << "The syringe caused the snail to explode! I wonder what was on that..." << endl;
         } else {
             cout
-                    << "Whatever disease you thought must've been on the Syringe had zero impact on the snail this attempt and resulted in " << Syringe.damage << " damage being done this time." << endl;
+                    << "Whatever disease you thought must've been on the Syringe had \nzero impact on the snail this attempt and resulted in " << Syringe.damage << " damage being done this time." << endl;
         }
     }
     else {

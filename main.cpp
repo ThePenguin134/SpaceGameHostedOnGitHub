@@ -1939,31 +1939,31 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
         auto start_time = std::chrono::high_resolution_clock::now();
 
         Room room1("Control-Room",
-                   "\nIn the center of the room there is a command console.\nNear the edge of the room there is a table, on which\nthere is a suspicious container of liquid. Under the\ncontainer, there appears to be a napkin, acting as a\ncoaster of sorts.\n",
+                   "\nIn the center of the room there is a command console.\nNear the edge of the room there is a table, on which\nthere is a folded up sheet of paper. Near the command\nconsole, you can see an ID card.",
                    ind[0], ind[1], true, true);
         Room room2("Mess-Hall",
-                   "\nTables with stools line the center of the room. On one\nside of the room, there appears to be what was once a\nbuffet. It is now covered in dust, and some strange\ngooey liquid. On the other side of the room, there are\nthree vending machines that look like they haven't been\ntouched in many generations.\n",
+                   "\nTables with stools line the center of the room. On one\nside of the room, there appears to be what was once a\nbuffet. It is now covered in dust, and some strange\ngooey liquid. You can see a note in the goo. On the\nother end of the buffet are various utensils, notably\na knife.",
                    ind[2], ind[3], true, true);
         Room room3("Electrical-Room",
-                   "\nUpon entering the dark room, you notice rows upon rows\nof defunct hardware for servers. In the corner of the\nroom there is what appears to be an electrical panel.\n",
+                   "\nUpon entering the dark room, you notice rows upon rows\nof defunct hardware for servers. In the corner of the\nroom there is what appears to be a shelf with emergency\nmedical supplies on it. You can see a lightbulb discarded\non the floor.\n",
                    ind[4], ind[5], true, true);
         Room room4("Radio-Room",
-                   "\nYou find a room with a large window directly ahead of\nyou. The window looks out into the vast emptiness of\nspace, along with a beautiful view of the sun, brighter\nthan you've ever seen it before. Beneath the window is a\nsystem that is quite obviously a communications system.\nVarious dials and levers span across the system. The rest\nof the room is filled with cases for various electronics.\n",
+                   "\nYou find a room with a large window directly ahead of\nyou. The window looks out into the vast emptiness of\nspace, along with a beautiful view of the sun, brighter\nthan you've ever seen it before. Beneath the window is a\nsystem that is quite obviously a communications system.\nThe system looks dead, but there seems to be a spare\nradio nearby. Also near the system is a skull, with\nslime nearby.",
                    ind[6], ind[7], true, true);
         Room room5("Cabins",
-                   "\nAhead of you lies 8 bunk beds, with 4 on each side of the\nroom. They are well-made, but clearly none of them have been\nslept in for a very long time. To the side of each bed there\nis a small dresser for personal belongings and clothing.\n",
+                   "\nAhead of you lies 8 bunk beds, with 4 on each side of the\nroom. They are well-made, but clearly none of them have been\nslept in for a very long time. To the side of each bed there\nis a small dresser for personal belongings and clothing. You\ncan see a sock strewn out on one dresser, and a dagger placed\nneatly on another.",
                    ind[8], ind[9], true, true);
         Room room6("Medical-Bay",
-                   "\nYou enter a small medical bay with 2 beds, medical equipment for each, a small desk in the corner, \nand a coat rack on the wall across from the beds. Papers are scattered across the desk. \nPerhaps someone was looking for something?\n",
+                   "\nYou enter a small medical bay with 2 beds, medical equipment for each,\na small desk in the corner, and a coat rack on the wall across from the\nbeds. Papers are scattered across the desk, along with a used syringe\nand some hand sanitizer. Perhaps someone was looking for something?\n",
                    ind[10], ind[11], true, true);
         Room room7("Alien-Room",
                    "You look through the small windows of the doors.\nThe room glows green. The air feels stale, and it smells like\nsomething died here. In the corner, a pulsing carcass sits.\nThe source of the light. A slimy green goo is splattered all\nover the walls.\nThere is also a shriveling up note posted on the door:\n",
                    ind[12], ind[13], true, true);
         Room room8("Greenhouse",
-                   "\nVarious plants are lined up across the room.\nBeneath each plant is a label that describes the\nplant and what its used for. Light from the sun\nshines in through the glass that makes up most of\nthe room. Lined up on one wall are various drawers,\nshelves, and gardening tools. A shovel can be found\nleaning on one of the shelves.\n",
+                   "\nVarious plants are lined up across the room.\nBeneath each plant is a label that describes the\nplant and what its used for. Light from the sun\nshines in through the glass that makes up most of\nthe room. Lined up on one wall are various drawers,\nshelves, and gardening tools. A shovel can be found\nleaning on one of the shelves. There is some green\ngoop off in the corner.\n",
                    ind[14], ind[15], true, true);
         Room room9("Storage-Room",
-                   "\nThe lights are broken, so the only illumination is coming from\nthe other side of the door. There are boxes scattered throughout\nthe room. Each box is labeled, presumably for what was contained\nin them. However, all but one of the boxes is empty. The only one\nthat isn't empty is labeled \"Spare Parts\"\n",
+                   "\nThe lights are broken, so the only illumination is coming from\nthe other side of the door. There are boxes scattered throughout\nthe room. Each box is labeled, presumably for what was contained\nin them. They all seem to be full of junk, except a box full of\nlighters. Along the walls are racks full of weapons, including an\nold looking sword.\n",
                    ind[16], ind[17], true, true);
 
         Room *previousRoomMain = &room2; /* Initialize the previousRoom Global var and initialize it, so

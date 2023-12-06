@@ -1344,42 +1344,46 @@ void getItem(Item ind[], Room *currentRoom) {
 
         //Output options for items that the player can pick up / interact with
         if (currentRoom->hasItem1 || currentRoom->hasItem2) {
-            cout << "There are item(s) in this room. If you would like to pick up an item, enter it's name. If not just enter 'nothing'" << endl;
-            if (currentRoom->hasItem1){
+            cout
+                    << "There are item(s) in this room. If you would like to pick up an item, enter it's name. If not just enter 'nothing'"
+                    << endl;
+            if (currentRoom->hasItem1) {
                 cout << "-" << currentRoom->Item1.readName() << endl;
             }
-            if (currentRoom->hasItem2){
+            if (currentRoom->hasItem2) {
                 cout << "-" << currentRoom->Item2.readName() << endl;
             }
-        }
+            string userChoice;
+            cin >> userChoice;
 
-        string userChoice;
-        cin >> userChoice;
-
-        // Process the users item input and gives their item by making it unavailable for pickup
-        if (userChoice == currentRoom->Item1.readName() && currentRoom->hasItem1) {
-            cout << "Description Of Item Selected:\n" << currentRoom->Item1.readDescription() << endl;
-            currentRoom->hasItem1 = false;
-            isValidChoice = true;
-
-        }
-        else if (userChoice == currentRoom->Item2.readName() && currentRoom->hasItem2) {
-            if (currentRoom->Item2.readName() != "Green-Goop") {
-                cout << "Description Of Item Selected:\n" << currentRoom->Item2.readDescription() << endl;
-                currentRoom->hasItem2 = false;
+            // Process the users item input and gives their item by making it unavailable for pickup
+            if (userChoice == currentRoom->Item1.readName() && currentRoom->hasItem1) {
+                cout << "Description Of Item Selected:\n" << currentRoom->Item1.readDescription() << endl;
+                currentRoom->hasItem1 = false;
                 isValidChoice = true;
-            } else { //If the item picked is the goop, then it has its own functionality aka you can't pick it up
-                GoopInteraction();
-                isValidChoice = true;
+
+            } else if (userChoice == currentRoom->Item2.readName() && currentRoom->hasItem2) {
+                if (currentRoom->Item2.readName() != "Green-Goop") {
+                    cout << "Description Of Item Selected:\n" << currentRoom->Item2.readDescription() << endl;
+                    currentRoom->hasItem2 = false;
+                    isValidChoice = true;
+                } else { //If the item picked is the goop, then it has its own functionality aka you can't pick it up
+                    GoopInteraction();
+                    isValidChoice = true;
+                }
+            } else if (userChoice == "nothing") {
+                break;
+            } else {
+                cout << "That's an invalid selection!" << endl;
             }
-        }
-        else if (userChoice == "nothing") {
+        } else {
+            cout << "There aren't any items in this room!" << endl;
             break;
         }
-        else {
-            cout << "That's an invalid selection!" << endl;
-        }
     }
+
+
+
 
 
 

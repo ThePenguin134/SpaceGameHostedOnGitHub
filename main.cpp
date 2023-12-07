@@ -1327,8 +1327,8 @@ bool swordBeenUsed = false;
 int weaponCount;
 
 void about() {
-    cout << "Welcome to SpaceGame. This is a game about speed, collection, and pure rng :D\n Please explore the"
-            "space station at your own pace. However, if you are a score setter, then collect as many items as "
+    cout << "Welcome to SpaceGame. This is a game about speed, collection, and pure rng :D\nPlease explore the"
+            "space station at your own pace. However, if you are a score setter, then collect \nas many items as "
             "possible and beat the boss as quickly as possible to receive the highest score." << endl;
 }
 void GoopInteraction() {

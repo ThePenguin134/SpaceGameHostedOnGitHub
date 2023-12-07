@@ -1944,15 +1944,6 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
                 << "Dangerous Snail behind these doors! Please do not enter unless you at MINIMUM have:\n1) At least two weapons\n2)Information about the dangers of the snail\n3)A proper way to heal\n"
                    "4)An ID-Card with clearance to access the room" << endl;
 
-    cout << "Dev Option: Give yourself MedKit, ID-Card, and Slime Note? (y/n)" <<endl;
-    string devChoice;
-    cin >> devChoice;
-    if (devChoice == "y") {
-        room6.hasItem2 = false; // MedKit
-        room1.hasItem2 = false; /* The ID Card */
-        room2.hasItem2 = false; /* The Slime Note */
-    }
-
         Knife.isAvailable = !room2.hasItem1; //Available if not pickup-able. First item in Mess Hall
         Dagger.isAvailable = !room5.hasItem1 && !GoopDagger.isAvailable; //Available if not pickup-able and GoopDagger isn't owned. First item in Cabins
         Syringe.isAvailable = !room6.hasItem1; //Available if not pickup-able. First item in MedicalBay
@@ -1977,9 +1968,6 @@ Room *RunAway(Room &room3, Room &room5, Room *currentRoom, Room *previousRoom) {
         if (Sword.isAvailable) {
             weaponCount += 1; //weaponCount var is declared right below the weapon instances in Boss Fight Code
         }
-
-        cout << weaponCount << " weapons available.\nDev Amount:" << endl;
-        cin >> weaponCount;
 
         if (weaponCount >= 2 && MedKit.isAvailable && !room1.hasItem2 /* The ID Card */ && !room2.hasItem2 /* The Slime Note */) {
             cout << "You can open the door with your ID-Card to take on the giant snail." << endl;
